@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Run Test Cukes" parallel="tests" thread-count="2">
+
+	<listeners>
+		<!-- This TestNG listener takes care of setting up and tearing down the 
+			WebDriver, and it also changes test names in the final TestNG HTML report. -->
+		<listener
+			class-name="com.CucumberCraft.supportLibraries.TestListener" />
+	</listeners>
+
+	<test name="Smoke Test on Web - Chrome">
+		<parameter name="ExecutionMode" value="LOCAL" />
+		<parameter name="BrowserName" value="CHROME" />		
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />			
+		</classes>
+	</test>
+
+	<test name="Smoke Test on Web - FireFox">
+		<parameter name="ExecutionMode" value="LOCAL" />
+		<parameter name="BrowserName" value="FIREFOX" />		
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke_FF" />			
+		</classes>
+	</test>
+
+<!--	<test name="Smoke Test on Mobile">
+		<parameter name="ExecutionMode" value="MOBILE" />
+		<parameter name="MobileExecutionPlatform" value="ANDROID" />
+		<parameter name="DeviceName" value="emulator-5554" />
+		<parameter name="OSVersion" value="7.0" />
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
+		</classes>
+	</test>	
+	
+	<test name="Smoke Test on Web - Chrome">
+		<parameter name="ExecutionMode" value="REMOTE" />
+		<parameter name="BrowserName" value="CHROME" />		
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />			
+		</classes>
+	</test>
+
+	<test name="Smoke Test on Web - Cloud based">
+		<parameter name="ExecutionMode" value="BROWSERSTACK" />
+		<parameter name="BrowserName" value="CHROME" />
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Web_Chrome" />
+		</classes>
+	</test>  -->
+
+</suite>

@@ -1,0 +1,22 @@
+[
+	{
+		"ESPO-1234-02": {
+			"name": "Bach The Vu",
+			"website": "www.linkedin.com/in/vu-bach-17448a58",
+			"email": "bachthevu@gmail.com",
+			"phone": "0933483450"
+		}
+	},
+	{
+		"Common-02": {
+			"username": "doe@abc.com",
+			"password": "pwd@1234"
+		}
+	},
+	{
+		"Common-03": {
+			"username": "henry@abc.com",
+			"password": "abcd@1234"
+		}
+	}
+]

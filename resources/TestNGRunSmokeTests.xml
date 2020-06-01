@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Run Test Cukes" parallel="tests" verbose="1"
+	configfailurepolicy="continue" thread-count="1">
+
+	<listeners>
+		<!-- This TestNG listener takes care of setting up and tearing down the 
+			WebDriver, and it also changes test names in the final TestNG HTML report. -->
+		<listener
+			class-name="com.CucumberCraft.supportLibraries.WebDriverListener" />
+	</listeners>
+
+	<!-- <test name="Smoke Test on Web">
+		<parameter name="ExecutionMode" value="LOCAL" />
+		<parameter name="BrowserName" value="CHROME" />		
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
+		</classes>
+	</test>  -->
+
+	<test name="Smoke Test on Web 1">
+		<parameter name="ExecutionMode" value="LOCAL" />
+		<parameter name="BrowserName" value="FIREFOX" />		
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
+		</classes>
+	</test>
+
+	<!-- <test name="Smoke Test on Mobile">
+		<parameter name="ExecutionMode" value="MOBILE" />
+		<parameter name="MobileExecutionPlatform" value="ANDROID" />
+		<parameter name="DeviceName" value="838ccbd" />
+		<parameter name="OSVersion" value="9.0" />
+		<classes>
+			<class name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
+		</classes>
+	</test> -->
+
+</suite>
