@@ -38,6 +38,7 @@ public class TimeStamp {
 						break; // optional
 
 					case "MOBILE":
+					case "SEETEST":
 						timeStamp = "Run_" + TestController.getTestParameters().getMobileExecutionPlatform().toString()
 								+ "_" + Util.getCurrentFormattedTime(properties.getProperty("DateFormatString"))
 										.replace(" ", "_").replace(":", "-");

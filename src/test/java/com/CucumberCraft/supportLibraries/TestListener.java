@@ -75,7 +75,7 @@ public class TestListener implements IInvokedMethodListener {
 	private void setDefaultTestParameters(IInvokedMethod method, SeleniumTestParameters testParameters) {
 		try {
 			String executionMode = method.getTestMethod().getXmlTest().getLocalParameters().get("ExecutionMode");
-
+			String mobileExecutionPlatform = null;
 			switch (executionMode) {
 
 			case "LOCAL":
@@ -98,7 +98,7 @@ public class TestListener implements IInvokedMethodListener {
 					testParameters
 							.setMobileToolName(MobileToolName.valueOf(properties.getProperty("DefaultMobileToolName")));
 				} else {
-					String mobileExecutionPlatform = method.getTestMethod().getXmlTest().getLocalParameters()
+					mobileExecutionPlatform = method.getTestMethod().getXmlTest().getLocalParameters()
 							.get("MobileExecutionPlatform");
 					testParameters.setMobileExecutionPlatform(MobileExecutionPlatform.valueOf(mobileExecutionPlatform));
 				}
@@ -121,7 +121,18 @@ public class TestListener implements IInvokedMethodListener {
 				}
 				
 				break;
+			case "SEETEST":
+				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
+				mobileExecutionPlatform = method.getTestMethod().getXmlTest().getLocalParameters()
+						.get("MobileExecutionPlatform");
+				testParameters.setMobileExecutionPlatform(MobileExecutionPlatform.valueOf(mobileExecutionPlatform));
 
+				testParameters
+						.setDeviceName(method.getTestMethod().getXmlTest().getLocalParameters().get("DeviceName"));
+				testParameters.setOsVersion(method.getTestMethod().getXmlTest().getLocalParameters().get("OSVersion"));
+				testParameters
+						.setSerialNumber(method.getTestMethod().getXmlTest().getLocalParameters().get("SerialNumber"));
+				break;
 			case "PERFECTO":
 
 				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
@@ -129,7 +140,7 @@ public class TestListener implements IInvokedMethodListener {
 					testParameters.setMobileToolName(
 							MobileToolName.valueOf(properties.getProperty("DefaultMobileExecutionPlatform")));
 				} else {
-					String mobileExecutionPlatform = method.getTestMethod().getXmlTest().getLocalParameters()
+					mobileExecutionPlatform = method.getTestMethod().getXmlTest().getLocalParameters()
 							.get("MobileExecutionPlatform");
 					testParameters.setMobileExecutionPlatform(MobileExecutionPlatform.valueOf(mobileExecutionPlatform));
 				}

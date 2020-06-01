@@ -10,6 +10,8 @@ public enum ExecutionMode {
 	
 	REMOTE("remote"),
 	
+	SEETEST("seetest"),
+	
 	MOBILE("mobile"),
 
 	PERFECTO("perfecto"),

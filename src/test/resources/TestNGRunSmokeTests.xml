@@ -9,7 +9,7 @@
 			class-name="com.CucumberCraft.supportLibraries.TestListener" />
 	</listeners>
 
-	<test name="Smoke Test on Web - Chrome">
+	<!--<test name="Smoke Test on Web - Chrome">
 		<parameter name="ExecutionMode" value="LOCAL" />
 		<parameter name="BrowserName" value="CHROME" />		
 		<classes>
@@ -27,7 +27,7 @@
 		</classes>
 	</test>
 
-<!--	<test name="Smoke Test on Mobile">
+	<test name="Smoke Test on Mobile">
 		<parameter name="ExecutionMode" value="MOBILE" />
 		<parameter name="MobileExecutionPlatform" value="ANDROID" />
 		<parameter name="DeviceName" value="emulator-5554" />
@@ -47,13 +47,18 @@
 		</classes>
 	</test>
 
-	<test name="Smoke Test on Web - Cloud based">
-		<parameter name="ExecutionMode" value="BROWSERSTACK" />
-		<parameter name="BrowserName" value="CHROME" />
+	 -->
+
+	<test name="Smoke Test on Mobile - Android">
+		<parameter name="ExecutionMode" value="SEETEST" />
+		<parameter name="MobileExecutionPlatform" value="ANDROID" />
+		<parameter name="DeviceName" value="Nexus 6P" />
+		<parameter name="SerialNumber" value="ENU7N16126004845" />
+		<parameter name="OSVersion" value="8.1.0" />		
 		<classes>
 			<class
-				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Web_Chrome" />
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
 		</classes>
-	</test>  -->
+	</test> 
 
 </suite>

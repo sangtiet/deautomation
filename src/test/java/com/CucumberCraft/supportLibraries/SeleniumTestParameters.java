@@ -16,7 +16,7 @@ public class SeleniumTestParameters {
 	private String modelName;
 	private boolean isDeviceUdid;
 	private String scenarioName;
-	
+	private String serialNumber;
 	private String browserVersion;
 	private String osVersion;
 
@@ -225,5 +225,13 @@ public class SeleniumTestParameters {
 
 	public void setOsVersion(String osVersion) {
 		this.osVersion = osVersion;
+	}
+
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 }

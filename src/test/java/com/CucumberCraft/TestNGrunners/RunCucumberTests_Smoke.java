@@ -26,8 +26,9 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.stepDefinitions" }, 
-	tags = {"@ESPO-1234-01"},
+	//tags = {"@ESPO-1234-01"},
 	//tags = {"@AndroidTesting"},
+	tags= {"@DeviceCloudTesting"},
 	monochrome = true,
 	//dryRun = true,
 	plugin = {
@@ -46,7 +47,7 @@ public class RunCucumberTests_Smoke extends AbstractTestNGCucumberTests {
 		
 		TestController.endWebDriver();
 		TestController.endAppiumDriver();
-		//AppiumServerJava.stopServer();
+		AppiumServerJava.stopServer();
 	}
 
 	private void generateCustomReports() {

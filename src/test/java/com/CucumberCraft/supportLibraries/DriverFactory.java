@@ -25,6 +25,11 @@ public class DriverFactory {
 				driver = AppiumDriverFactory.getAppiumDriver(testParameters.getMobileExecutionPlatform(),
 						testParameters.getDeviceName(), testParameters.getOsVersion(), false);
 				break;
+				
+			case SEETEST:
+				driver = SeetestDriverFactory.getSeetestDriver(testParameters);
+				break;
+				
 			case PERFECTO:
 
 				driver = PerfectoDriverFactory.getPerfectoAppiumDriver(testParameters);
