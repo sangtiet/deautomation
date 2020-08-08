@@ -4,7 +4,7 @@ import com.CucumberCraft.SupportLibraries.TestController;
 
 import cucumber.api.java.en.And;
 
-public class Common {
+public class Common extends MasterStepDefs{
 
 	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
 	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {

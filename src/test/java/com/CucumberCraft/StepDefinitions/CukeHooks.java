@@ -24,9 +24,21 @@ public class CukeHooks extends MasterStepDefs {
 			currentScenario = scenario;
 			propertiesFileAccess = properties;
 			currentTestParameters = TestController.getTestParameters();
+			
+			String ExecutionMode = TestController.getTestParameters().getExecutionMode().toString();
+			switch (ExecutionMode) {
+			case "LOCAL":
+				webDriver = TestController.getWebDriver();
+				break; // optional
+
+			case "MOBILE":
+				appiumDriver = TestController.getAppiumDriver();
+				break; // optional
+			}
 			currentTestParameters.setScenarioName(scenario.getName());
 		} catch (Exception e) {
 			log.error("Error at Before Scenario " + e.getMessage());
+			TestController.getHelper().writeStepFAIL();
 		}
 	}
 
@@ -46,7 +58,6 @@ public class CukeHooks extends MasterStepDefs {
 				currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
 				break; // optional
 			}
-
 			update(scenario);
 		} catch (Exception ex) {
 			log.error(ex.getMessage());

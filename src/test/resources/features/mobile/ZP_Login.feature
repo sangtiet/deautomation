@@ -1,7 +1,17 @@
-Feature: Android Testing 
+Feature: ZP_Login 
 
-@AndroidTesting 
-Scenario: Launch app on real device 
-	Given I launch app on real device 
-	And I click Add New button	   
-	And I verify the Accounts label
+@ZP-Login-01 
+Scenario Outline: Login successfully 
+	Given user launchs the application 
+	And "LOGIN_ZALOPAY_PAGE" shows up	   
+	And user clicks on "LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON"
+	And "LZP_PHONE_NUMBER_INPUT" is present
+	And "LZP_PHONE_NUMBER_INPUT" is not present
+	And user waits until "LZP_PHONE_NUMBER_INPUT" is present in 60 seconds
+	And user types '<phone_number>' into "LZP_PHONE_NUMBER_INPUT"
+	And user navigates back
+	When user scrolls "HOME_APPS_LIST" until "HOME_APP_LINK_BANK_BUTTON" is present
+	
+	Examples:
+      | phone_number |
+      | 0367260747   |
