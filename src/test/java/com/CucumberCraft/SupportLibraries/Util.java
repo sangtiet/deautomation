@@ -1,4 +1,4 @@
-package com.CucumberCraft.supportLibraries;
+package com.CucumberCraft.SupportLibraries;
 
 import java.io.File;
 import java.text.DateFormat;

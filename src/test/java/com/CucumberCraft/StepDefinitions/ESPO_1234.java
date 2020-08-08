@@ -1,10 +1,10 @@
-package com.CucumberCraft.stepDefinitions;
+package com.CucumberCraft.StepDefinitions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.CucumberCraft.pageObjects.*;
-import com.CucumberCraft.supportLibraries.*;
+import com.CucumberCraft.PageObjects.*;
+import com.CucumberCraft.SupportLibraries.*;
 
 import cucumber.api.java.en.*;
 

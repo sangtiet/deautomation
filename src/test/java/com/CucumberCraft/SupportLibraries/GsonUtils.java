@@ -1,4 +1,4 @@
-package com.CucumberCraft.supportLibraries;
+package com.CucumberCraft.SupportLibraries;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -2,7 +2,7 @@ package com.CucumberCraft.OtpGetter;
 
 import com.CucumberCraft.JsonModel.MySmsCredential;
 import com.CucumberCraft.JsonModel.MySmsMessage;
-import com.CucumberCraft.supportLibraries.GsonUtils;
+import com.CucumberCraft.SupportLibraries.GsonUtils;
 import com.google.gson.JsonObject;
 
 import org.apache.http.HttpEntity;

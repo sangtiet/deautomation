@@ -1,4 +1,4 @@
-package com.CucumberCraft.stepDefinitions;
+package com.CucumberCraft.StepDefinitions;
 
 import java.util.Properties;
 
@@ -6,8 +6,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.log4testng.Logger;
 
-import com.CucumberCraft.supportLibraries.Settings;
-import com.CucumberCraft.supportLibraries.TestController;
+import com.CucumberCraft.SupportLibraries.Settings;
+import com.CucumberCraft.SupportLibraries.TestController;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;

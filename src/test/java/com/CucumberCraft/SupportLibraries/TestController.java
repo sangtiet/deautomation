@@ -1,4 +1,4 @@
-package com.CucumberCraft.supportLibraries;
+package com.CucumberCraft.SupportLibraries;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;

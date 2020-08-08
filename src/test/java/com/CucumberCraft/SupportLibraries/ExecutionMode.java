@@ -1,4 +1,4 @@
-package com.CucumberCraft.supportLibraries;
+package com.CucumberCraft.SupportLibraries;
 
 /**
  * Enumeration to represent the mode of execution

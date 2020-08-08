@@ -1,4 +1,4 @@
-package com.CucumberCraft.pageObjects;
+package com.CucumberCraft.PageObjects;
 
 public class AccountPage {
 	

@@ -1,4 +1,4 @@
-package com.CucumberCraft.supportLibraries;
+package com.CucumberCraft.SupportLibraries;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;

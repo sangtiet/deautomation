@@ -1,10 +1,10 @@
-package com.CucumberCraft.stepDefinitions;
+package com.CucumberCraft.StepDefinitions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.log4testng.Logger;
 
-import com.CucumberCraft.supportLibraries.TestController;
+import com.CucumberCraft.SupportLibraries.TestController;
 
 import cucumber.api.java.en.*;
 import io.appium.java_client.AppiumDriver;

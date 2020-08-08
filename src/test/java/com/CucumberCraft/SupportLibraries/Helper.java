@@ -1,11 +1,8 @@
-package com.CucumberCraft.supportLibraries;
+package com.CucumberCraft.SupportLibraries;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -156,17 +153,5 @@ public class Helper {
 			}
 		}
 		writeStepFAIL("Unable to load test data of: " + TestcaseID);
-	}
-
-	public String getParamFromPropertiesFile(String propertiesFilePath, String key) throws Exception {
-		InputStream input = new FileInputStream(System.getProperty("user.dir") + propertiesFilePath);
-
-		Properties prop = new Properties();
-
-		// load a properties file
-		prop.load(input);
-
-		// get the property value and print it out
-		return prop.getProperty(key);
 	}
 }

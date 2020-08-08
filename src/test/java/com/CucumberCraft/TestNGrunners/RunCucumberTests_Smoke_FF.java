@@ -6,10 +6,10 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.testng.annotations.AfterTest;
 
-import com.CucumberCraft.supportLibraries.AppiumServerJava;
-import com.CucumberCraft.supportLibraries.TestController;
-import com.CucumberCraft.supportLibraries.TimeStamp;
-import com.CucumberCraft.supportLibraries.Util;
+import com.CucumberCraft.SupportLibraries.AppiumServerJava;
+import com.CucumberCraft.SupportLibraries.TestController;
+import com.CucumberCraft.SupportLibraries.TimeStamp;
+import com.CucumberCraft.SupportLibraries.Util;
 import com.github.mkolisnyk.cucumber.reporting.CucumberResultsOverview;
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 

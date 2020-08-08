@@ -1,6 +1,6 @@
-package com.CucumberCraft.stepDefinitions;
+package com.CucumberCraft.StepDefinitions;
 
-import com.CucumberCraft.supportLibraries.TestController;
+import com.CucumberCraft.SupportLibraries.TestController;
 
 import cucumber.api.java.en.And;
 
