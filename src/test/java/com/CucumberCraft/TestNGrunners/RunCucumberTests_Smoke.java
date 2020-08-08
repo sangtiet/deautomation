@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.testng.annotations.AfterTest;
 
-import com.CucumberCraft.SupportLibraries.AppiumServerJava;
 import com.CucumberCraft.SupportLibraries.TestController;
 import com.CucumberCraft.SupportLibraries.TimeStamp;
 import com.CucumberCraft.SupportLibraries.Util;
@@ -26,8 +25,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.stepDefinitions" }, 
-	//tags = {"@ESPO-1234-01"},
-	//tags = {"@AndroidTesting"},
 	tags= {"@DeviceCloudTesting"},
 	monochrome = true,
 	//dryRun = true,
@@ -46,8 +43,7 @@ public class RunCucumberTests_Smoke extends AbstractTestNGCucumberTests {
 		copyReportsFolder();
 		
 		TestController.endWebDriver();
-		TestController.endAppiumDriver();
-		AppiumServerJava.stopServer();
+		TestController.endAppiumDriver();		
 	}
 
 	private void generateCustomReports() {

@@ -15,12 +15,8 @@ import cucumber.api.java.Before;
 
 public class CukeHooks extends MasterStepDefs {
 
-	static Logger log;
+	static Logger log = Logger.getLogger(CukeHooks.class);;
 	static Properties properties = Settings.getInstance();
-
-	static {
-		log = Logger.getLogger(CukeHooks.class);
-	}
 
 	@Before
 	public void setUp(Scenario scenario) {
@@ -35,31 +31,28 @@ public class CukeHooks extends MasterStepDefs {
 	}
 
 	@After
-	public void embedScreenshot(Scenario scenario) {		
+	public void embedScreenshot(Scenario scenario) {
 		try {
 			String ExecutionMode = TestController.getTestParameters().getExecutionMode().toString();
-			switch(ExecutionMode) {
-			   case "LOCAL" :
-			      currentScenario.write("-> Browser: " + TestController.getTestParameters().getBrowser());
-			      break; // optional
-			   
-			   case "MOBILE" :
-				   currentScenario.write("-> MobileExecutionPlatform: " + TestController.getTestParameters().getMobileExecutionPlatform());
-				   currentScenario.write("-> DeviceName: " + TestController.getTestParameters().getDeviceName());
-				   currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
-			      break; // optional			
+			switch (ExecutionMode) {
+			case "LOCAL":
+				currentScenario.write("-> Browser: " + TestController.getTestParameters().getBrowser());
+				break; // optional
+
+			case "MOBILE":
+				currentScenario.write("-> MobileExecutionPlatform: "
+						+ TestController.getTestParameters().getMobileExecutionPlatform());
+				currentScenario.write("-> DeviceName: " + TestController.getTestParameters().getDeviceName());
+				currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
+				break; // optional
 			}
-			
+
 			update(scenario);
 		} catch (Exception ex) {
 			log.error(ex.getMessage());
 		}
 	}
 
-	/**
-	 * Embed a screenshot in test report if test is marked as failed And Update Task
-	 * in JIRA
-	 */
 	private void update(Scenario scenario) {
 		if (scenario.isFailed()) {
 			byte[] screenshot;

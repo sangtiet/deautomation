@@ -11,9 +11,6 @@ import io.appium.java_client.AppiumDriver;
  */
 public class TestController {
 
-	/*
-	 * Used for Multithreading of WebDriver Object
-	 */
 	@SuppressWarnings("rawtypes")
 	private static ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<AppiumDriver>();
 	private static ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();

@@ -10,15 +10,7 @@ public enum ExecutionMode {
 	
 	REMOTE("remote"),
 	
-	SEETEST("seetest"),
-	
 	MOBILE("mobile"),
-
-	PERFECTO("perfecto"),
-
-	PERFECTODESKTOP("perfectodesktop"),
-	
-	BROWSERSTACK("browserstack"),
 	
 	/**
 	 * Execute on a mobile device using Appium

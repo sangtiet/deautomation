@@ -21,8 +21,6 @@ public enum MobileExecutionPlatform {
 	 */
 	WEB_IOS("WEB_IOS");
 	
-	;
-	
 	private String value;
 
 	MobileExecutionPlatform(String value) {
