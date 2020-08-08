@@ -2,8 +2,6 @@ package com.CucumberCraft.SupportLibraries;
 
 import java.lang.reflect.Field;
 import java.util.Properties;
-
-//import org.apache.log4j.Logger;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
@@ -22,13 +20,12 @@ public class TestListener implements IInvokedMethodListener {
 	@Override
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 
-		SeleniumTestParameters testParameters = new SeleniumTestParameters();		
+		SeleniumTestParameters testParameters = new SeleniumTestParameters();
 		Helper helper = new Helper();
 
 		log.debug("BEGINNING: com.CucumberCraft.supportLibraries.WebDriverListener-beforeInvocation");
 
 		if (method.isTestMethod()) {
-
 			try {
 				properties = Settings.getInstance();
 				setDefaultTestParameters(method, testParameters);
@@ -49,11 +46,7 @@ public class TestListener implements IInvokedMethodListener {
 	@Override
 	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
 
-		log.debug("BEGINNING: WebDriverListener.afterInvocation");
-		/*
-		 * change the name of the test method that will appear in the report to one that
-		 * will contain very handy when analysing results.
-		 */
+		log.debug("BEGINNING: WebDriverListener.afterInvocation");		
 		if (method.isTestMethod()) {
 			try {
 				BaseTestMethod bm = (BaseTestMethod) testResult.getMethod();
@@ -76,11 +69,10 @@ public class TestListener implements IInvokedMethodListener {
 		try {
 			String executionMode = method.getTestMethod().getXmlTest().getLocalParameters().get("ExecutionMode");
 			String mobileExecutionPlatform = null;
-			switch (executionMode) {
 
+			switch (executionMode) {
 			case "LOCAL":
 			case "REMOTE":
-
 				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
 				if (method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName") == null) {
 					testParameters.setBrowser(Browser.valueOf(properties.getProperty("DefaultBrowser")));
@@ -111,97 +103,20 @@ public class TestListener implements IInvokedMethodListener {
 					testParameters
 							.setDeviceName(method.getTestMethod().getXmlTest().getLocalParameters().get("DeviceName"));
 				}
-				
+
 				if (method.getTestMethod().getXmlTest().getLocalParameters().get("OSVersion") == null) {
 					testParameters
 							.setMobileToolName(MobileToolName.valueOf(properties.getProperty("DefaultOSVersion")));
 
 				} else {
-					testParameters.setmobileOSVersion(method.getTestMethod().getXmlTest().getLocalParameters().get("OSVersion"));
-				}
-				
-				break;
-			case "SEETEST":
-				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
-				mobileExecutionPlatform = method.getTestMethod().getXmlTest().getLocalParameters()
-						.get("MobileExecutionPlatform");
-				testParameters.setMobileExecutionPlatform(MobileExecutionPlatform.valueOf(mobileExecutionPlatform));
-
-				testParameters
-						.setDeviceName(method.getTestMethod().getXmlTest().getLocalParameters().get("DeviceName"));
-				testParameters.setOsVersion(method.getTestMethod().getXmlTest().getLocalParameters().get("OSVersion"));
-				testParameters
-						.setSerialNumber(method.getTestMethod().getXmlTest().getLocalParameters().get("SerialNumber"));
-				break;
-			case "PERFECTO":
-
-				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
-				if (method.getTestMethod().getXmlTest().getLocalParameters().get("MobileExecutionPlatform") == null) {
-					testParameters.setMobileToolName(
-							MobileToolName.valueOf(properties.getProperty("DefaultMobileExecutionPlatform")));
-				} else {
-					mobileExecutionPlatform = method.getTestMethod().getXmlTest().getLocalParameters()
-							.get("MobileExecutionPlatform");
-					testParameters.setMobileExecutionPlatform(MobileExecutionPlatform.valueOf(mobileExecutionPlatform));
+					testParameters.setmobileOSVersion(
+							method.getTestMethod().getXmlTest().getLocalParameters().get("OSVersion"));
 				}
 
-				if (testParameters.getIsDeviceUdid()) {
-
-					testParameters
-							.setDeviceName(method.getTestMethod().getXmlTest().getLocalParameters().get("DeviceName"));
-
-				} else {
-					testParameters
-							.setModelName(method.getTestMethod().getXmlTest().getLocalParameters().get("ModelName"));
-					testParameters.setManuFacturerName(
-							method.getTestMethod().getXmlTest().getLocalParameters().get("ManufacturerName"));
-
-				}
-
-				break;
-
-			case "PERFECTODESKTOP":
-
-				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
-				if (method.getTestMethod().getXmlTest().getLocalParameters().get("OSVersion") == null) {
-					testParameters.setOsVersion(properties.getProperty("DefaultOSVersion"));
-				} else {
-					String osVersion = method.getTestMethod().getXmlTest().getLocalParameters().get("OSVersion");
-					testParameters.setOsVersion(osVersion);
-				}
-				testParameters.setBrowserVersion(
-						method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserVersion"));
-				if (method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName") == null) {
-					testParameters.setBrowser(Browser.valueOf(properties.getProperty("DefaultBrowser")));
-
-				} else {
-					testParameters.setBrowser(Browser
-							.valueOf(method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName")));
-				}
-
-				break;
-
-			case "BROWSERSTACK":
-				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
-				if (method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName") == null) {
-					testParameters.setBrowser(Browser.valueOf(properties.getProperty("DefaultBrowser")));
-
-				} else
-					testParameters.setBrowser(Browser
-							.valueOf(method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName")));
 				break;
 			default:
-				testParameters.setExecutionMode(ExecutionMode.valueOf(properties.getProperty("DefaultExecutionMode")));
-				if (method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName") == null) {
-					testParameters.setBrowser(Browser.valueOf(properties.getProperty("DefaultBrowser")));
-
-				} else {
-					testParameters.setBrowser(Browser
-							.valueOf(method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName")));
-				}
-				break;
+				log.warn("No Such Execution Mode available");
 			}
-
 		} catch (Exception ex) {
 			log.error(ex.getMessage());
 		}

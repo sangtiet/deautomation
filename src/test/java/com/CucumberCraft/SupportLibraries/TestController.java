@@ -24,21 +24,33 @@ public class TestController {
 
 	@SuppressWarnings("rawtypes")
 	public static AppiumDriver getAppiumDriver() {
-		if (appiumDriver.get() == null) {
-			log.info("Thread has no AppiumDriver, creating new one");
-			setDriver(DriverFactory.createInstance(getTestParameters()));
+		try {
+			if (appiumDriver.get() == null) {
+				log.info("Thread has no AppiumDriver, creating new one");
+				setDriver(DriverFactory.createInstance(getTestParameters()));
+			}
+			log.debug("Getting instance of AppiumDriver" + appiumDriver.get().getClass());
+			return appiumDriver.get();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
 		}
-		log.debug("Getting instance of AppiumDriver" + appiumDriver.get().getClass());
-		return appiumDriver.get();
+		return null;
 	}
 
 	public static WebDriver getWebDriver() {
-		if (webDriver.get() == null) {
-			log.info("Thread has no WebDriver, creating new one");
-			setDriver(DriverFactory.createInstanceWebDriver(getTestParameters()));
+		try {
+			if (webDriver.get() == null) {
+				log.info("Thread has no WebDriver, creating new one");
+				setDriver(DriverFactory.createInstanceWebDriver(getTestParameters()));
+			}
+			log.debug("Getting instance of WebDriver" + webDriver.get().getClass());
+			return webDriver.get();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage());
 		}
-		log.debug("Getting instance of WebDriver" + webDriver.get().getClass());
-		return webDriver.get();
+		return null;
 	}
 
 	@SuppressWarnings("rawtypes")

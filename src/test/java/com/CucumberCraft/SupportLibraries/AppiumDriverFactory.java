@@ -76,7 +76,7 @@ public class AppiumDriverFactory {
 			break;
 
 		default:
-
+			log.warn("No Such Mobile OS Implementation available");
 		}
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
