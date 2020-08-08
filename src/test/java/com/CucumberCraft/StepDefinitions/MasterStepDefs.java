@@ -14,6 +14,5 @@ public abstract class MasterStepDefs {
 	protected Properties propertiesFileAccess;
 	
 	@SuppressWarnings("rawtypes")
-	protected AppiumDriver appiumDriver;
-	protected WebDriver webDriver;
+	protected AppiumDriver appiumDriver;	
 }

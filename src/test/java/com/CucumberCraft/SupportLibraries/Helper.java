@@ -1,5 +1,6 @@
 package com.CucumberCraft.SupportLibraries;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -49,14 +50,33 @@ public class Helper {
 
 	/**
 	 * Java-Core Functions
+	 * 
+	 * @throws Exception
 	 */
-	public void createFolderIfNotExist(String Dir) throws IOException {
+	public String getLineFromLocFileContainsText(String textToFind, String fileName) throws Exception {
+		BufferedReader br = new BufferedReader(new FileReader(
+				System.getProperty("user.dir") + "\\src\\test\\resources\\elements\\" + fileName + ".loc"));
+		try {
+			String line = br.readLine();
+
+			while (line != null) {
+				if (line.contains(textToFind))
+					return line;
+				line = br.readLine();
+			}
+		} finally {
+			br.close();
+		}
+		return null;
+	}
+
+	public void createFolderIfNotExist(String Dir) throws Exception {
 		Path path = Paths.get(Dir);
 		if (!Files.exists(path))
 			Files.createDirectories(path);
 	}
 
-	public void copyFile(File from, File to) throws IOException {
+	public void copyFile(File from, File to) throws Exception {
 		Files.copy(from.toPath(), to.toPath());
 	}
 
@@ -70,13 +90,8 @@ public class Helper {
 		return properties.getProperty(param);
 	}
 
-	public void wait(int secs) {
-		try {
-			Thread.sleep(secs * 1000);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
+	public void wait(int secs) throws Exception {
+		Thread.sleep(secs * 1000);
 	}
 
 	public String returnCleanString(String s) {

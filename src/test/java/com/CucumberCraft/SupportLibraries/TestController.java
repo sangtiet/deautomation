@@ -20,58 +20,37 @@ public class TestController {
 	static Logger log = Logger.getLogger(TestController.class);
 
 	@SuppressWarnings("rawtypes")
-	public static AppiumDriver getAppiumDriver() {
-		try {
-			if (appiumDriver.get() == null) {
-				log.info("Thread has no AppiumDriver, creating new one");
-				setDriver(DriverFactory.createInstance(getTestParameters()));
-			}
-			log.debug("Getting instance of AppiumDriver" + appiumDriver.get().getClass());
-			return appiumDriver.get();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			log.error(e.getMessage());
+	public static AppiumDriver getAppiumDriver() throws Throwable {
+
+		if (appiumDriver.get() == null) {
+			log.info("Thread has no AppiumDriver, creating new one");
+			setDriver(DriverFactory.createInstance(getTestParameters()));
 		}
-		return null;
+		log.debug("Getting instance of AppiumDriver" + appiumDriver.get().getClass());
+		return appiumDriver.get();
 	}
 
-	public static WebDriver getWebDriver() {
-		try {
-			if (webDriver.get() == null) {
-				log.info("Thread has no WebDriver, creating new one");
-				setDriver(DriverFactory.createInstanceWebDriver(getTestParameters()));
-			}
-			log.debug("Getting instance of WebDriver" + webDriver.get().getClass());
-			return webDriver.get();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			log.error(e.getMessage());
+	public static WebDriver getWebDriver() throws Throwable {
+
+		if (webDriver.get() == null) {
+			log.info("Thread has no WebDriver, creating new one");
+			setDriver(DriverFactory.createInstanceWebDriver(getTestParameters()));
 		}
-		return null;
+		log.debug("Getting instance of WebDriver" + webDriver.get().getClass());
+		return webDriver.get();
 	}
 
 	@SuppressWarnings("rawtypes")
 	public static void setDriver(AppiumDriver p_driver) {
-		try {
-			appiumDriver.set(p_driver);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.error(e.getMessage());
-		}
+		appiumDriver.set(p_driver);
 	}
 
 	public static void setDriver(WebDriver driver) {
-		try {
-			webDriver.set(driver);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.error(e.getMessage());
-		}
+		webDriver.set(driver);
 	}
 
 	public static void setTestParameters(SeleniumTestParameters p_testParameters) {
 		testParameters.set(p_testParameters);
-
 	}
 
 	public static SeleniumTestParameters getTestParameters() {
@@ -79,22 +58,12 @@ public class TestController {
 	}
 
 	public static void endAppiumDriver() {
-		try {
-			appiumDriver.get().quit();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.error(e.getMessage());
-		}
+		appiumDriver.get().quit();
 	}
 
 	public static void endWebDriver() {
-		try {
-			webDriver.get().close();
-			webDriver.get().quit();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			log.error(e.getMessage());
-		}
+		webDriver.get().close();
+		webDriver.get().quit();
 	}
 
 	public static Helper getHelper() {

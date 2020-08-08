@@ -42,8 +42,16 @@ public class RunCucumberTests_Smoke extends AbstractTestNGCucumberTests {
 		generateCustomReports();
 		copyReportsFolder();
 		
-		TestController.endWebDriver();
-		TestController.endAppiumDriver();		
+		String ExecutionMode = TestController.getTestParameters().getExecutionMode().toString();
+		switch (ExecutionMode) {
+		case "LOCAL":
+			TestController.endWebDriver();
+			break; // optional
+
+		case "MOBILE":
+			TestController.endAppiumDriver();
+			break; // optional
+		}
 	}
 
 	private void generateCustomReports() {

@@ -15,8 +15,9 @@ import cucumber.api.java.Before;
 
 public class CukeHooks extends MasterStepDefs {
 
-	static Logger log = Logger.getLogger(CukeHooks.class);;
+	static Logger log = Logger.getLogger(CukeHooks.class);
 	static Properties properties = Settings.getInstance();
+	static String ExecutionMode = TestController.getTestParameters().getExecutionMode().toString();
 
 	@Before
 	public void setUp(Scenario scenario) {
@@ -24,54 +25,44 @@ public class CukeHooks extends MasterStepDefs {
 			currentScenario = scenario;
 			propertiesFileAccess = properties;
 			currentTestParameters = TestController.getTestParameters();
-			
-			String ExecutionMode = TestController.getTestParameters().getExecutionMode().toString();
-			switch (ExecutionMode) {
-			case "LOCAL":
-				webDriver = TestController.getWebDriver();
-				break; // optional
 
-			case "MOBILE":
-				appiumDriver = TestController.getAppiumDriver();
-				break; // optional
-			}
+			appiumDriver = TestController.getAppiumDriver();
 			currentTestParameters.setScenarioName(scenario.getName());
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			log.error("Error at Before Scenario " + e.getMessage());
 			TestController.getHelper().writeStepFAIL();
 		}
 	}
 
 	@After
-	public void embedScreenshot(Scenario scenario) {
-		try {
-			String ExecutionMode = TestController.getTestParameters().getExecutionMode().toString();
+	public void embedScreenshot(Scenario scenario) throws Throwable {
+		switch (ExecutionMode) {
+		case "LOCAL":
+			currentScenario.write("-> Browser: " + TestController.getTestParameters().getBrowser());
+			break; // optional
+
+		case "MOBILE":
+			currentScenario.write(
+					"-> MobileExecutionPlatform: " + TestController.getTestParameters().getMobileExecutionPlatform());
+			currentScenario.write("-> DeviceName: " + TestController.getTestParameters().getDeviceName());
+			currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
+			break; // optional
+		}
+		update(scenario);
+	}
+
+	private void update(Scenario scenario) throws Throwable {
+		if (scenario.isFailed()) {
+			byte[] screenshot = null;
+
 			switch (ExecutionMode) {
 			case "LOCAL":
-				currentScenario.write("-> Browser: " + TestController.getTestParameters().getBrowser());
+				screenshot = ((TakesScreenshot) TestController.getWebDriver()).getScreenshotAs(OutputType.BYTES);
 				break; // optional
 
 			case "MOBILE":
-				currentScenario.write("-> MobileExecutionPlatform: "
-						+ TestController.getTestParameters().getMobileExecutionPlatform());
-				currentScenario.write("-> DeviceName: " + TestController.getTestParameters().getDeviceName());
-				currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
-				break; // optional
-			}
-			update(scenario);
-		} catch (Exception ex) {
-			log.error(ex.getMessage());
-		}
-	}
-
-	private void update(Scenario scenario) {
-		if (scenario.isFailed()) {
-			byte[] screenshot;
-			try {
 				screenshot = ((TakesScreenshot) TestController.getAppiumDriver()).getScreenshotAs(OutputType.BYTES);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				screenshot = ((TakesScreenshot) TestController.getWebDriver()).getScreenshotAs(OutputType.BYTES);
+				break; // optional
 			}
 			scenario.embed(screenshot, "image/png");
 		}
