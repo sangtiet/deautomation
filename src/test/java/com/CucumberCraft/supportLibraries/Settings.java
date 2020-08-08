@@ -44,7 +44,7 @@ public class Settings {
 
 		try {
 			properties.load(new FileInputStream(relativePath
-					+ Util.getFileSeparator() + "GlobalSettings.properties"));
+					+ Util.getFileSeparator() + "config.properties"));
 		} catch (FileNotFoundException e) {
 			log.error(e.getMessage());
 			e.printStackTrace();
