@@ -24,8 +24,8 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 	usageReport = true)
 
 @CucumberOptions(features = "src/test/resources/features", 	
-	glue = { "com.CucumberCraft.stepDefinitions" }, 
-	tags= {"@DeviceCloudTesting"},
+	glue = { "com.CucumberCraft.StepDefinitions" }, 
+	tags= {"@ZP-Login-01"},
 	monochrome = true,
 	//dryRun = true,
 	plugin = {

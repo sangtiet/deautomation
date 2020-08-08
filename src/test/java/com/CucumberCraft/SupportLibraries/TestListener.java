@@ -6,7 +6,7 @@ import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 import org.testng.internal.BaseTestMethod;
-import org.testng.log4testng.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * Will be called before every TestNG Method

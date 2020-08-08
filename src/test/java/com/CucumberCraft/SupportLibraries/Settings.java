@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.testng.log4testng.Logger;
+import org.apache.log4j.Logger;
 
 //import org.apache.log4j.Logger;
 

@@ -2,7 +2,7 @@ package com.CucumberCraft.SupportLibraries;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebDriver;
-import org.testng.log4testng.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * DriverFactory which will create respective driver Object

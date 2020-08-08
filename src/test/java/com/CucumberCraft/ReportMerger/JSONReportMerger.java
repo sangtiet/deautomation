@@ -1,10 +1,9 @@
 package com.CucumberCraft.ReportMerger;
 
-//import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.testng.log4testng.Logger;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.apache.commons.io.FileUtils;
 

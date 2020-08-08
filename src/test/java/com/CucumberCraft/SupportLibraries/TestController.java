@@ -1,7 +1,7 @@
 package com.CucumberCraft.SupportLibraries;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.log4testng.Logger;
+import org.apache.log4j.Logger;
 
 import io.appium.java_client.AppiumDriver;
 
@@ -20,21 +20,31 @@ public class TestController {
 	static Logger log = Logger.getLogger(TestController.class);
 
 	@SuppressWarnings("rawtypes")
-	public static AppiumDriver getAppiumDriver() throws Throwable {
+	public static AppiumDriver getAppiumDriver() {
 
 		if (appiumDriver.get() == null) {
 			log.info("Thread has no AppiumDriver, creating new one");
-			setDriver(DriverFactory.createInstance(getTestParameters()));
+			try {
+				setDriver(DriverFactory.createInstance(getTestParameters()));
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				log.error(e.getMessage());
+			}
 		}
 		log.debug("Getting instance of AppiumDriver" + appiumDriver.get().getClass());
 		return appiumDriver.get();
 	}
 
-	public static WebDriver getWebDriver() throws Throwable {
+	public static WebDriver getWebDriver() {
 
 		if (webDriver.get() == null) {
 			log.info("Thread has no WebDriver, creating new one");
-			setDriver(DriverFactory.createInstanceWebDriver(getTestParameters()));
+			try {
+				setDriver(DriverFactory.createInstanceWebDriver(getTestParameters()));
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				log.error(e.getMessage());
+			}
 		}
 		log.debug("Getting instance of WebDriver" + webDriver.get().getClass());
 		return webDriver.get();

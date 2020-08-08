@@ -15,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.log4testng.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * Factory class for creating the {@link WebDriver} object as required

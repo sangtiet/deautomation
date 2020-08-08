@@ -3,7 +3,6 @@ package com.CucumberCraft.SupportLibraries;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -53,15 +52,15 @@ public class Helper {
 	 * 
 	 * @throws Exception
 	 */
-	public String getLineFromLocFileContainsText(String textToFind, String fileName) throws Exception {
+	public String getElementLocator(String element, String pageName) throws Exception {
 		BufferedReader br = new BufferedReader(new FileReader(
-				System.getProperty("user.dir") + "\\src\\test\\resources\\elements\\" + fileName + ".loc"));
+				System.getProperty("user.dir") + "\\src\\test\\resources\\elements\\" + pageName + ".loc"));
 		try {
 			String line = br.readLine();
 
 			while (line != null) {
-				if (line.contains(textToFind))
-					return line;
+				if (line.contains(element))
+					return line.replace(element + "=", "");
 				line = br.readLine();
 			}
 		} finally {

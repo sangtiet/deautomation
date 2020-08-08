@@ -1,9 +1,9 @@
 package com.CucumberCraft.PageObjects;
 
-public class LoginPage {
+public class LoginZaloPayPage {
 
-	public String btnLogin = "xpath=//button[@id='btn-login']";
+	public String ZALOPAY_LOGO = "xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ImageView";
 	
-	public LoginPage() {
+	public LoginZaloPayPage() {
 	}
 }

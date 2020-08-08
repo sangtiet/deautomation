@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.testng.log4testng.Logger;
+import org.apache.log4j.Logger;
 
 import com.CucumberCraft.SupportLibraries.Settings;
 import com.CucumberCraft.SupportLibraries.TestController;
@@ -24,9 +24,7 @@ public class CukeHooks extends MasterStepDefs {
 		try {
 			currentScenario = scenario;
 			propertiesFileAccess = properties;
-			currentTestParameters = TestController.getTestParameters();
-
-			appiumDriver = TestController.getAppiumDriver();
+			currentTestParameters = TestController.getTestParameters();			
 			currentTestParameters.setScenarioName(scenario.getName());
 		} catch (Throwable e) {
 			log.error("Error at Before Scenario " + e.getMessage());

@@ -6,7 +6,7 @@
 		<!-- This TestNG listener takes care of setting up and tearing down the 
 			WebDriver, and it also changes test names in the final TestNG HTML report. -->
 		<listener
-			class-name="com.CucumberCraft.supportLibraries.TestListener" />
+			class-name="com.CucumberCraft.SupportLibraries.TestListener" />
 	</listeners>
 
 	<test name="Smoke Test on Mobile">
