@@ -75,7 +75,8 @@ public class CommonSteps extends MasterStepDefs {
 	@When("^user types \"([^\"]*)\" into \"([^\"]*)\"$")
 	public void user_types_into(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-
+		element = driverUtil.getWebElement(arg2);
+		element.sendKeys(arg1);
 	}
 
 	@When("^user navigates back$")
