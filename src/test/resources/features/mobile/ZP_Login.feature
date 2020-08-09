@@ -6,15 +6,22 @@ Scenario Outline: Login successfully
 	And "LOGIN_ZALOPAY_PAGE" shows up	   
 	And user clicks on "LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON"
 	And "LZP_PHONE_NUMBER_INPUT" is present
-	And user types "<phone_number>" into "LZP_PHONE_NUMBER_INPUT"	
+	And user types "<phone_number>" into "LZP_PHONE_NUMBER_INPUT"
+	And user clicks on "LZP_CONTINUE_BUTTON"	
+	And user dismisses Alert
+	And "LZP_LOGIN_OTP_INPUT" is present	
 	When user searches for OTP in SMS from "<sender>" to "<phone_number>" and types into "LZP_LOGIN_OTP_INPUT"
+	And "ZALOPAY_PIN_PAGE" shows up	
 	And user inputs pin "<pin>"
+	And "HOME_PAGE" shows up
+	#When user swipes "UP"	
+	When user waits for 10 seconds
 	
 #	And "LZP_PHONE_NUMBER_INPUT" is not present
 #	And user waits until "LZP_PHONE_NUMBER_INPUT" is present in 60 seconds
 	
 #	When user waits for 10 seconds 
-#	When user swipes "UP" 
+	 
 #	And user navigates back
 	
 #	When user scrolls "HOME_APPS_LIST" until "HOME_APP_LINK_BANK_BUTTON" is present

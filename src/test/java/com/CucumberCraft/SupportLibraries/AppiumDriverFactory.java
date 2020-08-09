@@ -41,6 +41,7 @@ public class AppiumDriverFactory {
 			desiredCapabilities.setCapability("autoGrantPermissions", "true");
 			desiredCapabilities.setCapability("automationName",
 					mobileProperties.getProperty("android.automation.name"));
+			desiredCapabilities.setCapability("autoDismissAlerts", true);
 
 			driver = new AndroidDriver(new URL("http://0.0.0.0:" + appiumServerPort + "/wd/hub"), desiredCapabilities);
 			break;

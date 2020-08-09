@@ -7,10 +7,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.touch.TouchActions;
 
-import com.CucumberCraft.PageObjects.LoginZaloPayPage;
+import com.CucumberCraft.PageObjects.*;
 
 import io.appium.java_client.AppiumDriver;
-
 
 /**
  * Class containing useful WebDriver utility functions
@@ -54,6 +53,16 @@ public class AppiumDriverUtil {
 			LoginZaloPayPage LZP = new LoginZaloPayPage();
 			locator = LZP.ZALOPAY_LOGO;
 			break;
+			
+		case "ZALOPAY_PIN_PAGE":
+			ZaloPayPinPage ZPP = new ZaloPayPinPage();
+			locator = ZPP.ZALOPAY_PIN;
+			break;
+			
+		case "HOME_PAGE":
+			HomePage HP = new HomePage();
+			locator = HP.MAINMENU_TOP;
+			break;
 
 		default: // Optional
 			TestController.getHelper().writeStepFAIL("Unable to verify page shows up: " + pageName);
@@ -75,6 +84,14 @@ public class AppiumDriverUtil {
 		js.executeScript("mobile: scroll", scrollObject);
 	}
 
+	public void dismissAlert() {
+		try {
+			driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[1]")).click();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		}
+	}
+	
 	public void tapOnNumberPad(String value) {
 		char[] chars = value.toCharArray();
 		for (char c : chars) {
@@ -95,11 +112,11 @@ public class AppiumDriverUtil {
 		TestController.getHelper().writeStepFAIL("Unable to scroll then find the element: " + elementName);
 		return null;
 	}
-	
+
 	public void navigateBack() {
 		driver.navigate().back();
 	}
-	
+
 	public void navigateBackUntil(String pageName) {
 		driver.navigate().back();
 	}

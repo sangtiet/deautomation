@@ -31,7 +31,7 @@ public class TestController {
 				log.error(e.getMessage());
 			}
 		}
-		log.debug("Getting instance of AppiumDriver" + appiumDriver.get().getClass());
+		//log.debug("Getting instance of AppiumDriver" + appiumDriver.get().getClass());
 		return appiumDriver.get();
 	}
 
@@ -46,7 +46,7 @@ public class TestController {
 				log.error(e.getMessage());
 			}
 		}
-		log.debug("Getting instance of WebDriver" + webDriver.get().getClass());
+		//log.debug("Getting instance of WebDriver" + webDriver.get().getClass());
 		return webDriver.get();
 	}
 

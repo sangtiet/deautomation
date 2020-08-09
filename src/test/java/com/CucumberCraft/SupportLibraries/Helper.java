@@ -18,7 +18,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 
-import com.CucumberCraft.OtpGetter.MessageOtpGetter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -172,8 +171,8 @@ public class Helper {
 		writeStepFAIL("Unable to load test data of: " + TestcaseID);
 	}
 
-	public String retrieveOTPfromSMS(String sender, String receiver) {
-		MessageOtpGetter otpGetter = new MessageOtpGetter();
-		return otpGetter.getOtp(sender, receiver);
+	public String retrieveOTPfromSMS(String sender, String receiver) throws Exception {
+		MySMS otpGetter = new MySMS(receiver, "13102017", sender);
+		return otpGetter.getOTP();
 	}
 }

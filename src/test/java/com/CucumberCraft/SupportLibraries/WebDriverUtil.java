@@ -3,6 +3,7 @@ package com.CucumberCraft.SupportLibraries;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -45,7 +46,7 @@ public class WebDriverUtil {
 	public void refreshCurrentPage() {
 		driver.navigate().refresh();
 	}
-	
+
 	public void maximizeBrowser() {
 		driver.manage().window().maximize();
 	}
@@ -152,7 +153,7 @@ public class WebDriverUtil {
 			// TODO Auto-generated catch block
 			return;
 		}
-	}	
+	}
 
 	public void waitForAlert(int timeout) {
 		driverWait = new WebDriverWait(driver, timeout);
@@ -293,5 +294,17 @@ public class WebDriverUtil {
 		}
 		builder.sendKeys(Keys.ENTER).build().perform();
 		TestController.getHelper().wait(1);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void switchToWindowHandlesOpen() {
+		ArrayList tabs = new ArrayList(driver.getWindowHandles());
+		driver.switchTo().window((String) tabs.get(1));
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void closeSwitchToWindow() {
+		ArrayList tabs = new ArrayList(driver.getWindowHandles());
+		driver.switchTo().window((String) tabs.get(0));
 	}
 }

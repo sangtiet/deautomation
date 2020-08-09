@@ -17,6 +17,12 @@ public class CommonSteps extends MasterStepDefs {
 	private AppiumDriverUtil driverUtil = new AppiumDriverUtil(driver);
 	private WebElement element;
 
+	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
+	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		TestController.getHelper().loadTestDataFromJson(arg1, arg2);
+	}
+	
 	@Given("^user launchs the application$")
 	public void user_launchs_the_application() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
@@ -97,6 +103,12 @@ public class CommonSteps extends MasterStepDefs {
 		driverUtil.tapOnNumberPad(arg1);
 	}
 
+	@When("^user dismisses Alert$")
+	public void user_dismisses_Alert() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtil.dismissAlert();
+	}
+	
 	@When("^user swipes \"([^\"]*)\"$")
 	public void user_swipes(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
