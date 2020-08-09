@@ -54,8 +54,10 @@ public class Helper {
 	 * @throws Exception
 	 */
 	public String getElementLocator(String element, String pageName) throws Exception {
-		BufferedReader br = new BufferedReader(new FileReader(
-				System.getProperty("user.dir") + "\\src\\test\\resources\\elements\\" + pageName + ".loc"));
+		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
+
+		BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")
+				+ "\\src\\test\\resources\\elements\\" + platformName + "\\" + pageName + ".loc"));
 		try {
 			String line = br.readLine();
 

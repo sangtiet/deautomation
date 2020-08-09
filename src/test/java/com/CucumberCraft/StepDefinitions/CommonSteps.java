@@ -12,15 +12,10 @@ public class CommonSteps extends MasterStepDefs {
 
 	static Logger log = Logger.getLogger(CommonSteps.class);
 
+	@SuppressWarnings("rawtypes")
 	private AppiumDriver driver = TestController.getAppiumDriver();
 	private AppiumDriverUtil driverUtil = new AppiumDriverUtil(driver);
 	private WebElement element;
-
-	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
-	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		TestController.getHelper().loadTestDataFromJson(arg1, arg2);
-	}
 
 	@Given("^user launchs the application$")
 	public void user_launchs_the_application() throws Throwable {
@@ -45,19 +40,30 @@ public class CommonSteps extends MasterStepDefs {
 	public void user_searches_for_OTP_in_SMS_from_to_and_types_into(String arg1, String arg2, String arg3)
 			throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-
+		String otp = TestController.getHelper().retrieveOTPfromSMS(arg1, arg2);
+		element = driverUtil.getWebElement(arg3);
+		element.clear();
+		element.sendKeys(otp);
 	}
 
 	@Then("^\"([^\"]*)\" is present$")
 	public void is_present(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-
+		element = driverUtil.getWebElement(arg1);
+		if (!element.isDisplayed())
+			TestController.getHelper().writeStepFAIL("Element is NOT present");
 	}
 
 	@Then("^\"([^\"]*)\" is not present$")
 	public void is_not_present(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		try {
+			element = driverUtil.getWebElement(arg1);
+			TestController.getHelper().writeStepFAIL("Element is present");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 
+		}
 	}
 
 	@When("^user waits until \"([^\"]*)\" is present in (\\d+) seconds$")
@@ -82,18 +88,24 @@ public class CommonSteps extends MasterStepDefs {
 	@When("^user navigates back$")
 	public void user_navigates_back() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-
+		driverUtil.navigateBack();
 	}
 
 	@When("^user inputs pin \"([^\"]*)\"$")
-	public void user_inputs_pin(int arg1) throws Throwable {
+	public void user_inputs_pin(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		driverUtil.tapOnNumberPad(arg1);
+	}
 
+	@When("^user swipes \"([^\"]*)\"$")
+	public void user_swipes(String arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtil.mobileSwipe(arg1);
 	}
 
 	@When("^user scrolls \"([^\"]*)\" until \"([^\"]*)\" is present$")
 	public void user_scrolls_until_is_present(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-
+		driverUtil.scrollToFindElement(arg1, arg2, 10);
 	}
 }

@@ -1,11 +1,16 @@
 package com.CucumberCraft.SupportLibraries;
 
+import java.util.HashMap;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.touch.TouchActions;
 
 import com.CucumberCraft.PageObjects.LoginZaloPayPage;
 
 import io.appium.java_client.AppiumDriver;
+
 
 /**
  * Class containing useful WebDriver utility functions
@@ -29,7 +34,7 @@ public class AppiumDriverUtil {
 
 	public WebElement getWebElement(String elementName) throws Exception {
 		String locator = TestController.getHelper().getElementLocator(elementName, elementName.split("_")[0]);
-		
+
 		if (locator.startsWith("xpath"))
 			return driver.findElement(By.xpath(locator.replace("xpath=", "")));
 		else if (locator.startsWith("id"))
@@ -43,7 +48,7 @@ public class AppiumDriverUtil {
 
 	public boolean verifyPageShowsUp(String pageName) {
 		String locator = null;
-		
+
 		switch (pageName) {
 		case "LOGIN_ZALOPAY_PAGE":
 			LoginZaloPayPage LZP = new LoginZaloPayPage();
@@ -61,5 +66,41 @@ public class AppiumDriverUtil {
 			// TODO Auto-generated catch block
 			return false;
 		}
+	}
+
+	public void mobileSwipe(String direction) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		HashMap<String, String> scrollObject = new HashMap<String, String>();
+		scrollObject.put("direction", direction.toLowerCase());
+		js.executeScript("mobile: scroll", scrollObject);
+	}
+
+	public void tapOnNumberPad(String value) {
+		char[] chars = value.toCharArray();
+		for (char c : chars) {
+			driver.findElement(By.xpath("//*[@text='" + c + "']")).click();
+		}
+	}
+
+	public WebElement scrollToFindElement(String scroll, String elementName, int retry) throws Exception {
+		TouchActions action = new TouchActions(driver);
+		WebElement scrollElem = getWebElement(scroll);
+
+		int i = 0;
+		while (i < retry) {
+			action.scroll(scrollElem, 10, 100);
+			action.perform();
+			return getWebElement(elementName);
+		}
+		TestController.getHelper().writeStepFAIL("Unable to scroll then find the element: " + elementName);
+		return null;
+	}
+	
+	public void navigateBack() {
+		driver.navigate().back();
+	}
+	
+	public void navigateBackUntil(String pageName) {
+		driver.navigate().back();
 	}
 }
