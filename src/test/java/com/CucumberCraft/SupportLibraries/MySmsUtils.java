@@ -1,6 +1,7 @@
 package com.CucumberCraft.SupportLibraries;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
-public class MySMS {
+public class MySmsUtils {
 	private String mysms_account;
 	private String mysms_password;
 	private String mysms_sender;
@@ -22,10 +23,11 @@ public class MySMS {
 	private String locator;
 	private int timeout = 60;
 	private Helper helper = new Helper();
+	private Properties properties = Settings.getInstance();
 
-	public MySMS(String mysmsAccount, String mysmsPassword, String mysmsSender) {
+	public MySmsUtils(String mysmsAccount, String mysmsSender) {
 		mysms_account = mysmsAccount;
-		mysms_password = mysmsPassword;
+		mysms_password = properties.getProperty("mysms.cloud." + mysms_account);
 		mysms_sender = mysmsSender;
 
 		ChromeOptions options = new ChromeOptions();

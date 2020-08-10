@@ -22,10 +22,11 @@ public class CommonSteps extends MasterStepDefs {
 		// Write code here that turns the phrase above into concrete actions
 		TestController.getHelper().loadTestDataFromJson(arg1, arg2);
 	}
-	
+
 	@Given("^user launchs the application$")
 	public void user_launchs_the_application() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		element = driverUtil.getWebElement("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON");
 		log.info("App was launched successfully");
 	}
 
@@ -108,16 +109,19 @@ public class CommonSteps extends MasterStepDefs {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtil.dismissAlert();
 	}
-	
+
 	@When("^user swipes \"([^\"]*)\"$")
 	public void user_swipes(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		driverUtil.mobileSwipe(arg1);
+		if (arg1.toUpperCase().equals("UP"))
+			driverUtil.swipeUp(0.8, 0.1, 0.5, 2000);
+		else if (arg1.toUpperCase().equals("DOWN"))
+			driverUtil.swipDown(1);
 	}
 
-	@When("^user scrolls \"([^\"]*)\" until \"([^\"]*)\" is present$")
-	public void user_scrolls_until_is_present(String arg1, String arg2) throws Throwable {
+	@When("^user scrolls down until \"([^\"]*)\" element is present$")
+	public void user_scrolls_down_until_element_is_present(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		driverUtil.scrollToFindElement(arg1, arg2, 10);
+		driverUtil.scrollToFindElement(arg1, arg2, 5);
 	}
 }

@@ -172,7 +172,7 @@ public class Helper {
 	}
 
 	public String retrieveOTPfromSMS(String sender, String receiver) throws Exception {
-		MySMS otpGetter = new MySMS(receiver, "13102017", sender);
+		MySmsUtils otpGetter = new MySmsUtils(receiver, sender);
 		return otpGetter.getOTP();
 	}
 }
