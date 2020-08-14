@@ -1,0 +1,5 @@
+BLP_CARD_NUMBER_INPUT=xpath=(//*[@class='android.widget.EditText'])[1]
+BLP_ISSUE_DATE_INPUT=xpath=(//*[@class='android.widget.EditText'])[2]
+BLP_CARD_OWNER_INPUT=xpath=(//*[@class='android.widget.EditText'])[3]
+BLP_LINK_NOW_BUTTON=id=submit_btn
+

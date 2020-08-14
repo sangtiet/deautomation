@@ -1,16 +1,17 @@
 package com.CucumberCraft.SupportLibraries;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
-import com.CucumberCraft.PageObjects.HomePage;
-import com.CucumberCraft.PageObjects.LoginZaloPayPage;
-import com.CucumberCraft.PageObjects.ZaloPayPinPage;
+import com.CucumberCraft.PageObjects.*;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
@@ -44,6 +45,9 @@ public class AppiumDriverUtil {
 			return driver.findElement(By.id(locator.replace("id=", "")));
 		else if (locator.startsWith("name"))
 			return driver.findElement(By.name(locator.replace("name=", "")));
+		else if (locator.startsWith("text"))
+			return driver.findElement(
+					MobileBy.AndroidUIAutomator(("new UiSelector().text(\"" + locator.replace("text=", "") + "\")")));
 		else
 			TestController.getHelper().writeStepFAIL("Unable to locate the element: " + locator);
 		return null;
@@ -55,6 +59,15 @@ public class AppiumDriverUtil {
 
 		switch (pageName) {
 
+		case "BANK_LINK_PAGE":
+			BankLinkPage BLP = new BankLinkPage();
+
+			if (platformName.equals("android"))
+				locator = BLP.PAGE_INDICATOR_ANDROID;
+			else if (platformName.equals("ios"))
+				locator = BLP.PAGE_INDICATOR_IOS;
+			break;
+		
 		case "LOGIN_ZALOPAY_PAGE":
 			LoginZaloPayPage LZP = new LoginZaloPayPage();
 
@@ -71,6 +84,15 @@ public class AppiumDriverUtil {
 				locator = ZPP.PAGE_INDICATOR_ANDROID;
 			else if (platformName.equals("ios"))
 				locator = ZPP.PAGE_INDICATOR_IOS;
+			break;
+
+		case "CHOSE_LINK_PAGE":
+			ChoseLinkPage CLP = new ChoseLinkPage();
+
+			if (platformName.equals("android"))
+				locator = CLP.PAGE_INDICATOR_ANDROID;
+			else if (platformName.equals("ios"))
+				locator = CLP.PAGE_INDICATOR_IOS;
 			break;
 
 		case "HOME_PAGE":
@@ -149,12 +171,19 @@ public class AppiumDriverUtil {
 		}
 	}
 
-	public WebElement scrollToFindElement(String scroll, String elementName, int retry) throws Exception {
+	public WebElement scrollToFindElement(String elementName, int retry) throws Exception {
 		int i = 0;
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		while (i < retry) {
 			swipeUp(0.8, 0.1, 0.5, 2000);
-			return getWebElement(elementName);
+			try {
+				return getWebElement(elementName);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+
+			}
 		}
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		TestController.getHelper().writeStepFAIL("Element <" + elementName + "> not found");
 		return null;
 	}
@@ -165,5 +194,21 @@ public class AppiumDriverUtil {
 
 	public void navigateBackUntil(String pageName) {
 		driver.navigate().back();
+	}
+
+	@SuppressWarnings("unchecked")
+	public void clickElementByVisibleText(String text) {
+		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
+		List<WebElement> lstElem = null;
+
+		if (platformName.equals("android"))
+			lstElem = driver.findElements(MobileBy.AndroidUIAutomator(("new UiSelector().text(\"" + text + "\")")));
+		else if (platformName.equals("ios"))
+			lstElem = driver.findElements(MobileBy.IosUIAutomation(("new UiSelector().text(\"" + text + "\")")));
+
+		if (lstElem.size() == 1)
+			lstElem.get(0).click();
+		else
+			TestController.getHelper().writeStepFAIL("Element not found or match more than one");
 	}
 }

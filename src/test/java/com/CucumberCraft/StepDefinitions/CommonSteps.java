@@ -1,6 +1,9 @@
 package com.CucumberCraft.StepDefinitions;
 
 import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.Logger;
 
 import com.CucumberCraft.SupportLibraries.AppiumDriverUtil;
@@ -34,6 +37,7 @@ public class CommonSteps extends MasterStepDefs {
 	public void shows_up(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtil.verifyPageShowsUp(arg1);
+		log.info(arg1 + " page shown up");
 	}
 
 	@When("^user clicks on \"([^\"]*)\"$")
@@ -120,8 +124,15 @@ public class CommonSteps extends MasterStepDefs {
 	}
 
 	@When("^user scrolls down until \"([^\"]*)\" element is present$")
-	public void user_scrolls_down_until_element_is_present(String arg1, String arg2) throws Throwable {
+	public void user_scrolls_down_until_element_is_present(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		driverUtil.scrollToFindElement(arg1, arg2, 5);
+		driverUtil.scrollToFindElement(arg1, 5);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+
+	@When("^user clicks on element by visible text \"([^\"]*)\"$")
+	public void user_clicks_on_element_by_visible_text(String arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtil.clickElementByVisibleText(arg1);
 	}
 }
