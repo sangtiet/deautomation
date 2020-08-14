@@ -39,6 +39,7 @@ public class MySmsUtils {
 		driver = new ChromeDriver(options);
 		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
 		driverUtils = new WebDriverUtil(driver);
+		System.out.println("Getting OTP from MySMS...");
 	}
 
 	public String getOTP() throws Exception {

@@ -1,6 +1,10 @@
 package com.CucumberCraft.SupportLibraries;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -8,10 +12,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
-import com.CucumberCraft.PageObjects.*;
+import com.CucumberCraft.PageObjects.BankLinkPage;
+import com.CucumberCraft.PageObjects.ChoseLinkPage;
+import com.CucumberCraft.PageObjects.HomePage;
+import com.CucumberCraft.PageObjects.LoginZaloPayPage;
+import com.CucumberCraft.PageObjects.ZaloPayPinPage;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
@@ -46,61 +55,68 @@ public class AppiumDriverUtil {
 		else if (locator.startsWith("name"))
 			return driver.findElement(By.name(locator.replace("name=", "")));
 		else if (locator.startsWith("text"))
-			return driver.findElement(
-					MobileBy.AndroidUIAutomator(("new UiSelector().text(\"" + locator.replace("text=", "") + "\")")));
+			if (getMobileExecutionPlatform().equals("ANDROID"))
+				return driver.findElement(MobileBy
+						.AndroidUIAutomator(("new UiSelector().text(\"" + locator.replace("text=", "") + "\")")));
+			else
+				return driver.findElement(
+						MobileBy.IosUIAutomation(("new UiSelector().text(\"" + locator.replace("text=", "") + "\")")));
 		else
 			TestController.getHelper().writeStepFAIL("Unable to locate the element: " + locator);
 		return null;
 	}
 
+	private String getMobileExecutionPlatform() {
+		return TestController.getTestParameters().getMobileExecutionPlatform().toString().toUpperCase();
+	}
+
 	public boolean verifyPageShowsUp(String pageName) {
 		String locator = null;
-		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
 
 		switch (pageName) {
 
 		case "BANK_LINK_PAGE":
 			BankLinkPage BLP = new BankLinkPage();
 
-			if (platformName.equals("android"))
+			if (getMobileExecutionPlatform().equals("ANDROID"))
 				locator = BLP.PAGE_INDICATOR_ANDROID;
-			else if (platformName.equals("ios"))
+			else if (getMobileExecutionPlatform().equals("IOS"))
 				locator = BLP.PAGE_INDICATOR_IOS;
 			break;
-		
+
 		case "LOGIN_ZALOPAY_PAGE":
 			LoginZaloPayPage LZP = new LoginZaloPayPage();
 
-			if (platformName.equals("android"))
+			if (getMobileExecutionPlatform().equals("ANDROID"))
 				locator = LZP.PAGE_INDICATOR_ANDROID;
-			else if (platformName.equals("ios"))
+			else if (getMobileExecutionPlatform().equals("IOS"))
 				locator = LZP.PAGE_INDICATOR_IOS;
 			break;
 
 		case "ZALOPAY_PIN_PAGE":
 			ZaloPayPinPage ZPP = new ZaloPayPinPage();
 
-			if (platformName.equals("android"))
+			if (getMobileExecutionPlatform().equals("ANDROID"))
 				locator = ZPP.PAGE_INDICATOR_ANDROID;
-			else if (platformName.equals("ios"))
+			else if (getMobileExecutionPlatform().equals("IOS"))
 				locator = ZPP.PAGE_INDICATOR_IOS;
 			break;
 
 		case "CHOSE_LINK_PAGE":
 			ChoseLinkPage CLP = new ChoseLinkPage();
 
-			if (platformName.equals("android"))
+			if (getMobileExecutionPlatform().equals("ANDROID"))
 				locator = CLP.PAGE_INDICATOR_ANDROID;
-			else if (platformName.equals("ios"))
+			else if (getMobileExecutionPlatform().equals("IOS"))
 				locator = CLP.PAGE_INDICATOR_IOS;
 			break;
 
 		case "HOME_PAGE":
 			HomePage HP = new HomePage();
 
-			if (platformName.equals("android"))
+			if (getMobileExecutionPlatform().equals("ANDROID"))
 				locator = HP.PAGE_INDICATOR_ANDROID;
-			else if (platformName.equals("ios"))
+			else if (getMobileExecutionPlatform().equals("IOS"))
 				locator = HP.PAGE_INDICATOR_IOS;
 			break;
 
@@ -150,13 +166,11 @@ public class AppiumDriverUtil {
 
 	public void dismissAlert() {
 		try {
-			String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString()
-					.toLowerCase();
-			if (platformName.equals("android"))
+			if (getMobileExecutionPlatform().equals("ANDROID"))
 				driver.findElement(By.xpath(
 						"/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[1]"))
 						.click();
-			else if (platformName.equals("ios"))
+			else if (getMobileExecutionPlatform().equals("IOS"))
 				driver.findElement(By.xpath("/ios")).click();
 
 		} catch (Exception e) {
@@ -198,17 +212,32 @@ public class AppiumDriverUtil {
 
 	@SuppressWarnings("unchecked")
 	public void clickElementByVisibleText(String text) {
-		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
 		List<WebElement> lstElem = null;
 
-		if (platformName.equals("android"))
+		if (getMobileExecutionPlatform().equals("ANDROID"))
 			lstElem = driver.findElements(MobileBy.AndroidUIAutomator(("new UiSelector().text(\"" + text + "\")")));
-		else if (platformName.equals("ios"))
+		else if (getMobileExecutionPlatform().equals("IOS"))
 			lstElem = driver.findElements(MobileBy.IosUIAutomation(("new UiSelector().text(\"" + text + "\")")));
 
 		if (lstElem.size() == 1)
 			lstElem.get(0).click();
 		else
 			TestController.getHelper().writeStepFAIL("Element not found or match more than one");
+	}
+
+	public void clickElementByImage(String imageName) throws Exception {
+		Path path = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\images\\"
+				+ getMobileExecutionPlatform().toLowerCase() + "\\" + imageName + ".png");
+		MobileElement elementByImage = (MobileElement) driver
+				.findElementByImage(Base64.getEncoder().encodeToString(Files.readAllBytes(path)));
+		elementByImage.click();
+	}
+
+	public void findElementByImage(String imageName) throws Exception {
+		Path path = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\images\\"
+				+ getMobileExecutionPlatform().toLowerCase() + "\\" + imageName + ".png");
+		MobileElement elementByImage = (MobileElement) driver
+				.findElementByImage(Base64.getEncoder().encodeToString(Files.readAllBytes(path)));
+		System.out.println(imageName + " image element was found");
 	}
 }
