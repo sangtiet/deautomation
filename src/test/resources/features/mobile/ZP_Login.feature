@@ -23,8 +23,7 @@ Scenario Outline: Login successfully
 	Then "BANK_LINK_PAGE" shows up
 	And user types "<card_number>" into "BLP_CARD_NUMBER_INPUT"
 	And user types "<issue_date>" into "BLP_ISSUE_DATE_INPUT"
-	And user types "<card_owner>" into "BLP_CARD_OWNER_INPUT"
-	And "BLP_WARNING_MESSAGE_CARD_NUMBER_NOT_SUPPORTED" image element is present
+	And user types "<card_owner>" into "BLP_CARD_OWNER_INPUT"	
 	#And user clicks on "BLP_LINK_NOW_BUTTON"
 #	And "LZP_PHONE_NUMBER_INPUT" is not present
 #	And user waits until "LZP_PHONE_NUMBER_INPUT" is present in 60 seconds

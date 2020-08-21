@@ -232,12 +232,4 @@ public class AppiumDriverUtil {
 				.findElementByImage(Base64.getEncoder().encodeToString(Files.readAllBytes(path)));
 		elementByImage.click();
 	}
-
-	public void findElementByImage(String imageName) throws Exception {
-		Path path = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\images\\"
-				+ getMobileExecutionPlatform().toLowerCase() + "\\" + imageName + ".png");
-		MobileElement elementByImage = (MobileElement) driver
-				.findElementByImage(Base64.getEncoder().encodeToString(Files.readAllBytes(path)));
-		System.out.println(imageName + " image element was found");
-	}
 }
