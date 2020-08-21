@@ -137,11 +137,4 @@ public class CommonSteps extends MasterStepDefs {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtil.clickElementByVisibleText(arg1);
 	}
-	
-	@When("^user clicks on element by image \"([^\"]*)\"$")
-	public void user_clicks_on_element_by_image(String arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		driverUtil.clickElementByImage(arg1);
-	}
-
 }

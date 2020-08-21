@@ -1,5 +1,7 @@
 package com.CucumberCraft.SupportLibraries;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,8 +47,34 @@ public class AppiumDriverUtil {
 		driver = p_driver;
 	}
 
+	public String getElementLocator(String element, String pageName) throws Exception {
+		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
+
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\src\\test\\resources\\elements\\"
+					+ platformName + "\\" + pageName + ".loc"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src/test/resources/elements/"
+					+ platformName + "/" + pageName + ".loc"));
+		}
+		try {
+			String line = br.readLine();
+
+			while (line != null) {
+				if (line.contains(element))
+					return line.replace(element + "=", "");
+				line = br.readLine();
+			}
+		} finally {
+			br.close();
+		}
+		return null;
+	}
+
 	public WebElement getWebElement(String elementName) throws Exception {
-		String locator = TestController.getHelper().getElementLocator(elementName, elementName.split("_")[0]);
+		String locator = getElementLocator(elementName, elementName.split("_")[0]);
 
 		if (locator.startsWith("xpath"))
 			return driver.findElement(By.xpath(locator.replace("xpath=", "")));
@@ -206,10 +234,6 @@ public class AppiumDriverUtil {
 		driver.navigate().back();
 	}
 
-	public void navigateBackUntil(String pageName) {
-		driver.navigate().back();
-	}
-
 	@SuppressWarnings("unchecked")
 	public void clickElementByVisibleText(String text) {
 		List<WebElement> lstElem = null;
@@ -223,13 +247,5 @@ public class AppiumDriverUtil {
 			lstElem.get(0).click();
 		else
 			TestController.getHelper().writeStepFAIL("Element not found or match more than one");
-	}
-
-	public void clickElementByImage(String imageName) throws Exception {
-		Path path = Paths.get(System.getProperty("user.dir") + "\\src\\test\\resources\\images\\"
-				+ getMobileExecutionPlatform().toLowerCase() + "\\" + imageName + ".png");
-		MobileElement elementByImage = (MobileElement) driver
-				.findElementByImage(Base64.getEncoder().encodeToString(Files.readAllBytes(path)));
-		elementByImage.click();
 	}
 }

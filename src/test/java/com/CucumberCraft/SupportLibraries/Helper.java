@@ -1,6 +1,5 @@
 package com.CucumberCraft.SupportLibraries;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Files;
@@ -52,25 +51,6 @@ public class Helper {
 	 * 
 	 * @throws Exception
 	 */
-	public String getElementLocator(String element, String pageName) throws Exception {
-		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
-
-		BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")
-				+ "\\src\\test\\resources\\elements\\" + platformName + "\\" + pageName + ".loc"));
-		try {
-			String line = br.readLine();
-
-			while (line != null) {
-				if (line.contains(element))
-					return line.replace(element + "=", "");
-				line = br.readLine();
-			}
-		} finally {
-			br.close();
-		}
-		return null;
-	}
-
 	public void createFolderIfNotExist(String Dir) throws Exception {
 		Path path = Paths.get(Dir);
 		if (!Files.exists(path))
