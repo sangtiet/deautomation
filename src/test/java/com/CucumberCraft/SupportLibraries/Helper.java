@@ -71,10 +71,6 @@ public class Helper {
 		return properties.getProperty(param);
 	}
 
-	public void wait(int secs) throws Exception {
-		Thread.sleep(secs * 1000);
-	}
-
 	public String returnCleanString(String s) {
 		return s.trim().replaceAll("\\r|\\n", "");
 	}
@@ -149,10 +145,5 @@ public class Helper {
 			}
 		}
 		writeStepFAIL("Unable to load test data of: " + TestcaseID);
-	}
-
-	public String retrieveOTPfromSMS(String sender, String receiver) throws Exception {
-		MySmsUtils otpGetter = new MySmsUtils(receiver, sender);
-		return otpGetter.getOTP();
 	}
 }

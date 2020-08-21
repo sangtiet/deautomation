@@ -21,8 +21,7 @@ public class MySmsUtils {
 	private WebElement elem;
 	private List<WebElement> lstElem;
 	private String locator;
-	private int timeout = 60;
-	private Helper helper = new Helper();
+	private int timeout = 60;	
 	private Properties properties = Settings.getInstance();
 
 	public MySmsUtils(String mysmsAccount, String mysmsSender) {
@@ -51,7 +50,7 @@ public class MySmsUtils {
 		elem = driverUtils.getWebElement(locator);
 		elem.click();
 		driverUtils.switchToWindowHandlesOpen();
-		helper.wait(1);
+		driverUtils.wait(1);
 
 		locator = "xpath=//button[@type='button']//child::div[text()='Login']";
 		elem = driverUtils.getWebElement(locator);
@@ -64,7 +63,7 @@ public class MySmsUtils {
 		elem = driverUtils.getWebElement(locator);
 		Select drpCountry = new Select(elem);
 		drpCountry.selectByVisibleText("Vietnam (+84)");
-		helper.wait(1);
+		driverUtils.wait(1);
 
 		locator = "xpath=//input[@placeholder='Your mobile number']";
 		elem = driverUtils.getWebElement(locator);
@@ -81,7 +80,7 @@ public class MySmsUtils {
 		driverUtils.waitUntilElementLocated(locator, timeout);
 		elem = driverUtils.getWebElement(locator);
 		elem.click();
-		helper.wait(1);
+		driverUtils.wait(1);
 
 		locator = "xpath=//span[@class='message']";
 		lstElem = driverUtils.getListOfWebElement(locator);

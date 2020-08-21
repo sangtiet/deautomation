@@ -2,11 +2,7 @@ package com.CucumberCraft.SupportLibraries;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,22 +18,20 @@ import com.CucumberCraft.PageObjects.ZaloPayPinPage;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
 /**
- * Class containing useful WebDriver utility functions
+ * Class containing useful AppiumDriver utility functions
  * 
  */
 @SuppressWarnings("rawtypes")
 public class AppiumDriverUtil {
 
 	private AppiumDriver driver;
-	private final int TIMEOUT = 10;
-	private WebElement element;
-
+	private Helper helper = TestController.getHelper();
+	
 	/**
 	 * Constructor to initialize the {@link AppiumDriverUtil} object
 	 * 
@@ -81,16 +75,9 @@ public class AppiumDriverUtil {
 		else if (locator.startsWith("id"))
 			return driver.findElement(By.id(locator.replace("id=", "")));
 		else if (locator.startsWith("name"))
-			return driver.findElement(By.name(locator.replace("name=", "")));
-		else if (locator.startsWith("text"))
-			if (getMobileExecutionPlatform().equals("ANDROID"))
-				return driver.findElement(MobileBy
-						.AndroidUIAutomator(("new UiSelector().text(\"" + locator.replace("text=", "") + "\")")));
-			else
-				return driver.findElement(
-						MobileBy.IosUIAutomation(("new UiSelector().text(\"" + locator.replace("text=", "") + "\")")));
+			return driver.findElement(By.name(locator.replace("name=", "")));		
 		else
-			TestController.getHelper().writeStepFAIL("Unable to locate the element: " + locator);
+			helper.writeStepFAIL("Unable to locate the element: " + locator);
 		return null;
 	}
 
@@ -102,7 +89,6 @@ public class AppiumDriverUtil {
 		String locator = null;
 
 		switch (pageName) {
-
 		case "BANK_LINK_PAGE":
 			BankLinkPage BLP = new BankLinkPage();
 
@@ -149,11 +135,11 @@ public class AppiumDriverUtil {
 			break;
 
 		default: // Optional
-			TestController.getHelper().writeStepFAIL("Unable to verify page shows up: " + pageName);
+			helper.writeStepFAIL("Unable to verify page shows up: " + pageName);
 		}
 
 		try {
-			element = getWebElement(locator);
+			getWebElement(locator);
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -226,7 +212,7 @@ public class AppiumDriverUtil {
 			}
 		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		TestController.getHelper().writeStepFAIL("Element <" + elementName + "> not found");
+		helper.writeStepFAIL("Element <" + elementName + "> not found");
 		return null;
 	}
 
@@ -246,6 +232,30 @@ public class AppiumDriverUtil {
 		if (lstElem.size() == 1)
 			lstElem.get(0).click();
 		else
-			TestController.getHelper().writeStepFAIL("Element not found or match more than one");
+			helper.writeStepFAIL("Element not found or match more than one");
+	}
+
+	public String retrieveOTPfromSMS(String sender, String receiver) throws Exception {
+		MySmsUtils otpGetter = new MySmsUtils(receiver, sender);
+		return otpGetter.getOTP();
+	}
+	
+	public void verifyElementPresent(String locator) throws Exception {
+		if (!getWebElement(locator).isDisplayed())
+			helper.writeStepFAIL("Element is NOT present");
+	}
+	
+	public void verifyElementNotPresent(String locator) throws Exception {
+		try {
+			getWebElement(locator);
+			helper.writeStepFAIL("Element is present");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+		}
+	}
+	
+	public void wait(int secs) throws Exception {
+		Thread.sleep(secs * 1000);
 	}
 }

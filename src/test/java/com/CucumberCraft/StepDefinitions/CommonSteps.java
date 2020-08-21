@@ -1,15 +1,16 @@
 package com.CucumberCraft.StepDefinitions;
 
-import org.openqa.selenium.WebElement;
-
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.WebElement;
 
 import com.CucumberCraft.SupportLibraries.AppiumDriverUtil;
-import com.CucumberCraft.SupportLibraries.Helper;
 import com.CucumberCraft.SupportLibraries.TestController;
-import cucumber.api.java.en.*;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import io.appium.java_client.AppiumDriver;
 
 public class CommonSteps extends MasterStepDefs {
@@ -19,19 +20,19 @@ public class CommonSteps extends MasterStepDefs {
 	@SuppressWarnings("rawtypes")
 	private AppiumDriver driver = TestController.getAppiumDriver();
 	private AppiumDriverUtil driverUtil = new AppiumDriverUtil(driver);
-	private Helper helper = TestController.getHelper();
 	private WebElement element;
 
-	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
-	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		helper.loadTestDataFromJson(arg1, arg2);
-	}
+//  --------------------!!!DO NOT REMOVE!!!--------------------
+//	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
+//	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
+//		// Write code here that turns the phrase above into concrete actions
+//		helper.loadTestDataFromJson(arg1, arg2);
+//	}
 
 	@Given("^user launchs the application$")
 	public void user_launchs_the_application() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		element = driverUtil.getWebElement("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON");
+		driverUtil.getWebElement("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON");
 		log.info("App was launched successfully");
 	}
 
@@ -53,7 +54,7 @@ public class CommonSteps extends MasterStepDefs {
 	public void user_searches_for_OTP_in_SMS_from_to_and_types_into(String arg1, String arg2, String arg3)
 			throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		String otp = helper.retrieveOTPfromSMS(arg1, arg2);
+		String otp = driverUtil.retrieveOTPfromSMS(arg1, arg2);
 		element = driverUtil.getWebElement(arg3);
 		element.clear();
 		element.sendKeys(otp);
@@ -62,21 +63,13 @@ public class CommonSteps extends MasterStepDefs {
 	@Then("^\"([^\"]*)\" is present$")
 	public void is_present(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		element = driverUtil.getWebElement(arg1);
-		if (!element.isDisplayed())
-			helper.writeStepFAIL("Element is NOT present");
+		driverUtil.verifyElementPresent(arg1);
 	}
 
 	@Then("^\"([^\"]*)\" is not present$")
 	public void is_not_present(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		try {
-			element = driverUtil.getWebElement(arg1);
-			helper.writeStepFAIL("Element is present");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-
-		}
+		driverUtil.verifyElementNotPresent(arg1);
 	}
 
 	@When("^user waits until \"([^\"]*)\" is present in (\\d+) seconds$")
@@ -88,7 +81,7 @@ public class CommonSteps extends MasterStepDefs {
 	@When("^user waits for (\\d+) seconds$")
 	public void user_waits_for_seconds(int arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		helper.wait(arg1);
+		driverUtil.wait(arg1);
 	}
 
 	@When("^user types \"([^\"]*)\" into \"([^\"]*)\"$")
