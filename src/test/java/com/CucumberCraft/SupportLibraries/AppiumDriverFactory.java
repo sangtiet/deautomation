@@ -81,7 +81,8 @@ public class AppiumDriverFactory {
 		default:
 			log.warn("No such Execution Platform implementation available");
 		}
-
+		
+		log.info("AppiumDriver was created successfully");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
 	}
