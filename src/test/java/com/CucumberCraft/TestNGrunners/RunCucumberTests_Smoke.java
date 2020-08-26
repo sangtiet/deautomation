@@ -25,7 +25,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.StepDefinitions" }, 
-	tags= {"@ZP-Login-01"},
+	tags= {"@ZP-Login"},
 	monochrome = true,
 	//dryRun = true,
 	plugin = {

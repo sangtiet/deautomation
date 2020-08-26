@@ -32,6 +32,8 @@ public class CommonSteps extends MasterStepDefs {
 	@Given("^user launchs the application$")
 	public void user_launchs_the_application() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		//if(!driverUtil.isElementPresent("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON") && !driverUtil.isElementPresent("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON"))
+	
 		driverUtil.getWebElement("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON");
 		log.info("App was launched successfully");
 	}

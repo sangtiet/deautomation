@@ -12,8 +12,8 @@
 	<test name="Smoke Test on Mobile">
 		<parameter name="ExecutionMode" value="MOBILE" />
 		<parameter name="MobileExecutionPlatform" value="ANDROID" />
-		<parameter name="DeviceName" value="25733e2" />
-		<parameter name="OSVersion" value="10" />
+		<parameter name="DeviceName" value="52004c98eea95419" />
+		<parameter name="OSVersion" value="9" />
 		<classes>
 			<class
 				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />

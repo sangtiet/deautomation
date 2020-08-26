@@ -43,6 +43,10 @@ public class WebDriverUtil {
 		builder = new Actions(driver);
 	}
 
+	public void wait(int timeOut) throws Exception {
+		Thread.sleep(timeOut * 1000);
+	}
+
 	public void refreshCurrentPage() {
 		driver.navigate().refresh();
 	}

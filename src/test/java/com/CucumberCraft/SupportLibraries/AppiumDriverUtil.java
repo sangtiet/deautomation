@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ import com.CucumberCraft.PageObjects.ChoseLinkPage;
 import com.CucumberCraft.PageObjects.HomePage;
 import com.CucumberCraft.PageObjects.LoginZaloPayPage;
 import com.CucumberCraft.PageObjects.ZaloPayPinPage;
+import com.CucumberCraft.StepDefinitions.CukeHooks;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -31,7 +33,8 @@ public class AppiumDriverUtil {
 
 	private AppiumDriver driver;
 	private Helper helper = TestController.getHelper();
-	
+	static Logger log = Logger.getLogger(AppiumDriverUtil.class);
+
 	/**
 	 * Constructor to initialize the {@link AppiumDriverUtil} object
 	 * 
@@ -75,7 +78,7 @@ public class AppiumDriverUtil {
 		else if (locator.startsWith("id"))
 			return driver.findElement(By.id(locator.replace("id=", "")));
 		else if (locator.startsWith("name"))
-			return driver.findElement(By.name(locator.replace("name=", "")));		
+			return driver.findElement(By.name(locator.replace("name=", "")));
 		else
 			helper.writeStepFAIL("Unable to locate the element: " + locator);
 		return null;
@@ -224,9 +227,19 @@ public class AppiumDriverUtil {
 	public void clickElementByVisibleText(String text) {
 		List<WebElement> lstElem = null;
 
-		if (getMobileExecutionPlatform().equals("ANDROID"))
-			lstElem = driver.findElements(MobileBy.AndroidUIAutomator(("new UiSelector().text(\"" + text + "\")")));
-		else if (getMobileExecutionPlatform().equals("IOS"))
+		if (getMobileExecutionPlatform().equals("ANDROID")) {
+			// lstElem = driver.findElements(MobileBy.AndroidUIAutomator(("new
+			// UiSelector().text(\"" + text + "\")")));
+			lstElem = driver.findElements(MobileBy.className("android.widget.TextView"));
+			if (lstElem.size() > 0) {
+				for (int i = 0; i < lstElem.size(); i++) {
+					if (lstElem.get(i).getText().trim().equals(text)) {
+						lstElem.get(i).click();
+						return;
+					}
+				}
+			}
+		} else if (getMobileExecutionPlatform().equals("IOS"))
 			lstElem = driver.findElements(MobileBy.IosUIAutomation(("new UiSelector().text(\"" + text + "\")")));
 
 		if (lstElem.size() == 1)
@@ -239,12 +252,21 @@ public class AppiumDriverUtil {
 		MySmsUtils otpGetter = new MySmsUtils(receiver, sender);
 		return otpGetter.getOTP();
 	}
-	
+
+	public boolean isElementPresent(String locator) throws Exception {
+		if (!getWebElement(locator).isDisplayed())
+			return false;
+		else
+			return true;
+	}
+
 	public void verifyElementPresent(String locator) throws Exception {
 		if (!getWebElement(locator).isDisplayed())
 			helper.writeStepFAIL("Element is NOT present");
+		else
+			log.debug("Element <" + locator + "> is present");
 	}
-	
+
 	public void verifyElementNotPresent(String locator) throws Exception {
 		try {
 			getWebElement(locator);
@@ -254,7 +276,7 @@ public class AppiumDriverUtil {
 
 		}
 	}
-	
+
 	public void wait(int secs) throws Exception {
 		Thread.sleep(secs * 1000);
 	}
