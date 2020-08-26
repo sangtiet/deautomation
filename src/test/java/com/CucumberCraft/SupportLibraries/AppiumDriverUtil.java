@@ -160,7 +160,7 @@ public class AppiumDriverUtil {
 				.moveTo(PointOption.point(anchor, endPoint)).release().perform();
 	}
 
-	public void swipDown(int howManySwipes) {
+	public void swipeDown(int howManySwipes) {
 		Dimension size = driver.manage().window().getSize();
 		// calculate coordinates for vertical swipe
 		int startVerticalY = (int) (size.height * 0.8);
@@ -228,17 +228,7 @@ public class AppiumDriverUtil {
 		List<WebElement> lstElem = null;
 
 		if (getMobileExecutionPlatform().equals("ANDROID")) {
-			// lstElem = driver.findElements(MobileBy.AndroidUIAutomator(("new
-			// UiSelector().text(\"" + text + "\")")));
-			lstElem = driver.findElements(MobileBy.className("android.widget.TextView"));
-			if (lstElem.size() > 0) {
-				for (int i = 0; i < lstElem.size(); i++) {
-					if (lstElem.get(i).getText().trim().equals(text)) {
-						lstElem.get(i).click();
-						return;
-					}
-				}
-			}
+			lstElem = driver.findElements(MobileBy.AndroidUIAutomator(("new UiSelector().text(\"" + text + "\")")));
 		} else if (getMobileExecutionPlatform().equals("IOS"))
 			lstElem = driver.findElements(MobileBy.IosUIAutomation(("new UiSelector().text(\"" + text + "\")")));
 

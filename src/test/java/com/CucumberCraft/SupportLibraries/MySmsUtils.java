@@ -32,7 +32,7 @@ public class MySmsUtils {
 		ChromeOptions options = new ChromeOptions();
 		System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
 		System.setProperty("webdriver.chrome.driver",
-				System.getProperty("user.dir") + "\\src\\test\\resources\\drivers\\chromedriver.exe");
+				System.getProperty("user.dir") + "/src/test/resources/drivers/chromedriver");
 		options.addArguments("--start-maximized");
 		options.addArguments("--headless");
 		driver = new ChromeDriver(options);

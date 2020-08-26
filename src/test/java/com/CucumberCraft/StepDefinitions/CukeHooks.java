@@ -44,7 +44,6 @@ public class CukeHooks extends MasterStepDefs {
 					"-> MobileExecutionPlatform: " + TestController.getTestParameters().getMobileExecutionPlatform());
 			currentScenario.write("-> DeviceName: " + TestController.getTestParameters().getDeviceName());
 			currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
-			TestController.getAppiumDriver().closeApp();
 			break; // optional
 		}
 		update(scenario);

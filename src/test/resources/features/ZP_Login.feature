@@ -3,17 +3,17 @@ Feature: ZP_Login
 
 @ZP-Login-01 
 Scenario Outline: Login successfully 
-#	Given user launchs the application 
-#	And "LOGIN_ZALOPAY_PAGE" shows up	   
-#	And user clicks on "LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON"
-#	And "LZP_PHONE_NUMBER_INPUT" is present
-#	And user types "<phone_number>" into "LZP_PHONE_NUMBER_INPUT"
-#	And user clicks on "LZP_CONTINUE_BUTTON"	
-#	And user dismisses Alert
+	Given user launchs the application 
+	And "LOGIN_ZALOPAY_PAGE" shows up	   
+	And user clicks on "LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON"
+	And "LZP_PHONE_NUMBER_INPUT" is present
+	And user types "<phone_number>" into "LZP_PHONE_NUMBER_INPUT"
+	And user clicks on "LZP_CONTINUE_BUTTON"	
+	And user dismisses Alert
 	And "LZP_LOGIN_OTP_INPUT" is present	
-#	When user searches for OTP in SMS from "<sender>" to "<phone_number>" and types into "LZP_LOGIN_OTP_INPUT"
-#	And "ZALOPAY_PIN_PAGE" shows up	
-#	And user inputs pin "<pin>"
+	When user searches for OTP in SMS from "<sender>" to "<phone_number>" and types into "LZP_LOGIN_OTP_INPUT"
+	And "ZALOPAY_PIN_PAGE" shows up	
+	And user inputs pin "<pin>"
 	Given "HOME_PAGE" shows up
 	And user clicks on element by visible text "Liên Kết Ngân Hàng"
 	And user clicks on element by visible text "Thêm liên kết"

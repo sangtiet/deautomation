@@ -117,7 +117,7 @@ public class CommonSteps extends MasterStepDefs {
 		if (arg1.toUpperCase().equals("UP"))
 			driverUtil.swipeUp(0.8, 0.1, 0.5, 2000);
 		else if (arg1.toUpperCase().equals("DOWN"))
-			driverUtil.swipDown(1);
+			driverUtil.swipeDown(1);
 	}
 
 	@When("^user scrolls down until \"([^\"]*)\" element is present$")
