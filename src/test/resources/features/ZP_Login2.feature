@@ -1,8 +1,8 @@
-@ZP-Login
-Feature: ZP_Login 
+@ZP-Login2
+Feature: ZP_Login 2
 
-@ZP-Login-01 
-Scenario Outline: Login successfully 
+@ZP-Login2-01 
+Scenario Outline: Login successfully 2
 	Given user launchs the application 
 	And "LOGIN_ZALOPAY_PAGE" shows up	   
 	And user clicks on "LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON"
@@ -34,22 +34,3 @@ Scenario Outline: Login successfully
 	Examples:
       | phone_number | sender  | pin    | card_number | issue_date | card_owner     |
       | 0367260747   | ZaloPay | 123456 | 888888      | 02/19      | Thoi Thuc Phan |
-      
-#@ZP-Login-02 
-#Scenario Outline: Login successfully - demo
-#	Given "HOME_PAGE" shows up
-#	And user clicks on element by visible text "Liên Kết Ngân Hàng"
-#	And user clicks on element by visible text "Thêm liên kết"
-#	And "CHOSE_LINK_PAGE" shows up
-#	When user scrolls down until "CLP_SHINHANBANK_CARD" element is present
-#	And user clicks on "CLP_SHINHANBANK_CARD"		
-#	Then "BANK_LINK_PAGE" shows up
-#	And user types "<card_number>" into "BLP_CARD_NUMBER_INPUT"
-#	And user types "<issue_date>" into "BLP_ISSUE_DATE_INPUT"
-#	And user types "<card_owner>" into "BLP_CARD_OWNER_INPUT"	
-#	And user clicks on "BLP_LINK_NOW_BUTTON"
-#	When user waits for 10 seconds
-#	
-#	Examples:
-#      | card_number | issue_date | card_owner     |
-#      | 888888      | 02/19      | Thoi Thuc Phan |

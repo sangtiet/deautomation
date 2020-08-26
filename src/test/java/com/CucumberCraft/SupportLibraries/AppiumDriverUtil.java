@@ -226,11 +226,7 @@ public class AppiumDriverUtil {
 	@SuppressWarnings("unchecked")
 	public void clickElementByVisibleText(String text) {
 		List<WebElement> lstElem = null;
-
-		if (getMobileExecutionPlatform().equals("ANDROID")) {
-			lstElem = driver.findElements(MobileBy.AndroidUIAutomator(("new UiSelector().text(\"" + text + "\")")));
-		} else if (getMobileExecutionPlatform().equals("IOS"))
-			lstElem = driver.findElements(MobileBy.IosUIAutomation(("new UiSelector().text(\"" + text + "\")")));
+		lstElem = driver.findElements(By.xpath("//*[@text='" + text + "']"));
 
 		if (lstElem.size() == 1)
 			lstElem.get(0).click();
