@@ -13,7 +13,7 @@ public class PostsService extends BaseService {
 	private Helper helper = TestController.getHelper();
 	private String REQUEST_POSTS = helper.getConfig("demo.posts");
 
-	protected PostsService(ScenarioContext scenarioContex, String host) {
+	public PostsService(ScenarioContext scenarioContex, String host) {
 		super(scenarioContex, host);
 		// TODO Auto-generated constructor stub
 	}

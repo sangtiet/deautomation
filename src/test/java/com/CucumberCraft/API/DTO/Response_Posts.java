@@ -23,7 +23,7 @@ public class Response_Posts {
     private int id;
 
     @JsonProperty("title")
-    private int title;
+    private String title;
 
     @JsonProperty("body")
     private String body;
