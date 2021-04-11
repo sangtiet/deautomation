@@ -1,31 +1,23 @@
 package com.CucumberCraft.SupportLibraries;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.junit.Assert;
-
 public class ScenarioContext {
 
-	private Map<String, Object> scenarioContext;
+	private TestContext testContext;
 
-	public ScenarioContext() {
-		scenarioContext = new HashMap<>();
-	}
+    public ScenarioContext() {
+        this.testContext = TestContext.getInstance();
+    }
 
-	public void setContext(String key, Object value) {
-		scenarioContext.put(key, value);
-	}
+    public void setContext(String key, Object value) {
+        this.testContext.setData(key, value);
+    }
 
-	public Object getContext(String key) {
-		if (scenarioContext.get(key) != null)
-			return scenarioContext.get(key);
-		else
-			Assert.fail("ScenarioContext class - Key not found: " + key);
-		return null;
-	}
+    @SuppressWarnings("unchecked")
+    public <T> T getContext(String key) {
+        return (T) this.testContext.getData(key);
+    }
 
-	public Boolean isContains(String key) {
-		return scenarioContext.containsKey(key);
-	}
+    public Boolean isContains(String key) {
+        return this.testContext.isContains(key);
+    }
 }

@@ -67,7 +67,7 @@ public class Helper {
 		return dateFormat.format(date);
 	}
 
-	public String readGlobalParam(String param) {
+	public String getConfig(String param) {
 		return properties.getProperty(param);
 	}
 

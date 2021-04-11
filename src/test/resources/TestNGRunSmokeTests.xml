@@ -10,10 +10,8 @@
 	</listeners>
 
 	<test name="Smoke Test on Mobile">
-		<parameter name="ExecutionMode" value="MOBILE" />
-		<parameter name="MobileExecutionPlatform" value="ANDROID" />
-		<parameter name="DeviceName" value="52004c98eea95419" />
-		<parameter name="OSVersion" value="9" />
+		<parameter name="ExecutionMode" value="LOCAL" />
+		<parameter name="BrowserName" value="API" />		
 		<classes>
 			<class
 				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
