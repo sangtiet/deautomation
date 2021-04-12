@@ -16,16 +16,17 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Response_Posts {
-    @JsonProperty("userid")
-    private int userId;
-
-    @JsonProperty("id")
+    
+	@JsonProperty("id")
     private int id;
-
-    @JsonProperty("title")
+	
+	@JsonProperty("title")
     private String title;
 
     @JsonProperty("body")
     private String body;
+	
+	@JsonProperty("userid")
+    private int userId;
 
 }

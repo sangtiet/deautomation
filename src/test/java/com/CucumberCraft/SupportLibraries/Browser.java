@@ -8,6 +8,7 @@ public enum Browser {
 	FIREFOX("firefox"),
 	INTERNET_EXPLORER("internet explorer"),
 	OPERA("opera"),
+	API("api"),
 	EDGE("edge");
 	
 	private String value;

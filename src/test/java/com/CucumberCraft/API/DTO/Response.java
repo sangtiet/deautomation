@@ -1,4 +1,4 @@
-package com.CucumberCraft.API.Base;
+package com.CucumberCraft.API.DTO;
 
 import java.io.IOException;
 

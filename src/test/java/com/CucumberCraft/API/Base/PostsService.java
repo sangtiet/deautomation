@@ -1,6 +1,6 @@
 package com.CucumberCraft.API.Base;
 
-import com.CucumberCraft.API.DTO.Request_GetPostsByID;
+import com.CucumberCraft.API.DTO.Request_CreateNewPost;
 import com.CucumberCraft.SupportLibraries.Helper;
 import com.CucumberCraft.SupportLibraries.ScenarioContext;
 import com.CucumberCraft.SupportLibraries.TestController;
@@ -27,8 +27,9 @@ public class PostsService extends BaseService {
 		return spec.get();
 	}
 
-	public Response requestUploadAPost(Request_GetPostsByID getPostsByIdRequest) {
+	public Response requestCreateNewPost(Request_CreateNewPost createNewPostRequest) {
 		RequestSpecification spec = this.defaultRequestBuilder(REQUEST_POSTS);
-		return spec.params(getPostsByIdRequest.getDefaultRequestParams()).log().all(true).post().thenReturn();
+		//return spec.params(createNewPostRequest.getDefaultRequestParams()).log().all(true).post().thenReturn();
+		return spec.body(createNewPostRequest.getData()).log().all(true).post().thenReturn();
 	}
 }

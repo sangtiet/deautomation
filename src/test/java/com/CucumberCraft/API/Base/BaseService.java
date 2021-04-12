@@ -40,14 +40,14 @@ public abstract class BaseService {
     }
 
     protected RequestSpecification requestBuilderWithProxy(String apiPath, String proxyHost, int proxyPort) {
-        return RestAssured.given().contentType(ContentType.URLENC.withCharset("UTF-8")).baseUri(this.getAPIUrl())
+        return RestAssured.given().contentType(ContentType.JSON.withCharset("UTF-8")).baseUri(this.getAPIUrl())
                 .basePath(apiPath).relaxedHTTPSValidation().cookies(cookies).headers(headers)
                 .proxy(proxyHost, proxyPort);
     }
 
     protected RequestSpecification defaultRequestBuilder(String apiPath) {
         RequestSpecification requestSpecification = RestAssured.given()
-                .contentType(ContentType.URLENC.withCharset("UTF-8")).baseUri(this.getAPIUrl()).basePath(apiPath)
+                .contentType(ContentType.JSON.withCharset("UTF-8")).baseUri(this.getAPIUrl()).basePath(apiPath)
                 .relaxedHTTPSValidation().cookies(cookies).headers(headers);
         if (this.isEnableProxy.equals("true")) {
             requestSpecification.proxy(this.proxyHost, Integer.parseInt(this.proxyPort));
@@ -56,7 +56,8 @@ public abstract class BaseService {
     }
 
     public String getAPIUrl() {
-        return String.format("%s://%s:%d", this.protocol, this.host, this.port);
+        //return String.format("%s://%s:%d", this.protocol, this.host, this.port);
+        return String.format("%s://%s", this.protocol, this.host);
     }
 
     @SuppressWarnings("java:S1452")
