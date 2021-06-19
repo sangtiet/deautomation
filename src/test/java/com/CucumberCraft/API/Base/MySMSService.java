@@ -1,6 +1,6 @@
 package com.CucumberCraft.API.Base;
 
-import com.CucumberCraft.API.DTO.request.MySMS;
+import com.CucumberCraft.API.DTO.Requests.MySMS;
 import com.CucumberCraft.SupportLibraries.Helper;
 import com.CucumberCraft.SupportLibraries.ScenarioContext;
 import com.CucumberCraft.SupportLibraries.TestController;
@@ -20,11 +20,6 @@ public class MySMSService extends BaseService {
 
 	public MySMSService(ScenarioContext scenarioContext, String protocol, String host, int port) {
 		super(scenarioContext, protocol, host, port);
-	}
-
-	public Response requestGetPostsById(String postID) {
-		RequestSpecification spec = this.defaultRequestBuilder(END_POINT + "/" + postID);
-		return spec.get();
 	}
 
 	public Response requestMySMS(MySMS mySMSRequest) {

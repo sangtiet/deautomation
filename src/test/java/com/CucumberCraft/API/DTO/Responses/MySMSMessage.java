@@ -1,4 +1,4 @@
-package com.CucumberCraft.API.DTO.response;
+package com.CucumberCraft.API.DTO.Responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

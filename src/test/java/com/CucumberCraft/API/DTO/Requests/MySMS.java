@@ -1,4 +1,4 @@
-package com.CucumberCraft.API.DTO.request;
+package com.CucumberCraft.API.DTO.Requests;
 
 import com.CucumberCraft.API.DTO.Request;
 

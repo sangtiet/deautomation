@@ -1,6 +1,6 @@
 package com.CucumberCraft.API.Base;
 
-import com.CucumberCraft.API.DTO.request.CreateNewPost;
+import com.CucumberCraft.API.DTO.Requests.CreateNewPost;
 import com.CucumberCraft.SupportLibraries.Helper;
 import com.CucumberCraft.SupportLibraries.ScenarioContext;
 import com.CucumberCraft.SupportLibraries.TestController;

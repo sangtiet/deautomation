@@ -4,8 +4,8 @@ import java.util.Map;
 
 import com.CucumberCraft.API.Base.*;
 import com.CucumberCraft.API.DTO.Request;
-import com.CucumberCraft.API.DTO.request.*;
-import com.CucumberCraft.API.DTO.response.*;
+import com.CucumberCraft.API.DTO.Requests.*;
+import com.CucumberCraft.API.DTO.Responses.*;
 import com.CucumberCraft.SupportLibraries.Helper;
 import com.CucumberCraft.SupportLibraries.ObjectMapperUtils;
 import com.CucumberCraft.SupportLibraries.ScenarioContext;
@@ -64,7 +64,7 @@ public class ApiSteps extends SharedContextSteps {
 	@Given("^I create a MySMS request with data$")
 	public void IcreateaMySMSrequestwithdata(Map<String, String> dataTable) throws IllegalArgumentException {
 		MySMS mySMSRequest = initializeMySMSDTO(dataTable);
-		Response response = mySMSRequest.requestMySMS(mySMSRequest);
+		Response response = mySMSRequest.re(mySMSRequest);
 		reponsePosts = ObjectMapperUtils.dtoClassMapper(response.getBody().asString(), Posts.class);
 
 	}
