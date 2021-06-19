@@ -16,7 +16,7 @@ import io.restassured.response.Response;
 
 public class ApiSteps extends SharedContextSteps {
 	private Helper helper = TestController.getHelper();
-	private String CPS_SERVICE_URL = helper.getConfig("demo.domain");
+	private String CPS_SERVICE_URL = helper.getConfig("mysms.domain");
 	PostsService postsService;
 	Posts reponsePosts;
 	MySMSService mySMSService;
@@ -25,6 +25,7 @@ public class ApiSteps extends SharedContextSteps {
 	public ApiSteps(ScenarioContext scenarioContext) {
 		super(scenarioContext);
 		postsService = new PostsService(scenarioContext, CPS_SERVICE_URL);
+		mySMSService = new MySMSService(scenarioContext, CPS_SERVICE_URL);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,8 +35,8 @@ public class ApiSteps extends SharedContextSteps {
 			PostData postData = Request.createDTOObjectByDataTable(PostData.class, dataTable);
 			return postData.convertDTOObjectToJSONString();
 		case "MySMS":
-			MySMS mySMS = Request.createDTOObjectByDataTable(MySMS.class, dataTable);
-			return mySMS.convertDTOObjectToJSONString();
+			MySMSData mySMSData = Request.createDTOObjectByDataTable(MySMSData.class, dataTable);
+			return mySMSData.convertDTOObjectToJSONString();
 		}
 		return null;
 	}
@@ -67,8 +68,9 @@ public class ApiSteps extends SharedContextSteps {
 	public void IcreateaMySMSrequestwithdata(Map<String, String> dataTable) throws IllegalArgumentException {
 		MySMS mySMSRequest = initializeMySMSDTO(dataTable);
 		Response response = mySMSService.requestMySMS(mySMSRequest);
-		reponsePosts = ObjectMapperUtils.dtoClassMapper(response.getBody().asString(), Posts.class);
-
+		System.out.println("Status code = " + response.getStatusCode());
+		reponseMySMS = ObjectMapperUtils.dtoClassMapper(response.getBody().asString(), MySMSMessage.class);
+		System.out.println(reponseMySMS.getMessages());
 	}
 
 	private CreateNewPost initializeCreateNewPostDTO(Map<String, String> dataTable) {

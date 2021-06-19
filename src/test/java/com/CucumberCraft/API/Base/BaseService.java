@@ -42,7 +42,7 @@ public abstract class BaseService {
     }
 
     protected RequestSpecification defaultRequestBuilder(String apiPath) {
-        RequestSpecification requestSpecification = RestAssured.given()
+        RequestSpecification requestSpecification = RestAssured.given().accept("application/json")
                 .contentType(ContentType.JSON.withCharset("UTF-8")).baseUri(this.getAPIUrl()).basePath(apiPath)
                 .relaxedHTTPSValidation().cookies(cookies).headers(headers);
         if (this.isEnableProxy.equals("true")) {

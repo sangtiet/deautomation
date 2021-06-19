@@ -20,5 +20,5 @@ Scenario: MySMS - Message verification
     | limit         | 20 |
     | authToken     | pcervE-HEopWcVhQiXaNZQ |
     | apiKey        | ejMNsCikQpek12e5KfYYIONhlzC5W-_HzIxvvTUMcKVOs8hh9S-MWeOgLaLcFjR9BrQP3VIf38Y |
-    And The response code should be "200"
-    And The response message should be displayed on console
+    #And The response code should be "200"
+    #And The response message should be displayed on console 

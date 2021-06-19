@@ -16,7 +16,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.util.ArrayMap;
 
-
 public interface Request {
 	static final Logger LOGGER = LoggerFactory.getLogger(Request.class);
 
@@ -79,7 +78,6 @@ public interface Request {
 	public static <T extends Request> T createDTOObjectByDataTable(Class<T> dtoClass, Map<String, String> dataTable) {
 		T dtoClassInstance;
 		try {
-
 			dtoClassInstance = dtoClass.getDeclaredConstructor().newInstance();
 			for (Entry<String, String> param : dataTable.entrySet()) {
 				String paramKey = param.getKey();
