@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Response_Posts {
+public class Response_MySMSMessage {
     
-	@JsonProperty("id")
-    private int id;
+	@JsonProperty("errorCode")
+    private int errorCode;
 	
 	@JsonProperty("title")
     private String title;

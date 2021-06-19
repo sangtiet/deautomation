@@ -8,17 +8,17 @@ import com.CucumberCraft.SupportLibraries.TestController;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-public class PostsService extends BaseService {
+public class MySMSService extends BaseService {
 
 	private Helper helper = TestController.getHelper();
-	private String REQUEST_POSTS = helper.getConfig("demo.posts");
+	private String END_POINT = helper.getConfig("mysms.endpoint.conversation");
 
-	public PostsService(ScenarioContext scenarioContex, String host) {
+	public MySMSService(ScenarioContext scenarioContex, String host) {
 		super(scenarioContex, host);
 		// TODO Auto-generated constructor stub
 	}
 
-	public PostsService(ScenarioContext scenarioContext, String protocol, String host, int port) {
+	public MySMSService(ScenarioContext scenarioContext, String protocol, String host, int port) {
 		super(scenarioContext, protocol, host, port);
 	}
 

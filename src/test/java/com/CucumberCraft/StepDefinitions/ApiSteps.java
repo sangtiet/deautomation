@@ -4,9 +4,9 @@ import java.util.Map;
 
 import com.CucumberCraft.API.Base.PostsService;
 import com.CucumberCraft.API.DTO.Request;
-import com.CucumberCraft.API.DTO.Request_CreateNewPost;
-import com.CucumberCraft.API.DTO.Request_PostData;
-import com.CucumberCraft.API.DTO.Response_Posts;
+import com.CucumberCraft.API.DTO.request.Request_CreateNewPost;
+import com.CucumberCraft.API.DTO.request.Request_PostData;
+import com.CucumberCraft.API.DTO.response.Response_Posts;
 import com.CucumberCraft.SupportLibraries.Helper;
 import com.CucumberCraft.SupportLibraries.ObjectMapperUtils;
 import com.CucumberCraft.SupportLibraries.ScenarioContext;

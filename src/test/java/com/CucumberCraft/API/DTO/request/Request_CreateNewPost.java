@@ -1,4 +1,6 @@
-package com.CucumberCraft.API.DTO;
+package com.CucumberCraft.API.DTO.request;
+
+import com.CucumberCraft.API.DTO.Request;
 
 import lombok.*;
 
