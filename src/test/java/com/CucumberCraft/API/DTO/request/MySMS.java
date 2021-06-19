@@ -7,7 +7,6 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class MySMS implements Request {
 	
 	private String address;

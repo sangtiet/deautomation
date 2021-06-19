@@ -41,7 +41,7 @@ public interface Request {
 
 	}
 
-	public default List<Field> getAllFileds() {
+	public default List<Field> getAllFields() {
 		Field[] allFields = this.getClass().getDeclaredFields();
 		List<Field> allFiledsWithAccessible = new ArrayList<>();
 		for (Field field : allFields) {

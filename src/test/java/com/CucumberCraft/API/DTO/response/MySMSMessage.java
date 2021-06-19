@@ -16,13 +16,7 @@ public class MySMSMessage {
 	@JsonProperty("errorCode")
     private int errorCode;
 	
-	@JsonProperty("title")
-    private String title;
-
-    @JsonProperty("body")
-    private String body;
-	
-	@JsonProperty("userid")
-    private int userId;
+	@JsonProperty("messages")
+    private MessageDataObject[] messages;
 
 }

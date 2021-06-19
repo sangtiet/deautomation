@@ -11,3 +11,14 @@ Scenario: Create new post
 	| userId       | 1111                 |
     | title        | API automation demo  |
     | body         | Created by VuB       |
+    
+@API-demo-03
+Scenario: MySMS - Message verification
+	Given I create a MySMS request with data   
+	| address       | VinaPhone |
+    | offset        | 0 |
+    | limit         | 20 |
+    | authToken     | pcervE-HEopWcVhQiXaNZQ |
+    | apiKey        | ejMNsCikQpek12e5KfYYIONhlzC5W-_HzIxvvTUMcKVOs8hh9S-MWeOgLaLcFjR9BrQP3VIf38Y |
+    And The response code should be "200"
+    And The response message should be displayed on console
