@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Response_Posts {
+public class Posts {
     
 	@JsonProperty("id")
     private int id;

@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Request_MySMS implements Request {
+public class MySMS implements Request {
 	
 	private String address;
 	private int offset;

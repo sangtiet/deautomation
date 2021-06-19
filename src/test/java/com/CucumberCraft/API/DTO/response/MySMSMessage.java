@@ -6,16 +6,12 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-/**
- * 
- * @author hoangdm
- *
- */
+
 @Getter
 @NoArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Response_MySMSMessage {
+public class MySMSMessage {
     
 	@JsonProperty("errorCode")
     private int errorCode;

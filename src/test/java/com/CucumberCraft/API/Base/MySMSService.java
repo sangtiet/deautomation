@@ -1,6 +1,6 @@
 package com.CucumberCraft.API.Base;
 
-import com.CucumberCraft.API.DTO.request.Request_CreateNewPost;
+import com.CucumberCraft.API.DTO.request.CreateNewPost;
 import com.CucumberCraft.SupportLibraries.Helper;
 import com.CucumberCraft.SupportLibraries.ScenarioContext;
 import com.CucumberCraft.SupportLibraries.TestController;
@@ -27,7 +27,7 @@ public class MySMSService extends BaseService {
 		return spec.get();
 	}
 
-	public Response requestCreateNewPost(Request_CreateNewPost createNewPostRequest) {
+	public Response requestCreateNewPost(CreateNewPost createNewPostRequest) {
 		RequestSpecification spec = this.defaultRequestBuilder(REQUEST_POSTS);
 		//return spec.params(createNewPostRequest.getDefaultRequestParams()).log().all(true).post().thenReturn();
 		return spec.body(createNewPostRequest.getData()).log().all(true).post().thenReturn();

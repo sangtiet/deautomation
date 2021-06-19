@@ -16,11 +16,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.util.ArrayMap;
 
-/**
- * 
- * @author minhhn3
- *
- */
+
 public interface Request {
 	static final Logger LOGGER = LoggerFactory.getLogger(Request.class);
 

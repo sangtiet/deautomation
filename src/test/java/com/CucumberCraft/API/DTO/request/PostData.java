@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Request_PostData implements Request {
+public class PostData implements Request {
 	
 	private String userId;
 	private String title;

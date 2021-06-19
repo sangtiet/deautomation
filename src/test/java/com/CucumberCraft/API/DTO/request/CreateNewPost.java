@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Request_CreateNewPost implements Request {
+public class CreateNewPost implements Request {
 	
 	private String data;
 	

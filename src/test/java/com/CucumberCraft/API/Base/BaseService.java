@@ -11,11 +11,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-/**
- * 
- * @author minhhn3
- *
- */
+
 public abstract class BaseService {
     protected ScenarioContext scenarioContex;
     private Helper helper = TestController.getHelper();
