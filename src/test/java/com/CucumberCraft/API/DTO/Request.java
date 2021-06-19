@@ -20,14 +20,14 @@ public interface Request {
 	static final Logger LOGGER = LoggerFactory.getLogger(Request.class);
 
 	@SuppressWarnings({ "java:S3011", "java:S2139" })
-	public default Map<String, String> getDefaultRequestParams() {
+	public default Map<String, Object> getDefaultRequestParams() {
 		try {
-			Map<String, String> requestParams = new ArrayMap<>();
+			Map<String, Object> requestParams = new ArrayMap<>();
 			Field[] allFields = this.getClass().getDeclaredFields();
 			for (Field field : allFields) {
 				field.setAccessible(true);
 				if (field.get(this) != null) {
-					requestParams.put(field.getName().toLowerCase(), field.get(this).toString());
+					requestParams.put(field.getName(), field.get(this));
 				}
 			}
 			return requestParams;

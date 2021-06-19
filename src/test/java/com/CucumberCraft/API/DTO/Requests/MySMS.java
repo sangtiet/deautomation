@@ -9,5 +9,9 @@ import lombok.*;
 @AllArgsConstructor
 public class MySMS implements Request {
 	
-	private String data;
+	private String address;
+	private int offset;
+	private int limit;
+	private String authToken;
+	private String apiKey;
 }

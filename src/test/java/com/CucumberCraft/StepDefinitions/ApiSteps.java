@@ -70,7 +70,8 @@ public class ApiSteps extends SharedContextSteps {
 		Response response = mySMSService.requestMySMS(mySMSRequest);
 		System.out.println("Status code = " + response.getStatusCode());
 		reponseMySMS = ObjectMapperUtils.dtoClassMapper(response.getBody().asString(), MySMSMessage.class);
-		System.out.println(reponseMySMS.getMessages());
+		System.out.println("Error Code = " + reponseMySMS.getErrorCode());
+		System.out.println("Messages = " + reponseMySMS.getMessages());
 	}
 
 	private CreateNewPost initializeCreateNewPostDTO(Map<String, String> dataTable) {
@@ -79,7 +80,8 @@ public class ApiSteps extends SharedContextSteps {
 	}
 
 	private MySMS initializeMySMSDTO(Map<String, String> dataTable) {
-		MySMS mySMSRequest = new MySMS(generateDataParam(dataTable, "MySMS"));
+		MySMS mySMSRequest = new MySMS(dataTable.get("address"), Integer.parseInt(dataTable.get("offset")),
+				Integer.parseInt(dataTable.get("limit")), dataTable.get("authToken"), dataTable.get("apiKey"));
 		return mySMSRequest;
 	}
 }

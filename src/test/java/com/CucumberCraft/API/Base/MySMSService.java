@@ -24,6 +24,7 @@ public class MySMSService extends BaseService {
 
 	public Response requestMySMS(MySMS mySMSRequest) {
 		RequestSpecification spec = this.defaultRequestBuilder(END_POINT);
-		return spec.body(mySMSRequest.getData()).log().all(true).post().thenReturn();
+		//return spec.params(createNewPostRequest.getDefaultRequestParams()).log().all(true).post().thenReturn();
+		return spec.body(mySMSRequest.getDefaultRequestParams()).log().all(true).post().thenReturn();
 	}
 }
