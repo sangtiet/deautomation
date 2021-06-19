@@ -19,6 +19,8 @@ public class ApiSteps extends SharedContextSteps {
 	private String CPS_SERVICE_URL = helper.getConfig("demo.domain");
 	PostsService postsService;
 	Posts reponsePosts;
+	MySMSService mySMSService;
+	MySMSMessage reponseMySMS;
 
 	public ApiSteps(ScenarioContext scenarioContext) {
 		super(scenarioContext);
@@ -64,7 +66,7 @@ public class ApiSteps extends SharedContextSteps {
 	@Given("^I create a MySMS request with data$")
 	public void IcreateaMySMSrequestwithdata(Map<String, String> dataTable) throws IllegalArgumentException {
 		MySMS mySMSRequest = initializeMySMSDTO(dataTable);
-		Response response = mySMSRequest.re(mySMSRequest);
+		Response response = mySMSService.requestMySMS(mySMSRequest);
 		reponsePosts = ObjectMapperUtils.dtoClassMapper(response.getBody().asString(), Posts.class);
 
 	}
