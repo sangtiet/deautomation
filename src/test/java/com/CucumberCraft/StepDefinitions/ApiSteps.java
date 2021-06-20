@@ -2,6 +2,8 @@ package com.CucumberCraft.StepDefinitions;
 
 import java.util.Map;
 
+import org.testng.Assert;
+
 import com.CucumberCraft.API.Base.*;
 import com.CucumberCraft.API.DTO.Request;
 import com.CucumberCraft.API.DTO.Requests.*;
@@ -56,8 +58,7 @@ public class ApiSteps extends SharedContextSteps {
 		CreateNewPost createNewPostRequest = initializeCreateNewPostDTO(dataTable);
 		Response response = postsService.requestCreateNewPost(createNewPostRequest);
 		reponsePosts = ObjectMapperUtils.dtoClassMapper(response.getBody().asString(), Posts.class);
-		// this.scenarioContext.setContext(VariableContext.CREATE_ORDER_RESPONSE,
-		// topUpCreateOrderResponse);
+
 		System.out.println("ID = " + reponsePosts.getId());
 		System.out.println("UserID = " + reponsePosts.getUserId());
 		System.out.println("Title = " + reponsePosts.getTitle());
@@ -69,10 +70,31 @@ public class ApiSteps extends SharedContextSteps {
 		MySMS mySMSRequest = initializeMySMSDTO(dataTable);
 		Response response = mySMSService.requestMySMS(mySMSRequest);
 		System.out.println("Status code = " + response.getStatusCode());
+		this.scenarioContext.setContext("MYSMS_RESPONSE_CODE", response.getStatusCode());
 		reponseMySMS = ObjectMapperUtils.dtoClassMapper(response.getBody().asString(), MySMSMessage.class);
-		System.out.println("Error Code = " + reponseMySMS.getErrorCode());
-		System.out.println("Messages = " + reponseMySMS.getMessages());
 	}
+
+	@Given("^The response code should be \"([^\"]*)\"$")
+	public void the_response_code_should_be(String arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		Assert.assertEquals(this.scenarioContext.getContext("MYSMS_RESPONSE_CODE").toString(), arg1);
+	}
+
+	@Given("^The response message should be displayed$")
+	public void the_response_message_should_be_displayed() throws Throwable {
+		MessageDataObject[] ar = reponseMySMS.getMessages();
+
+		for (int i = 0; i < ar.length; i++) {
+			MessageDataObject x = ar[i];
+			System.out.println("Message[" + i + "] = " + x.getMessage());
+		}
+	}
+
+	/**
+	 *
+	 * DTO Initialization
+	 *
+	 */
 
 	private CreateNewPost initializeCreateNewPostDTO(Map<String, String> dataTable) {
 		CreateNewPost createNewPostRequest = new CreateNewPost(generateDataParam(dataTable, "PostData"));
