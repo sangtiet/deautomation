@@ -40,6 +40,7 @@ public class CukeHooks extends MasterStepDefs {
 			break; // optional
 
 		case "MOBILE":
+		case "SEETEST":	
 			currentScenario.write(
 					"-> MobileExecutionPlatform: " + TestController.getTestParameters().getMobileExecutionPlatform());
 			currentScenario.write("-> DeviceName: " + TestController.getTestParameters().getDeviceName());
@@ -59,6 +60,7 @@ public class CukeHooks extends MasterStepDefs {
 				break; // optional
 
 			case "MOBILE":
+			case "SEETEST":	
 				screenshot = ((TakesScreenshot) TestController.getAppiumDriver()).getScreenshotAs(OutputType.BYTES);
 				break; // optional
 			}

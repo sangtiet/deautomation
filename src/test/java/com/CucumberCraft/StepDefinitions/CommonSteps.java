@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 
 import com.CucumberCraft.SupportLibraries.AppiumDriverUtil;
 import com.CucumberCraft.SupportLibraries.TestController;
+import com.experitest.appium.SeeTestClient;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,6 +23,7 @@ public class CommonSteps extends MasterStepDefs {
 	private AppiumDriver driver = TestController.getAppiumDriver();
 	private AppiumDriverUtil driverUtil = new AppiumDriverUtil(driver);
 	private WebElement element;
+	private SeeTestClient seetest = new SeeTestClient(driver);
 
 //  --------------------!!!DO NOT REMOVE!!!--------------------
 //	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
@@ -34,10 +37,22 @@ public class CommonSteps extends MasterStepDefs {
 		// Write code here that turns the phrase above into concrete actions
 		//if(!driverUtil.isElementPresent("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON") && !driverUtil.isElementPresent("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON"))
 	
-		driverUtil.getWebElement("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON");
+		driverUtil.getWebElement("PLP_LOGIN_BUTTON");
 		log.info("App was launched successfully");
 	}
 
+	@And("^user starts performance transaction$")
+	public void userstartsperformancetransaction() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		seetest.startPerformanceTransaction("NONE");
+	}
+	
+	@And("^user ends performance transaction$")
+	public void userendsperformancetransaction() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		System.out.println(seetest.endPerformanceTransaction("HTAgent"));
+	}
+	
 	@Then("^\"([^\"]*)\" shows up$")
 	public void shows_up(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
@@ -50,16 +65,6 @@ public class CommonSteps extends MasterStepDefs {
 		// Write code here that turns the phrase above into concrete actions
 		element = driverUtil.getWebElement(arg1);
 		element.click();
-	}
-
-	@When("^user searches for OTP in SMS from \"([^\"]*)\" to \"([^\"]*)\" and types into \"([^\"]*)\"$")
-	public void user_searches_for_OTP_in_SMS_from_to_and_types_into(String arg1, String arg2, String arg3)
-			throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		String otp = driverUtil.retrieveOTPfromSMS(arg1, arg2);
-		element = driverUtil.getWebElement(arg3);
-		element.clear();
-		element.sendKeys(otp);
 	}
 
 	@Then("^\"([^\"]*)\" is present$")
@@ -90,6 +95,7 @@ public class CommonSteps extends MasterStepDefs {
 	public void user_types_into(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		element = driverUtil.getWebElement(arg2);
+		element.clear();
 		element.sendKeys(arg1);
 	}
 

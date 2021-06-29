@@ -25,7 +25,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.StepDefinitions" }, 
-	tags= {"@API-demo-03"},
+	tags= {"@TF-Login-01"},
 	monochrome = true,
 	//dryRun = true,
 	plugin = {
@@ -49,6 +49,7 @@ public class RunCucumberTests_Smoke extends AbstractTestNGCucumberTests {
 			break; // optional
 
 		case "MOBILE":
+		case "SEETEST":
 			TestController.endAppiumDriver();
 			break; // optional
 		}

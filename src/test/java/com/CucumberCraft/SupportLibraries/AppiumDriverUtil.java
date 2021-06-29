@@ -9,12 +9,14 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import com.CucumberCraft.PageObjects.BankLinkPage;
 import com.CucumberCraft.PageObjects.ChoseLinkPage;
 import com.CucumberCraft.PageObjects.HomePage;
-import com.CucumberCraft.PageObjects.LoginZaloPayPage;
+import com.CucumberCraft.PageObjects.LoginPage;
+import com.CucumberCraft.PageObjects.PreLoginPage;
 import com.CucumberCraft.PageObjects.ZaloPayPinPage;
 import com.CucumberCraft.StepDefinitions.CukeHooks;
 
@@ -71,16 +73,23 @@ public class AppiumDriverUtil {
 	}
 
 	public WebElement getWebElement(String elementName) throws Exception {
-		String locator = getElementLocator(elementName, elementName.split("_")[0]);
+		String locator = null;
+		try {
+			locator = getElementLocator(elementName, elementName.split("_")[0]);
 
-		if (locator.startsWith("xpath"))
-			return driver.findElement(By.xpath(locator.replace("xpath=", "")));
-		else if (locator.startsWith("id"))
-			return driver.findElement(By.id(locator.replace("id=", "")));
-		else if (locator.startsWith("name"))
-			return driver.findElement(By.name(locator.replace("name=", "")));
-		else
-			helper.writeStepFAIL("Unable to locate the element: " + locator);
+			if (locator.startsWith("xpath"))
+				return driver.findElement(By.xpath(locator.replace("xpath=", "")));
+			else if (locator.startsWith("id"))
+				return driver.findElement(By.id(locator.replace("id=", "")));
+			else if (locator.startsWith("name"))
+				return driver.findElement(By.name(locator.replace("name=", "")));
+			else
+				helper.writeStepFAIL("Unable to locate the element: " + locator);
+		} catch (NoSuchElementException e) {
+
+			// TODO Auto-generated catch block
+			System.out.println("Element not found: " + locator);
+		}
 		return null;
 	}
 
@@ -101,13 +110,13 @@ public class AppiumDriverUtil {
 				locator = BLP.PAGE_INDICATOR_IOS;
 			break;
 
-		case "LOGIN_ZALOPAY_PAGE":
-			LoginZaloPayPage LZP = new LoginZaloPayPage();
+		case "LOGIN_PAGE":
+			LoginPage LP = new LoginPage();
 
 			if (getMobileExecutionPlatform().equals("ANDROID"))
-				locator = LZP.PAGE_INDICATOR_ANDROID;
+				locator = LP.PAGE_INDICATOR_ANDROID;
 			else if (getMobileExecutionPlatform().equals("IOS"))
-				locator = LZP.PAGE_INDICATOR_IOS;
+				locator = LP.PAGE_INDICATOR_IOS;
 			break;
 
 		case "ZALOPAY_PIN_PAGE":
@@ -135,6 +144,15 @@ public class AppiumDriverUtil {
 				locator = HP.PAGE_INDICATOR_ANDROID;
 			else if (getMobileExecutionPlatform().equals("IOS"))
 				locator = HP.PAGE_INDICATOR_IOS;
+			break;
+
+		case "PRE_LOGIN_PAGE":
+			PreLoginPage PLP = new PreLoginPage();
+
+			if (getMobileExecutionPlatform().equals("ANDROID"))
+				locator = PLP.PAGE_INDICATOR_ANDROID;
+			else if (getMobileExecutionPlatform().equals("IOS"))
+				locator = PLP.PAGE_INDICATOR_IOS;
 			break;
 
 		default: // Optional
@@ -234,10 +252,6 @@ public class AppiumDriverUtil {
 			helper.writeStepFAIL("Element not found or match more than one");
 	}
 
-	public String retrieveOTPfromSMS(String sender, String receiver) throws Exception {
-		MySmsUtils otpGetter = new MySmsUtils(receiver, sender);
-		return otpGetter.getOTP();
-	}
 
 	public boolean isElementPresent(String locator) throws Exception {
 		if (!getWebElement(locator).isDisplayed())

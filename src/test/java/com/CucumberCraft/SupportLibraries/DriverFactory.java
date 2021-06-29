@@ -21,6 +21,10 @@ public class DriverFactory {
 			driver = AppiumDriverFactory.getAppiumDriver(testParameters.getMobileExecutionPlatform(),
 					testParameters.getDeviceName(), testParameters.getOsVersion(), false);
 			break;
+			
+		case SEETEST:
+			driver = SeetestDriverFactory.getSeetestDriver(testParameters);
+			break;
 
 		default:
 			log.warn("No Such ExecutionMode Available, please modify accordingly");

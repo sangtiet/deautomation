@@ -10,15 +10,41 @@
 	</listeners>
 
 	<test name="Smoke Test on Mobile">
-		<parameter name="ExecutionMode" value="LOCAL" />
-		<parameter name="BrowserName" value="API" />		
+		<parameter name="ExecutionMode" value="SEETEST" />
+		<parameter name="MobileExecutionPlatform" value="ANDROID" />
+		<parameter name="DeviceName" value="OnePlus IO-US 084" />
+		<parameter name="SerialNumber" value="c8fc88d6" />
+		<parameter name="OSVersion" value="9" />
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
+		</classes>
+	</test>		
+	
+		
+
+<!--
+	<test name="Smoke Test on Mobile 1">
+		<parameter name="ExecutionMode" value="SEETEST" />
+		<parameter name="MobileExecutionPlatform" value="ANDROID" />
+		<parameter name="DeviceName" value="Samsung Galaxy A5 IO-UK 41" />
+		<parameter name="SerialNumber" value="5200ff97eef7a423" />
+		<parameter name="OSVersion" value="8" />
 		<classes>
 			<class
 				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
 		</classes>
 	</test>	
 
-<!--
+	<test name="Smoke Test on Mobile">
+		<parameter name="ExecutionMode" value="LOCAL" />
+		<parameter name="BrowserName" value="API" />		
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
+		</classes>
+	</test>
+
 	<test name="Smoke Test on Mobile">
 		<parameter name="ExecutionMode" value="MOBILE" />
 		<parameter name="MobileExecutionPlatform" value="ANDROID" />

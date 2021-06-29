@@ -126,6 +126,11 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
+		<repository>
+			<id>seeetest</id>
+			<name>seetest client</name>
+			<url>https://cloud.experitest.com/repo/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -293,6 +298,13 @@
 			<artifactId>google-http-client</artifactId>
 			<version>1.32.1</version>
 		</dependency>		
+		
+		<dependency>
+			<groupId>com.experitest</groupId>
+			<artifactId>appium-seetest-extension</artifactId>
+			<version>LATEST</version>
+		</dependency>
+		
 	</dependencies>
 
 </project>

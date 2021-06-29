@@ -1,2 +1,2 @@
-HP_LINK_BANK_BUTTON=id=round_container
+HP_UTILITY_POTENTIAL_CLIENT_LABEL=xpath=//android.widget.TextView[@text='Khách hàng tìm năng']
 

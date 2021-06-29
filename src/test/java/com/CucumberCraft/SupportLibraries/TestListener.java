@@ -46,7 +46,7 @@ public class TestListener implements IInvokedMethodListener {
 	@Override
 	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
 
-		log.debug("BEGINNING: WebDriverListener.afterInvocation");		
+		log.debug("BEGINNING: WebDriverListener.afterInvocation");
 		if (method.isTestMethod()) {
 			try {
 				BaseTestMethod bm = (BaseTestMethod) testResult.getMethod();
@@ -68,12 +68,12 @@ public class TestListener implements IInvokedMethodListener {
 	private void setDefaultTestParameters(IInvokedMethod method, SeleniumTestParameters testParameters) {
 		try {
 			String executionMode = method.getTestMethod().getXmlTest().getLocalParameters().get("ExecutionMode");
+			testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
 			String mobileExecutionPlatform = null;
 
 			switch (executionMode) {
 			case "LOCAL":
 			case "REMOTE":
-				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
 				if (method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName") == null) {
 					testParameters.setBrowser(Browser.valueOf(properties.getProperty("DefaultBrowser")));
 
@@ -84,8 +84,19 @@ public class TestListener implements IInvokedMethodListener {
 
 				break;
 
+			case "SEETEST":
+				mobileExecutionPlatform = method.getTestMethod().getXmlTest().getLocalParameters()
+						.get("MobileExecutionPlatform");
+				testParameters.setMobileExecutionPlatform(MobileExecutionPlatform.valueOf(mobileExecutionPlatform));
+
+				testParameters
+						.setDeviceName(method.getTestMethod().getXmlTest().getLocalParameters().get("DeviceName"));
+				testParameters.setOsVersion(method.getTestMethod().getXmlTest().getLocalParameters().get("OSVersion"));
+				testParameters
+						.setSerialNumber(method.getTestMethod().getXmlTest().getLocalParameters().get("SerialNumber"));
+				break;
+				
 			case "MOBILE":
-				testParameters.setExecutionMode(ExecutionMode.valueOf(executionMode));
 				if (method.getTestMethod().getXmlTest().getLocalParameters().get("MobileExecutionPlatform") == null) {
 					testParameters
 							.setMobileToolName(MobileToolName.valueOf(properties.getProperty("DefaultMobileToolName")));
