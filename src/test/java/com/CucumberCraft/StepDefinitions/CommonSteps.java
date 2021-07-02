@@ -50,7 +50,7 @@ public class CommonSteps extends MasterStepDefs {
 	@And("^user ends performance transaction$")
 	public void userendsperformancetransaction() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		System.out.println(seetest.endPerformanceTransaction("HTAgent"));
+		log.info(seetest.endPerformanceTransaction("HTAgent"));
 	}
 	
 	@Then("^\"([^\"]*)\" shows up$")

@@ -19,7 +19,7 @@
 		<source.and.target.JVM.version>1.8</source.and.target.JVM.version>
 		<org.apache.maven.plugins.maven-compiler-plugin.version>3.5</org.apache.maven.plugins.maven-compiler-plugin.version>
 		<org.apache.maven.plugins.maven-surefire-plugin.version>2.19</org.apache.maven.plugins.maven-surefire-plugin.version>
-		<org.codehaus.mojo.exec-maven-plugin.version>1.2.1</org.codehaus.mojo.exec-maven-plugin.version>		
+		<org.codehaus.mojo.exec-maven-plugin.version>1.2.1</org.codehaus.mojo.exec-maven-plugin.version>
 	</properties>
 
 	<profiles>
@@ -263,13 +263,13 @@
 			<artifactId>jaxb-runtime</artifactId>
 			<version>2.3.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
 			<version>2.11.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
@@ -297,14 +297,20 @@
 			<groupId>com.google.http-client</groupId>
 			<artifactId>google-http-client</artifactId>
 			<version>1.32.1</version>
-		</dependency>		
-		
+		</dependency>
+
 		<dependency>
 			<groupId>com.experitest</groupId>
 			<artifactId>appium-seetest-extension</artifactId>
 			<version>LATEST</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
 	</dependencies>
 
 </project>
