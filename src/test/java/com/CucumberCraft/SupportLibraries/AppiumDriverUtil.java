@@ -1,7 +1,9 @@
 package com.CucumberCraft.SupportLibraries;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +21,11 @@ import com.CucumberCraft.PageObjects.LoginPage;
 import com.CucumberCraft.PageObjects.PreLoginPage;
 import com.CucumberCraft.PageObjects.ZaloPayPinPage;
 import com.CucumberCraft.StepDefinitions.CukeHooks;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -72,23 +79,39 @@ public class AppiumDriverUtil {
 		return null;
 	}
 
-	public WebElement getWebElement(String elementName) throws Exception {
-		String locator = null;
-		try {
-			locator = getElementLocator(elementName, elementName.split("_")[0]);
+	public WebElement getElement(String elementName) throws Exception {
+		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
+		String jsonPath = "$.elements[?(@.name=='" + elementName + "')].locators." + platformName;
+		String pageName = extractPageNameFromElementname(elementName);
+		File jsonFile = new File(
+				System.getProperty("user.dir") + "\\src\\test\\resources\\pages\\" + pageName + ".json");
 
-			if (locator.startsWith("xpath"))
-				return driver.findElement(By.xpath(locator.replace("xpath=", "")));
-			else if (locator.startsWith("id"))
-				return driver.findElement(By.id(locator.replace("id=", "")));
-			else if (locator.startsWith("name"))
-				return driver.findElement(By.name(locator.replace("name=", "")));
-			else
-				helper.writeStepFAIL("Unable to locate the element: " + locator);
-		} catch (NoSuchElementException e) {
+		Configuration conf = Configuration.builder().jsonProvider(new GsonJsonProvider()).build();
+		JsonArray ja = JsonPath.using(conf).parse(jsonFile).read(jsonPath);
+		JsonObject jo = (JsonObject) ja.get(0);
 
-			// TODO Auto-generated catch block
-			System.out.println("Element not found: " + locator);
+		String selector = jo.getAsJsonObject().get("selector").toString().replaceAll("^\"+|\"+$", "");
+		String strategy = jo.getAsJsonObject().get("strategy").toString().replaceAll("^\"+|\"+$", "");
+
+		switch (strategy) {
+		case "xpath":
+			return driver.findElement(By.xpath(selector));
+		case "id":
+			return driver.findElement(By.id(selector));
+		case "name":
+			return driver.findElement(By.name(selector));
+		case "cssSelector":
+			return driver.findElement(By.cssSelector(selector));
+		case "className":
+			return driver.findElement(By.className(selector));
+		case "linkText":
+			return driver.findElement(By.linkText(selector));
+		case "tagName":
+			return driver.findElement(By.tagName(selector));
+		case "partialLinkText":
+			return driver.findElement(By.partialLinkText(selector));
+		default:
+			helper.writeStepFAIL("Unable to locate the element: " + elementName);
 		}
 		return null;
 	}
@@ -97,75 +120,15 @@ public class AppiumDriverUtil {
 		return TestController.getTestParameters().getMobileExecutionPlatform().toString().toUpperCase();
 	}
 
-	public boolean verifyPageShowsUp(String pageName) {
-		String locator = null;
+	public void verifyPageShowsUp(String pageName) throws Exception {
+		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
+		String jsonPath = "$.detectors." + platformName;
+		File jsonFile = new File(
+				System.getProperty("user.dir") + "\\src\\test\\resources\\pages\\" + pageName + ".json");
 
-		switch (pageName) {
-		case "BANK_LINK_PAGE":
-			BankLinkPage BLP = new BankLinkPage();
-
-			if (getMobileExecutionPlatform().equals("ANDROID"))
-				locator = BLP.PAGE_INDICATOR_ANDROID;
-			else if (getMobileExecutionPlatform().equals("IOS"))
-				locator = BLP.PAGE_INDICATOR_IOS;
-			break;
-
-		case "LOGIN_PAGE":
-			LoginPage LP = new LoginPage();
-
-			if (getMobileExecutionPlatform().equals("ANDROID"))
-				locator = LP.PAGE_INDICATOR_ANDROID;
-			else if (getMobileExecutionPlatform().equals("IOS"))
-				locator = LP.PAGE_INDICATOR_IOS;
-			break;
-
-		case "ZALOPAY_PIN_PAGE":
-			ZaloPayPinPage ZPP = new ZaloPayPinPage();
-
-			if (getMobileExecutionPlatform().equals("ANDROID"))
-				locator = ZPP.PAGE_INDICATOR_ANDROID;
-			else if (getMobileExecutionPlatform().equals("IOS"))
-				locator = ZPP.PAGE_INDICATOR_IOS;
-			break;
-
-		case "CHOSE_LINK_PAGE":
-			ChoseLinkPage CLP = new ChoseLinkPage();
-
-			if (getMobileExecutionPlatform().equals("ANDROID"))
-				locator = CLP.PAGE_INDICATOR_ANDROID;
-			else if (getMobileExecutionPlatform().equals("IOS"))
-				locator = CLP.PAGE_INDICATOR_IOS;
-			break;
-
-		case "HOME_PAGE":
-			HomePage HP = new HomePage();
-
-			if (getMobileExecutionPlatform().equals("ANDROID"))
-				locator = HP.PAGE_INDICATOR_ANDROID;
-			else if (getMobileExecutionPlatform().equals("IOS"))
-				locator = HP.PAGE_INDICATOR_IOS;
-			break;
-
-		case "PRE_LOGIN_PAGE":
-			PreLoginPage PLP = new PreLoginPage();
-
-			if (getMobileExecutionPlatform().equals("ANDROID"))
-				locator = PLP.PAGE_INDICATOR_ANDROID;
-			else if (getMobileExecutionPlatform().equals("IOS"))
-				locator = PLP.PAGE_INDICATOR_IOS;
-			break;
-
-		default: // Optional
-			helper.writeStepFAIL("Unable to verify page shows up: " + pageName);
-		}
-
-		try {
-			getWebElement(locator);
-			return true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return false;
-		}
+		Configuration conf = Configuration.builder().jsonProvider(new GsonJsonProvider()).build();
+		String elementName = JsonPath.using(conf).parse(jsonFile).read(jsonPath).toString().replaceAll("^\"+|\"+$", "");
+		getElement(elementName);
 	}
 
 	public void swipeUp(double startPercentage, double finalPercentage, double anchorPercentage, int duration) {
@@ -226,7 +189,7 @@ public class AppiumDriverUtil {
 		while (i < retry) {
 			swipeUp(0.8, 0.1, 0.5, 2000);
 			try {
-				return getWebElement(elementName);
+				return getElement(elementName);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 
@@ -252,16 +215,15 @@ public class AppiumDriverUtil {
 			helper.writeStepFAIL("Element not found or match more than one");
 	}
 
-
 	public boolean isElementPresent(String locator) throws Exception {
-		if (!getWebElement(locator).isDisplayed())
+		if (!getElement(locator).isDisplayed())
 			return false;
 		else
 			return true;
 	}
 
 	public void verifyElementPresent(String locator) throws Exception {
-		if (!getWebElement(locator).isDisplayed())
+		if (!getElement(locator).isDisplayed())
 			helper.writeStepFAIL("Element is NOT present");
 		else
 			log.debug("Element <" + locator + "> is present");
@@ -269,7 +231,7 @@ public class AppiumDriverUtil {
 
 	public void verifyElementNotPresent(String locator) throws Exception {
 		try {
-			getWebElement(locator);
+			getElement(locator);
 			helper.writeStepFAIL("Element is present");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -279,5 +241,12 @@ public class AppiumDriverUtil {
 
 	public void wait(int secs) throws Exception {
 		Thread.sleep(secs * 1000);
+	}
+
+	private String extractPageNameFromElementname(String elementName) {
+		String pageName = null;
+		int subStringEndIndex = elementName.indexOf("PAGE") + 4;
+		pageName = elementName.substring(0, subStringEndIndex);
+		return pageName;
 	}
 }

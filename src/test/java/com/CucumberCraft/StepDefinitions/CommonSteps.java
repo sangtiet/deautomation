@@ -25,20 +25,10 @@ public class CommonSteps extends MasterStepDefs {
 	private WebElement element;
 	private SeeTestClient seetest = new SeeTestClient(driver);
 
-//  --------------------!!!DO NOT REMOVE!!!--------------------
-//	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
-//	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		helper.loadTestDataFromJson(arg1, arg2);
-//	}
-
-	@Given("^user launchs the application$")
-	public void user_launchs_the_application() throws Throwable {
+	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
+	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		//if(!driverUtil.isElementPresent("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON") && !driverUtil.isElementPresent("LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON"))
-	
-		driverUtil.getWebElement("PLP_LOGIN_BUTTON");
-		log.info("App was launched successfully");
+		TestController.getHelper().loadTestDataFromJson(arg1, arg2);
 	}
 
 	@And("^user starts performance transaction$")
@@ -57,13 +47,12 @@ public class CommonSteps extends MasterStepDefs {
 	public void shows_up(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtil.verifyPageShowsUp(arg1);
-		log.info(arg1 + " page shown up");
 	}
 
 	@When("^user clicks on \"([^\"]*)\"$")
 	public void user_clicks_on(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		element = driverUtil.getWebElement(arg1);
+		element = driverUtil.getElement(arg1);
 		element.click();
 	}
 
@@ -94,7 +83,7 @@ public class CommonSteps extends MasterStepDefs {
 	@When("^user types \"([^\"]*)\" into \"([^\"]*)\"$")
 	public void user_types_into(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		element = driverUtil.getWebElement(arg2);
+		element = driverUtil.getElement(arg2);
 		element.clear();
 		element.sendKeys(arg1);
 	}
