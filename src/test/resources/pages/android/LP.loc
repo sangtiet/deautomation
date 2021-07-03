@@ -1,6 +1,0 @@
-LP_USERNAME_INPUT=xpath=(//android.widget.EditText[@enabled='true'])[1]
-LP_PASSWORD_INPUT=xpath=(//android.widget.EditText[@enabled='true'])[2]
-LP_LOGIN_BUTTON=xpath=//android.widget.Button[@enabled='true']
-LP_CLOSE_POPUP_BUTTON=xpath=//*[@id='infobar_close_button']
-
-

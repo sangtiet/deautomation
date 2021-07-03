@@ -1,3 +1,0 @@
-PLP_LOGIN_BUTTON=xpath=//android.widget.TextView[@text='Đăng nhập']
-PLP_SKIP_BUTTON=xpath=//android.widget.TextView[@text='Bỏ qua']
-

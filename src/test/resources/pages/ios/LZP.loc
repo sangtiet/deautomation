@@ -1,2 +1,0 @@
-LZP_LOGIN_WITH_PHONE_NUMBER_BUTTON=xpath=/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.TextView
-LZP_PHONE_NUMBER_INPUT=id=edtInput
