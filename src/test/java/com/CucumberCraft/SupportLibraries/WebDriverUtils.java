@@ -191,13 +191,13 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertElementPresent(String elementName) {
+	public void assertElementIsPresent(String elementName) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void assertElementNotPresent(String elementName) {
+	public void assertElementIsNotPresent(String elementName) {
 		// TODO Auto-generated method stub
 
 	}
@@ -272,6 +272,24 @@ public class WebDriverUtils implements DriverUtils {
 		};
 
 		return wait.until(jQueryLoad) && wait.until(jsLoad);
+	}
+
+	@Override
+	public void assertPageShowUpInGivenTimeSeconds(String pageName, int timeInSeconds) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void assertElementIsPresentInGivenTimeSeconds(String elementName, int timeInSeconds) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void assertElementIsNotPresentInGivenTimeSeconds(String elementName, int timeInSeconds) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

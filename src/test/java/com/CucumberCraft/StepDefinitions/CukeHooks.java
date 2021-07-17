@@ -24,7 +24,7 @@ public class CukeHooks extends MasterStepDefs {
 		try {
 			currentScenario = scenario;
 			propertiesFileAccess = properties;
-			currentTestParameters = TestController.getTestParameters();			
+			currentTestParameters = TestController.getTestParameters();
 			currentTestParameters.setScenarioName(scenario.getName());
 		} catch (Throwable e) {
 			log.error("Error at Before Scenario " + e.getMessage());
@@ -37,15 +37,15 @@ public class CukeHooks extends MasterStepDefs {
 		switch (ExecutionMode) {
 		case "WEB":
 			currentScenario.write("-> Browser: " + TestController.getTestParameters().getBrowser());
-			break; // optional
+			break;
 
 		case "MOBILE":
-		case "SEETEST":	
+		case "SEETEST":
 			currentScenario.write(
 					"-> MobileExecutionPlatform: " + TestController.getTestParameters().getMobileExecutionPlatform());
 			currentScenario.write("-> DeviceName: " + TestController.getTestParameters().getDeviceName());
 			currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
-			break; // optional
+			break;
 		}
 		update(scenario);
 	}
@@ -57,14 +57,15 @@ public class CukeHooks extends MasterStepDefs {
 			switch (ExecutionMode) {
 			case "WEB":
 				screenshot = ((TakesScreenshot) TestController.getWebDriver()).getScreenshotAs(OutputType.BYTES);
-				break; // optional
+				scenario.embed(screenshot, "image/png");
+				break;
 
 			case "MOBILE":
-			case "SEETEST":	
+			case "SEETEST":
 				screenshot = ((TakesScreenshot) TestController.getAppiumDriver()).getScreenshotAs(OutputType.BYTES);
-				break; // optional
+				scenario.embed(screenshot, "image/png");
+				break;
 			}
-			scenario.embed(screenshot, "image/png");
 		}
 	}
 }

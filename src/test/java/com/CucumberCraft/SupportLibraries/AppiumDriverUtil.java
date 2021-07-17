@@ -1,9 +1,6 @@
 package com.CucumberCraft.SupportLibraries;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -11,16 +8,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
-import com.CucumberCraft.PageObjects.BankLinkPage;
-import com.CucumberCraft.PageObjects.ChoseLinkPage;
-import com.CucumberCraft.PageObjects.HomePage;
-import com.CucumberCraft.PageObjects.LoginPage;
-import com.CucumberCraft.PageObjects.PreLoginPage;
-import com.CucumberCraft.PageObjects.ZaloPayPinPage;
-import com.CucumberCraft.StepDefinitions.CukeHooks;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jayway.jsonpath.Configuration;
@@ -28,7 +17,6 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
