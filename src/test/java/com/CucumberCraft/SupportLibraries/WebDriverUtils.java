@@ -158,13 +158,7 @@ public class WebDriverUtils implements DriverUtils {
 				System.getProperty("user.dir") + "\\src\\test\\resources\\pages\\" + pageName + ".json");
 
 		Configuration conf = Configuration.builder().jsonProvider(new GsonJsonProvider()).build();
-		String elementName = null;
-		try {
-			elementName = JsonPath.using(conf).parse(jsonFile).read(jsonPath).toString().replaceAll("^\"+|\"+$", "");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			helper.writeStepFAIL(e.getMessage());
-		}
+		String elementName = JsonPath.using(conf).parse(jsonFile).read(jsonPath).toString().replaceAll("^\"+|\"+$", "");
 		getElement(elementName);
 	}
 
@@ -189,15 +183,18 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertElementShowText(String elementName, String text) {
+	public void assertElementShowText(String elementName, String text) throws Exception {
 		// TODO Auto-generated method stub
-
+		element = getElement(elementName);
+		helper.compare2Text(element.getText(), text);
 	}
 
 	@Override
-	public void assertElementContainText(String elementName, String text) {
+	public void assertElementContainText(String elementName, String text) throws Exception {
 		// TODO Auto-generated method stub
-
+		element = getElement(elementName);
+		if (!element.getText().contains(text))
+			helper.writeStepFAIL("Actual: " + element.getText() + " - Expected: " + text);
 	}
 
 	@Override
@@ -261,9 +258,15 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertPageShowUpInGivenTimeSeconds(String pageName, int timeInSeconds) {
+	public void assertPageShowUpInGivenTimeSeconds(String pageName, int timeInSeconds) throws Exception {
 		// TODO Auto-generated method stub
+		String jsonPath = "$.detectors.web";
+		File jsonFile = new File(
+				System.getProperty("user.dir") + "\\src\\test\\resources\\pages\\" + pageName + ".json");
 
+		Configuration conf = Configuration.builder().jsonProvider(new GsonJsonProvider()).build();
+		String elementName = JsonPath.using(conf).parse(jsonFile).read(jsonPath).toString().replaceAll("^\"+|\"+$", "");
+		assertElementIsPresentInGivenTimeSeconds(elementName, timeInSeconds);
 	}
 
 	@Override
@@ -289,9 +292,25 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertElementIsNotPresentInGivenTimeSeconds(String elementName, int timeInSeconds) {
+	public void assertElementIsNotPresentInGivenTimeSeconds(String elementName, int timeInSeconds) throws Exception {
 		// TODO Auto-generated method stub
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		int curr = 1;
+		boolean found = true;
+		do {
+			try {
+				getElement(elementName);
+				helper.delaySynchronization(1);
+				curr += 1;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				found = false;
+			}
+		} while ((curr <= timeInSeconds) && (found));
 
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (found)
+			helper.writeStepFAIL("Element <" + elementName + "> is present");
 	}
 
 	@Override

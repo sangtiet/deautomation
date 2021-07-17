@@ -41,7 +41,7 @@ public interface DriverUtils {
 
 	void assertPageShowUp(String pageName) throws Exception;
 
-	void assertPageShowUpInGivenTimeSeconds(String pageName, int timeInSeconds);
+	void assertPageShowUpInGivenTimeSeconds(String pageName, int timeInSeconds) throws Exception;
 
 	void assertElementIsPresent(String elementName) throws Exception;
 
@@ -49,11 +49,11 @@ public interface DriverUtils {
 
 	void assertElementIsNotPresent(String elementName);
 
-	void assertElementIsNotPresentInGivenTimeSeconds(String elementName, int timeInSeconds);
+	void assertElementIsNotPresentInGivenTimeSeconds(String elementName, int timeInSeconds) throws Exception;
 
-	void assertElementShowText(String elementName, String text);
+	void assertElementShowText(String elementName, String text) throws Exception;
 
-	void assertElementContainText(String elementName, String text);
+	void assertElementContainText(String elementName, String text) throws Exception;
 
 	void assertElementAttributeHasValue(String elementName, String attributeName, String value);
 

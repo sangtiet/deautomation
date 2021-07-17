@@ -25,7 +25,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.StepDefinitions" }, 
-	tags= {"@TEST-Login-001"},
+	tags= {"@common-01"},
 	monochrome = true,
 	//dryRun = true,
 	plugin = {

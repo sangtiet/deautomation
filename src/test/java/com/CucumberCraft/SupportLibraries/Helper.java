@@ -123,30 +123,6 @@ public class Helper {
 		Assert.fail(message);
 	}
 
-	public void loadTestDataFromJson(String TestcaseID, String JsonFile) throws Exception {
-		Object data = null;
-		JSONParser jsonParser = new JSONParser();
-		FileReader reader;
-		try {
-			reader = new FileReader(
-					System.getProperty("user.dir") + "\\src\\test\\resources\\data\\" + JsonFile + ".json");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			reader = new FileReader(System.getProperty("user.dir") + "/src/test/resources/data/" + JsonFile + ".json");
-		}
-		data = jsonParser.parse(reader);
-		JSONArray dataset = (JSONArray) data;
-
-		for (int i = 0; i < dataset.size(); i++) {
-			JSONObject tc = (JSONObject) dataset.get(i);
-			if (tc.containsKey(TestcaseID)) {
-				TestData = (JSONObject) tc.get(TestcaseID);
-				return;
-			}
-		}
-		writeStepFAIL("Unable to load test data of: " + TestcaseID);
-	}
-
 	public String extractPageNameFromElementname(String elementName) {
 		String pageName = null;
 		int subStringEndIndex = elementName.indexOf("PAGE") + 4;
