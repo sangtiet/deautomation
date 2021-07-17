@@ -1,6 +1,9 @@
-Feature: Common Actions 
- 
-Scenario: Common user actions 
-	Given "LOGIN_PAGE" shows up 
+@common 
+Feature: Common Steps 
+
+@common-01 
+Scenario: User actions to interact with web element
+	Given user launches application under test 
+	And "LOGIN_PAGE" shows up 
 
       

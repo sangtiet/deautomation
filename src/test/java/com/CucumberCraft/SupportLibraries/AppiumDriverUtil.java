@@ -56,7 +56,7 @@ public class AppiumDriverUtil {
 	public WebElement getElement(String elementName) throws Exception {
 		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
 		String jsonPath = "$.elements[?(@.name=='" + elementName + "')].locators." + platformName;
-		String pageName = extractPageNameFromElementname(elementName);
+		String pageName = helper.extractPageNameFromElementname(elementName);
 		File jsonFile = new File(
 				System.getProperty("user.dir") + "\\src\\test\\resources\\pages\\" + pageName + ".json");
 

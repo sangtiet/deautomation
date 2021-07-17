@@ -35,7 +35,7 @@ public class CukeHooks extends MasterStepDefs {
 	@After
 	public void embedScreenshot(Scenario scenario) throws Throwable {
 		switch (ExecutionMode) {
-		case "LOCAL":
+		case "WEB":
 			currentScenario.write("-> Browser: " + TestController.getTestParameters().getBrowser());
 			break; // optional
 
@@ -55,7 +55,7 @@ public class CukeHooks extends MasterStepDefs {
 			byte[] screenshot = null;
 
 			switch (ExecutionMode) {
-			case "LOCAL":
+			case "WEB":
 				screenshot = ((TakesScreenshot) TestController.getWebDriver()).getScreenshotAs(OutputType.BYTES);
 				break; // optional
 

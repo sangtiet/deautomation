@@ -207,4 +207,11 @@ public class WebDriverUtils implements DriverUtils {
 
 	}
 
+	@Override
+	public void launchAUT() {
+		// TODO Auto-generated method stub
+		String Url = helper.getConfig("web.url");
+		driver.get(Url);
+	}
+
 }

@@ -4,12 +4,13 @@ import java.io.IOException;
 
 import org.openqa.selenium.WebElement;
 
-interface DriverUtils {
+public interface DriverUtils {
 	WebElement getElement(String elementName) throws IOException;
 	void clickOnElement(String elementName);
 	void clickOnElementByVisibleText(String text);
 	void clickOnElementByVisibleTextAtIndex(String text, int index);
 	void typeTextIntoElement(String text, String elementName);
+	void launchAUT();
 	void refresh();
 	void goToUrl();
 	void navigateBack();

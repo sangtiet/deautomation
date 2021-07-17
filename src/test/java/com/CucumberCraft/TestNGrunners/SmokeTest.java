@@ -25,7 +25,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.StepDefinitions" }, 
-	tags= {"@TF-Login-01"},
+	tags= {"@common-01"},
 	monochrome = true,
 	//dryRun = true,
 	plugin = {
@@ -44,7 +44,7 @@ public class SmokeTest extends AbstractTestNGCucumberTests {
 		
 		String ExecutionMode = TestController.getTestParameters().getExecutionMode().toString();
 		switch (ExecutionMode) {
-		case "LOCAL":
+		case "WEB":
 			TestController.endWebDriver();
 			break; // optional
 
