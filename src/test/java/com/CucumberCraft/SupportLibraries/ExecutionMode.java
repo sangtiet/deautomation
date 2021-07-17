@@ -6,7 +6,7 @@ package com.CucumberCraft.SupportLibraries;
  */
 public enum ExecutionMode {
 	
-	LOCAL("local"),
+	WEB("web"),
 	
 	REMOTE("remote"),
 	

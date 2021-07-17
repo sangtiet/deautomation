@@ -36,7 +36,7 @@ public class DriverFactory {
 		WebDriver driver = null;
 		switch (testParameters.getExecutionMode()) {
 
-		case LOCAL:
+		case WEB:
 			driver = WebDriverFactory.getWebDriver(testParameters.getBrowser());
 			break;
 

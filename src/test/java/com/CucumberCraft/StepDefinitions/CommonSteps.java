@@ -23,24 +23,11 @@ public class CommonSteps extends MasterStepDefs {
 	private AppiumDriver driver = TestController.getAppiumDriver();
 	private AppiumDriverUtil driverUtil = new AppiumDriverUtil(driver);
 	private WebElement element;
-	private SeeTestClient seetest = new SeeTestClient(driver);
 
 	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
 	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		TestController.getHelper().loadTestDataFromJson(arg1, arg2);
-	}
-
-	@And("^user starts performance transaction$")
-	public void userstartsperformancetransaction() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		seetest.startPerformanceTransaction("NONE");
-	}
-	
-	@And("^user ends performance transaction$")
-	public void userendsperformancetransaction() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		log.info(seetest.endPerformanceTransaction("HTAgent"));
 	}
 	
 	@Then("^\"([^\"]*)\" shows up$")

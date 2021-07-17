@@ -72,7 +72,7 @@ public class TestListener implements IInvokedMethodListener {
 			String mobileExecutionPlatform = null;
 
 			switch (executionMode) {
-			case "LOCAL":
+			case "WEB":
 			case "REMOTE":
 				if (method.getTestMethod().getXmlTest().getLocalParameters().get("BrowserName") == null) {
 					testParameters.setBrowser(Browser.valueOf(properties.getProperty("DefaultBrowser")));

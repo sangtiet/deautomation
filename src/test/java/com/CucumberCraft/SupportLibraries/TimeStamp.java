@@ -33,14 +33,14 @@ public class TimeStamp {
 					case "LOCAL":
 					case "REMOTE":
 						timeStamp = "Run_" + TestController.getTestParameters().getBrowser().toString() + "_"
-								+ Util.getCurrentFormattedTime(properties.getProperty("DateFormatString"))
+								+ Util.getCurrentFormattedTime(properties.getProperty("generic.dateFormatString"))
 										.replace(" ", "_").replace(":", "-");
 						break; // optional
 
 					case "MOBILE":
 					case "SEETEST":
 						timeStamp = "Run_" + TestController.getTestParameters().getMobileExecutionPlatform().toString()
-								+ "_" + Util.getCurrentFormattedTime(properties.getProperty("DateFormatString"))
+								+ "_" + Util.getCurrentFormattedTime(properties.getProperty("generic.dateFormatString"))
 										.replace(" ", "_").replace(":", "-");
 						break; // optional
 					}

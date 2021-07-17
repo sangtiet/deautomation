@@ -51,33 +51,7 @@ public class AppiumDriverUtil {
 	 */
 	public AppiumDriverUtil(AppiumDriver p_driver) {
 		driver = p_driver;
-	}
-
-	public String getElementLocator(String element, String pageName) throws Exception {
-		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
-
-		BufferedReader br;
-		try {
-			br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\src\\test\\resources\\elements\\"
-					+ platformName + "\\" + pageName + ".loc"));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src/test/resources/elements/"
-					+ platformName + "/" + pageName + ".loc"));
-		}
-		try {
-			String line = br.readLine();
-
-			while (line != null) {
-				if (line.contains(element))
-					return line.replace(element + "=", "");
-				line = br.readLine();
-			}
-		} finally {
-			br.close();
-		}
-		return null;
-	}
+	}	
 
 	public WebElement getElement(String elementName) throws Exception {
 		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();
@@ -243,10 +217,5 @@ public class AppiumDriverUtil {
 		Thread.sleep(secs * 1000);
 	}
 
-	private String extractPageNameFromElementname(String elementName) {
-		String pageName = null;
-		int subStringEndIndex = elementName.indexOf("PAGE") + 4;
-		pageName = elementName.substring(0, subStringEndIndex);
-		return pageName;
-	}
+	
 }

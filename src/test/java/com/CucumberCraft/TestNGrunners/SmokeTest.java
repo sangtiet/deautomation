@@ -35,7 +35,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		"json:target/cucumber-report/Smoke/cucumber.json",
 		"junit:target/cucumber-report/Smoke/cucumber-junitreport.xml" })
 
-public class RunCucumberTests_Smoke extends AbstractTestNGCucumberTests {
+public class SmokeTest extends AbstractTestNGCucumberTests {
 
 	@AfterTest
 	private void test() {				

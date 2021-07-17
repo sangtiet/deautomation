@@ -8,20 +8,15 @@
 		<listener
 			class-name="com.CucumberCraft.SupportLibraries.TestListener" />
 	</listeners>
-
-	<test name="Smoke Test on Mobile">
-		<parameter name="ExecutionMode" value="SEETEST" />
-		<parameter name="MobileExecutionPlatform" value="ANDROID" />
-		<parameter name="DeviceName" value="OnePlus IO-US 084" />
-		<parameter name="SerialNumber" value="c8fc88d6" />
-		<parameter name="OSVersion" value="9" />
+	
+	<test name="Smoke Test on Web - Chrome">
+		<parameter name="ExecutionMode" value="WEB" />
+		<parameter name="BrowserName" value="CHROME" />		
 		<classes>
 			<class
-				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />
+				name="com.CucumberCraft.TestNGrunners.SmokeTest" />			
 		</classes>
-	</test>		
-	
-		
+	</test>
 
 <!--
 	<test name="Smoke Test on Mobile 1">
@@ -56,14 +51,7 @@
 		</classes>
 	</test>	
 
-	<test name="Smoke Test on Web - Chrome">
-		<parameter name="ExecutionMode" value="LOCAL" />
-		<parameter name="BrowserName" value="CHROME" />		
-		<classes>
-			<class
-				name="com.CucumberCraft.TestNGrunners.RunCucumberTests_Smoke" />			
-		</classes>
-	</test>
+	
 	
 	<test name="Smoke Test on Web - FireFox">
 		<parameter name="ExecutionMode" value="LOCAL" />
