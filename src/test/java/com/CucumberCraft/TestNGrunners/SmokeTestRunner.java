@@ -25,7 +25,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.StepDefinitions" }, 
-	tags= {"@common-01"},
+	tags= {"@TEST-Login-001"},
 	monochrome = true,
 	//dryRun = true,
 	plugin = {
@@ -35,7 +35,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		"json:target/cucumber-report/Smoke/cucumber.json",
 		"junit:target/cucumber-report/Smoke/cucumber-junitreport.xml" })
 
-public class SmokeTest extends AbstractTestNGCucumberTests {
+public class SmokeTestRunner extends AbstractTestNGCucumberTests {
 
 	@AfterTest
 	private void test() {				

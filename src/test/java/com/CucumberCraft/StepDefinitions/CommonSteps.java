@@ -13,19 +13,19 @@ public class CommonSteps extends MasterStepDefs {
 	
 
 	private WebDriver driver = TestController.getWebDriver();
-	//private DriverUtils driverUtils = new WebDriverUtils(driver);	
+	private DriverUtils driverUtils = new WebDriverUtils(driver);	
 	
 	
 	@And("^user launches application under test$")
 	public void userLaunchesApplicationUnderTest() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		//driverUtils.launchAUT();
+		driverUtils.launchAUT();
 	}
 	
 	@And("^\"([^\"]*)\" shows up$")
 	public void pageShowUp(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		//driverUtils.assertPageShowUp(arg1);
+		driverUtils.assertPageShowUp(arg1);
 	}
 	
 //	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")

@@ -1,11 +1,9 @@
 package com.CucumberCraft.SupportLibraries;
 
-import java.io.IOException;
-
 import org.openqa.selenium.WebElement;
 
 public interface DriverUtils {
-	WebElement getElement(String elementName) throws IOException;
+	WebElement getElement(String elementName);
 	void clickOnElement(String elementName);
 	void clickOnElementByVisibleText(String text);
 	void clickOnElementByVisibleTextAtIndex(String text, int index);
@@ -23,8 +21,9 @@ public interface DriverUtils {
 	void scrollDown();
 	void scrollDownNTimes(int n);
 	void scrollToElement(String elementName);
+	boolean waitForJSandJQueryToLoad();
 	
-	void assertPageShowUp(String pageName) throws IOException;
+	void assertPageShowUp(String pageName);
 	void assertElementPresent(String elementName);
 	void assertElementNotPresent(String elementName);
 	void assertElementShowText(String elementName, String text);

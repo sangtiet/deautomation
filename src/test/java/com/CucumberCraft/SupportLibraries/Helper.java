@@ -146,11 +146,15 @@ public class Helper {
 		}
 		writeStepFAIL("Unable to load test data of: " + TestcaseID);
 	}
-	
+
 	public String extractPageNameFromElementname(String elementName) {
 		String pageName = null;
 		int subStringEndIndex = elementName.indexOf("PAGE") + 4;
 		pageName = elementName.substring(0, subStringEndIndex);
 		return pageName;
+	}
+
+	public void delaySynchronization(int timeInSeconds) throws InterruptedException {
+		Thread.sleep(timeInSeconds * 1000);
 	}
 }

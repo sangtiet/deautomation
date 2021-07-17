@@ -14,7 +14,7 @@
 		<parameter name="BrowserName" value="CHROME" />		
 		<classes>
 			<class
-				name="com.CucumberCraft.TestNGrunners.SmokeTest" />			
+				name="com.CucumberCraft.TestNGrunners.SmokeTestRunner" />			
 		</classes>
 	</test>
 
