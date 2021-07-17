@@ -7,10 +7,6 @@ public interface DriverUtils {
 
 	void clickOnElement(String elementName);
 
-	void clickOnElementByVisibleText(String text);
-
-	void clickOnElementByVisibleTextAtIndex(String text, int index);
-
 	void typeTextIntoElement(String text, String elementName);
 
 	void launchAUT();

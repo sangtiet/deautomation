@@ -81,18 +81,6 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void clickOnElementByVisibleText(String text) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void clickOnElementByVisibleTextAtIndex(String text, int index) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void typeTextIntoElement(String text, String elementName) {
 		// TODO Auto-generated method stub
 		element = getElement(elementName);
