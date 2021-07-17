@@ -3,11 +3,13 @@ package com.CucumberCraft.SupportLibraries;
 import org.openqa.selenium.WebElement;
 
 public interface DriverUtils {
-	WebElement getElement(String elementName);
+	WebElement getElement(String elementName) throws Exception;
 
-	void clickOnElement(String elementName);
+	void clickOnElement(String elementName) throws Exception;
 
-	void typeTextIntoElement(String text, String elementName);
+	void typeTextIntoElement(String text, String elementName) throws Exception;
+	
+	void submitForm(String elementName) throws Exception;
 
 	void launchAUT();
 
@@ -37,13 +39,13 @@ public interface DriverUtils {
 
 	boolean waitForJSandJQueryToLoad();
 
-	void assertPageShowUp(String pageName);
+	void assertPageShowUp(String pageName) throws Exception;
 
 	void assertPageShowUpInGivenTimeSeconds(String pageName, int timeInSeconds);
 
-	void assertElementIsPresent(String elementName);
+	void assertElementIsPresent(String elementName) throws Exception;
 
-	void assertElementIsPresentInGivenTimeSeconds(String elementName, int timeInSeconds);
+	void assertElementIsPresentInGivenTimeSeconds(String elementName, int timeInSeconds) throws Exception;
 
 	void assertElementIsNotPresent(String elementName);
 

@@ -2,6 +2,7 @@ package com.CucumberCraft.SupportLibraries;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -27,7 +28,7 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public WebElement getElement(String elementName) {
+	public WebElement getElement(String elementName) throws Exception {
 		// TODO Auto-generated method stub
 		String jsonPath = "$.elements[?(@.name=='" + elementName + "')].locators.web";
 		String pageName = helper.extractPageNameFromElementname(elementName);
@@ -35,53 +36,42 @@ public class WebDriverUtils implements DriverUtils {
 				System.getProperty("user.dir") + "\\src\\test\\resources\\pages\\" + pageName + ".json");
 
 		Configuration conf = Configuration.builder().jsonProvider(new GsonJsonProvider()).build();
-		JsonArray ja = null;
-		try {
-			ja = JsonPath.using(conf).parse(jsonFile).read(jsonPath);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			helper.writeStepFAIL(e1.getMessage());
-		}
+		JsonArray ja = JsonPath.using(conf).parse(jsonFile).read(jsonPath);
 		JsonObject jo = (JsonObject) ja.get(0);
 
 		String selector = jo.getAsJsonObject().get("selector").toString().replaceAll("^\"+|\"+$", "");
 		String strategy = jo.getAsJsonObject().get("strategy").toString().replaceAll("^\"+|\"+$", "");
 
-		try {
-			switch (strategy) {
-			case "xpath":
-				return driver.findElement(By.xpath(selector));
-			case "id":
-				return driver.findElement(By.id(selector));
-			case "name":
-				return driver.findElement(By.name(selector));
-			case "cssSelector":
-				return driver.findElement(By.cssSelector(selector));
-			case "className":
-				return driver.findElement(By.className(selector));
-			case "linkText":
-				return driver.findElement(By.linkText(selector));
-			case "tagName":
-				return driver.findElement(By.tagName(selector));
-			case "partialLinkText":
-				return driver.findElement(By.partialLinkText(selector));
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			helper.writeStepFAIL("Element <" + elementName + "> not found");
+		switch (strategy) {
+		case "xpath":
+			return driver.findElement(By.xpath(selector));
+		case "id":
+			return driver.findElement(By.id(selector));
+		case "name":
+			return driver.findElement(By.name(selector));
+		case "cssSelector":
+			return driver.findElement(By.cssSelector(selector));
+		case "className":
+			return driver.findElement(By.className(selector));
+		case "linkText":
+			return driver.findElement(By.linkText(selector));
+		case "tagName":
+			return driver.findElement(By.tagName(selector));
+		case "partialLinkText":
+			return driver.findElement(By.partialLinkText(selector));
 		}
 		return null;
 	}
 
 	@Override
-	public void clickOnElement(String elementName) {
+	public void clickOnElement(String elementName) throws Exception {
 		// TODO Auto-generated method stub
 		element = getElement(elementName);
-		element.clear();
+		element.click();
 	}
 
 	@Override
-	public void typeTextIntoElement(String text, String elementName) {
+	public void typeTextIntoElement(String text, String elementName) throws Exception {
 		// TODO Auto-generated method stub
 		element = getElement(elementName);
 		element.clear();
@@ -161,7 +151,7 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertPageShowUp(String pageName) {
+	public void assertPageShowUp(String pageName) throws Exception {
 		// TODO Auto-generated method stub
 		String jsonPath = "$.detectors.web";
 		File jsonFile = new File(
@@ -179,15 +169,23 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertElementIsPresent(String elementName) {
+	public void assertElementIsPresent(String elementName) throws Exception {
 		// TODO Auto-generated method stub
-
+		element = getElement(elementName);
+		if (!element.isDisplayed())
+			helper.writeStepFAIL("Element <" + elementName + "> is not present");
 	}
 
 	@Override
 	public void assertElementIsNotPresent(String elementName) {
 		// TODO Auto-generated method stub
+		try {
+			element = getElement(elementName);
+			helper.writeStepFAIL("Element <" + elementName + "> is present");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 
+		}
 	}
 
 	@Override
@@ -269,15 +267,38 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertElementIsPresentInGivenTimeSeconds(String elementName, int timeInSeconds) {
+	public void assertElementIsPresentInGivenTimeSeconds(String elementName, int timeInSeconds) throws Exception {
 		// TODO Auto-generated method stub
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		int curr = 1;
+		boolean found = false;
+		do {
+			try {
+				getElement(elementName);
+				found = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				helper.delaySynchronization(1);
+				curr += 1;
+			}
+		} while ((curr <= timeInSeconds) && (!found));
 
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (!found)
+			helper.writeStepFAIL("Element <" + elementName + "> is not present");
 	}
 
 	@Override
 	public void assertElementIsNotPresentInGivenTimeSeconds(String elementName, int timeInSeconds) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void submitForm(String elementName) throws Exception {
+		// TODO Auto-generated method stub
+		element = getElement(elementName);
+		element.submit();
 	}
 
 }
