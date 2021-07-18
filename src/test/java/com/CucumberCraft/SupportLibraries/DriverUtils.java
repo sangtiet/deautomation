@@ -15,13 +15,13 @@ public interface DriverUtils {
 
 	void refresh();
 
-	void goToUrl();
+	void goToUrl(String Url);
 
 	void navigateBack();
 
 	void navigateForward();
 
-	void switchToIframe();
+	void switchToIframe(String elementName) throws Exception;
 
 	void switchToDefault();
 
@@ -55,7 +55,7 @@ public interface DriverUtils {
 
 	void assertElementContainText(String elementName, String text) throws Exception;
 
-	void assertElementAttributeHasValue(String elementName, String attributeName, String value);
+	void assertElementAttributeHasValue(String elementName, String attributeName, String value) throws Exception;
 
-	void assertElementAttributeContainValue(String elementName, String attributeName, String value);
+	void assertElementAttributeContainValue(String elementName, String attributeName, String value) throws Exception;
 }

@@ -81,37 +81,38 @@ public class WebDriverUtils implements DriverUtils {
 	@Override
 	public void refresh() {
 		// TODO Auto-generated method stub
-
+		driver.navigate().refresh();
 	}
 
 	@Override
-	public void goToUrl() {
+	public void goToUrl(String Url) {
 		// TODO Auto-generated method stub
-
+		driver.navigate().to(Url);
 	}
 
 	@Override
 	public void navigateBack() {
 		// TODO Auto-generated method stub
-
+		driver.navigate().back();
 	}
 
 	@Override
 	public void navigateForward() {
 		// TODO Auto-generated method stub
-
+		driver.navigate().forward();
 	}
 
 	@Override
-	public void switchToIframe() {
+	public void switchToIframe(String elementName) throws Exception {
 		// TODO Auto-generated method stub
-
+		element = getElement(elementName);
+		driver.switchTo().frame(element);
 	}
 
 	@Override
 	public void switchToDefault() {
 		// TODO Auto-generated method stub
-
+		driver.switchTo().defaultContent();
 	}
 
 	@Override
@@ -186,7 +187,7 @@ public class WebDriverUtils implements DriverUtils {
 	public void assertElementShowText(String elementName, String text) throws Exception {
 		// TODO Auto-generated method stub
 		element = getElement(elementName);
-		helper.compare2Text(element.getText(), text);
+		helper.compare2Text(element.getText().trim(), text);
 	}
 
 	@Override
@@ -198,15 +199,18 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertElementAttributeHasValue(String elementName, String attributeName, String value) {
+	public void assertElementAttributeHasValue(String elementName, String attributeName, String value) throws Exception {
 		// TODO Auto-generated method stub
-
+		element = getElement(elementName);
+		helper.compare2Text(element.getAttribute(attributeName).toString().trim(),value);
 	}
 
 	@Override
-	public void assertElementAttributeContainValue(String elementName, String attributeName, String value) {
+	public void assertElementAttributeContainValue(String elementName, String attributeName, String value) throws Exception {
 		// TODO Auto-generated method stub
-
+		element = getElement(elementName);
+		if (!element.getAttribute(attributeName).toString().contains(value))
+			helper.writeStepFAIL("Actual: " + element.getAttribute(attributeName).toString().trim() + " - Expected: " + value);
 	}
 
 	@Override

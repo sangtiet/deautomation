@@ -12,6 +12,15 @@
           "strategy": "xpath"          
         }
       }
+    },
+    {
+      "name": "HOME_PAGE_SUBSCRIBE_BUTTON",
+      "locators": {
+        "web": {
+          "selector": "Subscriber_link",
+          "strategy": "id"          
+        }
+      }
     }
   ]
 }

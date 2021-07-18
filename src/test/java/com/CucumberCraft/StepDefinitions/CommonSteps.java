@@ -88,12 +88,59 @@ public class CommonSteps extends MasterStepDefs {
 		driverUtils.assertElementContainText(arg1, arg2);
 	}
 
+	@And("^\"([^\"]*)\" has attribute \"([^\"]*)\" with value \"([^\"]*)\"$")
+	public void elementAttributeWithValue(String arg1, String arg2, String arg3) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.assertElementAttributeHasValue(arg1, arg2, arg3);
+	}
+
+	@And("^\"([^\"]*)\" has attribute \"([^\"]*)\" contain value \"([^\"]*)\"$")
+	public void elementAttributeContainValue(String arg1, String arg2, String arg3) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.assertElementAttributeContainValue(arg1, arg2, arg3);
+	}
+
 	@And("^user wait for (\\d+) seconds$")
 	public void userWaitForNSeconds(int arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		helper.delaySynchronization(arg1);
 	}
 
+	@And("^user refreshes current page$")
+	public void userRefreshesCurrentPage() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.refresh();
+	}
+	
+	@And("^user navigates to \"([^\"]*)\"$")
+	public void userNavigatesToUrl(String arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.goToUrl(arg1);
+	}
+	
+	@And("^user navigates back$")
+	public void userNavigatesBack() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.navigateBack();
+	}
+	
+	@And("^user navigate forward$")
+	public void userNavigateForward() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.navigateForward();
+	}
+	
+	@And("^user switch to default$")
+	public void userSwitchToDefault() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.switchToDefault();;
+	}
+	
+	@And("^user switch to \"([^\"]*)\"$")
+	public void userSwitchToIframe(String arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.switchToIframe(arg1);;
+	}
 //	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
 //	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
 //		// Write code here that turns the phrase above into concrete actions
