@@ -7,9 +7,11 @@ Scenario Outline: User actions to interact with web element
 	And "LOGIN_PAGE" shows up	
 	And user types "<username>" into "LOGIN_PAGE_USERNAME_INPUT"
 	And user types "<password>" into "LOGIN_PAGE_PASSWORD_INPUT"
-	When user submits form "LOGIN_PAGE_LOGIN_FORM" 
-	#Then "HOME_PAGE" shows up in 30 seconds
+	#When user clicks on "LOGIN_PAGE_LOGIN_BUTTON"
+	When user submits form "LOGIN_PAGE_LOGIN_FORM"
+	#And user wait for 10 seconds  
 	Then "HOME_PAGE" shows up
+	#Then "HOME_PAGE" shows up in 30 seconds
 	#And "HOME_PAGE_DASHBOARD_LABEL" is present
 	#Then "HOME_PAGE_DASHBOARD_LABEL" is present in 30 seconds 
 	#And "LOGIN_PAGE_LOGIN_BUTTON" is not present
@@ -25,8 +27,7 @@ Scenario Outline: User actions to interact with web element
 	And user navigate forward 
 	And user switch to "ANY_IFRAME"
 	And user switch to default
-	#When user clicks on "LOGIN_PAGE_LOGIN_BUTTON"
-	#And user wait for 10 seconds 
+	
 	Examples:
     | username | password | url                        |
     |    Admin | admin123 | https://www.google.com.vn/ |
