@@ -1,0 +1,26 @@
+{
+  "name": "PIM_EMPLOYEE_LIST_PAGE",
+  "detectors": {
+    "web": "PIM_EMPLOYEE_LIST_PAGE_EMPLOYEE_LABEL"    
+  },
+  "elements": [
+    {
+      "name": "PIM_EMPLOYEE_LIST_PAGE_EMPLOYEE_LABEL",
+      "locators": {
+        "web": {
+          "selector": "//h1[text()='Employee Information']",
+          "strategy": "xpath"          
+        }
+      }
+    },
+    {
+      "name": "PIM_EMPLOYEE_LIST_PAGE_FOOTER_LINK",
+      "locators": {
+        "web": {
+          "selector": "//a[contains(text(),'OrangeHRM')]",
+          "strategy": "xpath"          
+        }
+      }
+    }
+  ]
+}

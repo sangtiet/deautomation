@@ -6,6 +6,8 @@ public interface DriverUtils {
 	WebElement getElement(String elementName) throws Exception;
 
 	void clickOnElement(String elementName) throws Exception;
+	
+	void clickOnElementByJS(String elementName) throws Exception;
 
 	void typeTextIntoElement(String text, String elementName) throws Exception;
 	
@@ -27,15 +29,13 @@ public interface DriverUtils {
 
 	void accessWebView();
 
-	void scrollUp();
+	void scrollDown(int pixel);
 
-	void scrollUpNTimes(int n);
+	void scrollDownNTimes(int pixel, int n);
 
-	void scrollDown();
-
-	void scrollDownNTimes(int n);
-
-	void scrollToElement(String elementName);
+	void scrollToElement(String elementName) throws Exception;
+	
+	void pressEnterKey();
 
 	boolean waitForJSandJQueryToLoad();
 

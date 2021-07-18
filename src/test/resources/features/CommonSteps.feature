@@ -25,8 +25,14 @@ Scenario Outline: User actions to interact with web element
 	And user navigates to "<url>"
 	And user navigates back  
 	And user navigate forward 
-	And user switch to "ANY_IFRAME"
+	And user switch to "ANY_IFRAME" 
 	And user switch to default
+	And user scrolls down 200 pixel
+	And user scrolls down 200 pixel 3 times
+	And user scrolls to "PIM_EMPLOYEE_LIST_PAGE_FOOTER_LINK"
+	And user presses ENTER key
+	And user clicks on "LOGIN_PAGE_LOGIN_BUTTON" by JS
+	And user clicks on menu following order "PIM > Employee List" 
 	
 	Examples:
     | username | password | url                        |

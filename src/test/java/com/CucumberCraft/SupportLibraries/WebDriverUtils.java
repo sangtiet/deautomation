@@ -6,8 +6,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,11 +22,15 @@ import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 public class WebDriverUtils implements DriverUtils {
 
 	private WebDriver driver;
-	private Helper helper = TestController.getHelper();
 	private WebElement element;
+	private JavascriptExecutor executor;
+	private Actions builder;
+	private Helper helper = TestController.getHelper();
 
 	public WebDriverUtils(WebDriver p_driver) {
 		this.driver = p_driver;
+		executor = (JavascriptExecutor) this.driver;
+		builder = new Actions(this.driver);
 	}
 
 	@Override
@@ -122,33 +128,24 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void scrollUp() {
+	public void scrollDown(int pixel) {
 		// TODO Auto-generated method stub
-
+		executor.executeScript("window.scrollBy(0," + String.valueOf(pixel) + ")");
 	}
 
 	@Override
-	public void scrollUpNTimes(int n) {
+	public void scrollDownNTimes(int pixel, int n) {
 		// TODO Auto-generated method stub
-
+		for (int i = 0; i < n - 1; i++) {
+			scrollDown(pixel);
+		}
 	}
 
 	@Override
-	public void scrollDown() {
+	public void scrollToElement(String elementName) throws Exception {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void scrollDownNTimes(int n) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void scrollToElement(String elementName) {
-		// TODO Auto-generated method stub
-
+		element = getElement(elementName);
+		executor.executeScript("arguments[0].scrollIntoView();", element);
 	}
 
 	@Override
@@ -199,18 +196,21 @@ public class WebDriverUtils implements DriverUtils {
 	}
 
 	@Override
-	public void assertElementAttributeHasValue(String elementName, String attributeName, String value) throws Exception {
+	public void assertElementAttributeHasValue(String elementName, String attributeName, String value)
+			throws Exception {
 		// TODO Auto-generated method stub
 		element = getElement(elementName);
-		helper.compare2Text(element.getAttribute(attributeName).toString().trim(),value);
+		helper.compare2Text(element.getAttribute(attributeName).toString().trim(), value);
 	}
 
 	@Override
-	public void assertElementAttributeContainValue(String elementName, String attributeName, String value) throws Exception {
+	public void assertElementAttributeContainValue(String elementName, String attributeName, String value)
+			throws Exception {
 		// TODO Auto-generated method stub
 		element = getElement(elementName);
 		if (!element.getAttribute(attributeName).toString().contains(value))
-			helper.writeStepFAIL("Actual: " + element.getAttribute(attributeName).toString().trim() + " - Expected: " + value);
+			helper.writeStepFAIL(
+					"Actual: " + element.getAttribute(attributeName).toString().trim() + " - Expected: " + value);
 	}
 
 	@Override
@@ -322,6 +322,19 @@ public class WebDriverUtils implements DriverUtils {
 		// TODO Auto-generated method stub
 		element = getElement(elementName);
 		element.submit();
+	}
+
+	@Override
+	public void clickOnElementByJS(String elementName) throws Exception {
+		// TODO Auto-generated method stub
+		element = getElement(elementName);
+		executor.executeScript("arguments[0].click();", element);
+	}
+
+	@Override
+	public void pressEnterKey() {
+		// TODO Auto-generated method stub
+		builder.sendKeys(Keys.ENTER).build().perform();
 	}
 
 }

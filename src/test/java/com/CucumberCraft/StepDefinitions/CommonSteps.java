@@ -1,5 +1,6 @@
 package com.CucumberCraft.StepDefinitions;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.CucumberCraft.SupportLibraries.DriverUtils;
@@ -111,97 +112,91 @@ public class CommonSteps extends MasterStepDefs {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.refresh();
 	}
-	
+
 	@And("^user navigates to \"([^\"]*)\"$")
 	public void userNavigatesToUrl(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.goToUrl(arg1);
 	}
-	
+
 	@And("^user navigates back$")
 	public void userNavigatesBack() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.navigateBack();
 	}
-	
+
 	@And("^user navigate forward$")
 	public void userNavigateForward() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.navigateForward();
 	}
-	
+
 	@And("^user switch to default$")
 	public void userSwitchToDefault() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		driverUtils.switchToDefault();;
+		driverUtils.switchToDefault();
+		;
 	}
-	
+
 	@And("^user switch to \"([^\"]*)\"$")
 	public void userSwitchToIframe(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		driverUtils.switchToIframe(arg1);;
+		driverUtils.switchToIframe(arg1);
+		;
 	}
+
+	@Then("^user scrolls down (\\d+) pixel$")
+	public void userScrollsDownPixel(int arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.scrollDown(arg1);
+	}
+
+	@Then("^user scrolls down (\\d+) pixel (\\d+) times$")
+	public void userScrollsDownPixelTimes(int arg1, int arg2) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.scrollDownNTimes(arg1, arg2);
+	}
+
+	@Then("^user scrolls to \"([^\"]*)\"$")
+	public void userScrollsToElement(String arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.scrollToElement(arg1);
+	}
+
+	@Then("^user presses ENTER key$")
+	public void userPressesENTERKey() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.pressEnterKey();
+	}
+
+	@Then("^user clicks on \"([^\"]*)\" by JS$")
+	public void userClicksOnElementByJS(String arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		driverUtils.clickOnElementByJS(arg1);
+	}
+
+	@Then("^user clicks on menu following order \"([^\"]*)\"$")
+	public void user_clicks_on_menu_following_order_will_be_removed(String arg1) throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		String[] arr = arg1.split(">");
+		String locator = null;
+		for (int i = 0; i < arr.length; i++) {
+			if (i == 0) {
+				locator = "//li[@class='main-menu-first-level-list-item']//child::b[text()='" + arr[i].trim() + "']";
+				driver.findElement(By.xpath(locator)).click();				
+				locator = locator.replace("main-menu-first-level-list-item", "current main-menu-first-level-list-item");
+			} else {
+				locator += "//following::ul[1]//following::a[text()='" + arr[i].trim() + "']";				
+				driver.findElement(By.xpath(locator)).click();				
+			}
+		}
+
+	}
+
 //	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
 //	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
 //		// Write code here that turns the phrase above into concrete actions
 //		TestController.getHelper().loadTestDataFromJson(arg1, arg2);
-//	}
-//
 
-//
-
-//
-//	@When("^user waits until \"([^\"]*)\" is present in (\\d+) seconds$")
-//	public void user_waits_until_is_present_in_seconds(String arg1, int arg2) throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//
-//	}
-//
-//	@When("^user waits for (\\d+) seconds$")
-//	public void user_waits_for_seconds(int arg1) throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		driverUtil.wait(arg1);
-//	}
-//
-//
-//	@When("^user navigates back$")
-//	public void user_navigates_back() throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		driverUtil.navigateBack();
-//	}
-//
-//	@When("^user inputs pin \"([^\"]*)\"$")
-//	public void user_inputs_pin(String arg1) throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		driverUtil.tapOnNumberPad(arg1);
-//	}
-//
-//	@When("^user dismisses Alert$")
-//	public void user_dismisses_Alert() throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		driverUtil.dismissAlert();
-//	}
-//
-//	@When("^user swipes \"([^\"]*)\"$")
-//	public void user_swipes(String arg1) throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		if (arg1.toUpperCase().equals("UP"))
-//			driverUtil.swipeUp(0.8, 0.1, 0.5, 2000);
-//		else if (arg1.toUpperCase().equals("DOWN"))
-//			driverUtil.swipeDown(1);
-//	}
-//
-//	@When("^user scrolls down until \"([^\"]*)\" element is present$")
-//	public void user_scrolls_down_until_element_is_present(String arg1) throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		driverUtil.scrollToFindElement(arg1, 5);
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//	}
-//
-//	@When("^user clicks on element by visible text \"([^\"]*)\"$")
-//	public void user_clicks_on_element_by_visible_text(String arg1) throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		driverUtil.clickElementByVisibleText(arg1);
-//	}
 //	td[count(//th[.='First Name']/preceding-sibling::th) +1][.='bat']
 }

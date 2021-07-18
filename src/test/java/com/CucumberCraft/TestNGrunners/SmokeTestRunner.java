@@ -25,7 +25,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.StepDefinitions" }, 
-	tags= {"@common-01"},
+	tags= {"@TEST_PIM_EL_001"},
 	monochrome = true,
 	//dryRun = true,
 	plugin = {

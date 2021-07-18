@@ -10,7 +10,7 @@ import com.CucumberCraft.SupportLibraries.WebDriverUtils;
 
 import cucumber.api.java.en.And;
 
-public class LoginSteps extends MasterStepDefs {
+public class PIM_EmployeeList extends MasterStepDefs {
 
 	private WebDriver driver = TestController.getWebDriver();
 	private DriverUtils driverUtils = new WebDriverUtils(driver);
