@@ -9,7 +9,6 @@ import com.CucumberCraft.SupportLibraries.TestController;
 import com.CucumberCraft.SupportLibraries.WebDriverUtils;
 
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 
 public class CommonSteps extends MasterStepDefs {
 
@@ -145,37 +144,37 @@ public class CommonSteps extends MasterStepDefs {
 		;
 	}
 
-	@Then("^user scrolls down (\\d+) pixel$")
+	@And("^user scrolls down (\\d+) pixel$")
 	public void userScrollsDownPixel(int arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.scrollDown(arg1);
 	}
 
-	@Then("^user scrolls down (\\d+) pixel (\\d+) times$")
+	@And("^user scrolls down (\\d+) pixel (\\d+) times$")
 	public void userScrollsDownPixelTimes(int arg1, int arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.scrollDownNTimes(arg1, arg2);
 	}
 
-	@Then("^user scrolls to \"([^\"]*)\"$")
+	@And("^user scrolls to \"([^\"]*)\"$")
 	public void userScrollsToElement(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.scrollToElement(arg1);
 	}
 
-	@Then("^user presses ENTER key$")
+	@And("^user presses ENTER key$")
 	public void userPressesENTERKey() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.pressEnterKey();
 	}
 
-	@Then("^user clicks on \"([^\"]*)\" by JS$")
+	@And("^user clicks on \"([^\"]*)\" by JS$")
 	public void userClicksOnElementByJS(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.clickOnElementByJS(arg1);
 	}
 
-	@Then("^user clicks on menu following order \"([^\"]*)\"$")
+	@And("^user clicks on menu following order \"([^\"]*)\"$")
 	public void user_clicks_on_menu_following_order_will_be_removed(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		String[] arr = arg1.split(">");
