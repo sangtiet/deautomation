@@ -192,6 +192,17 @@ public class CommonSteps extends MasterStepDefs {
 		}
 
 	}
+	
+	@And("^user login with valid username and password$")
+	public void userLoginWithValidUsernameAndPassword() throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		String userName = helper.getConfig("web.username");
+		String password = helper.getConfig("web.password");
+
+		driverUtils.typeTextIntoElement(userName, "LOGIN_PAGE_USERNAME_INPUT");
+		driverUtils.typeTextIntoElement(password, "LOGIN_PAGE_PASSWORD_INPUT");
+		driverUtils.getElement("LOGIN_PAGE_LOGIN_FORM").submit();
+	}
 
 //	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
 //	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
