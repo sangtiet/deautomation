@@ -43,6 +43,7 @@ public class CommonSteps extends MasterStepDefs {
 	@And("^user types \"([^\"]*)\" into \"([^\"]*)\"$")
 	public void userTypesTextIntoElement(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		arg1 = helper.loadTestDataIntoParam(arg1);		
 		driverUtils.typeTextIntoElement(arg1, arg2);
 	}
 
@@ -182,16 +183,16 @@ public class CommonSteps extends MasterStepDefs {
 		for (int i = 0; i < arr.length; i++) {
 			if (i == 0) {
 				locator = "//li[@class='main-menu-first-level-list-item']//child::b[text()='" + arr[i].trim() + "']";
-				driver.findElement(By.xpath(locator)).click();				
+				driver.findElement(By.xpath(locator)).click();
 				locator = locator.replace("main-menu-first-level-list-item", "current main-menu-first-level-list-item");
 			} else {
-				locator += "//following::ul[1]//following::a[text()='" + arr[i].trim() + "']";				
-				driver.findElement(By.xpath(locator)).click();				
+				locator += "//following::ul[1]//following::a[text()='" + arr[i].trim() + "']";
+				driver.findElement(By.xpath(locator)).click();
 			}
 		}
 
 	}
-	
+
 	@And("^user login with valid username and password$")
 	public void userLoginWithValidUsernameAndPassword() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions

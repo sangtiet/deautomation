@@ -30,6 +30,15 @@
           "strategy": "id"          
         }
       }
+    },
+    {
+      "name": "PIM_EMPLOYEE_LIST_PAGE_SEARCH_FORM",
+      "locators": {
+        "web": {
+          "selector": "search_form",
+          "strategy": "id"          
+        }
+      }
     }
   ]
 }

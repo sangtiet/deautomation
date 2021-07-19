@@ -80,7 +80,7 @@ public class WebDriverUtils implements DriverUtils {
 	public void typeTextIntoElement(String text, String elementName) throws Exception {
 		// TODO Auto-generated method stub
 		element = getElement(elementName);
-		element.clear();
+		element.clear();		
 		element.sendKeys(text);
 	}
 

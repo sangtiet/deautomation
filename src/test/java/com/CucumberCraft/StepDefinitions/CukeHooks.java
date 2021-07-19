@@ -26,6 +26,7 @@ public class CukeHooks extends MasterStepDefs {
 			propertiesFileAccess = properties;
 			currentTestParameters = TestController.getTestParameters();
 			currentTestParameters.setScenarioName(scenario.getName());
+			TestController.getHelper().getScenarioContext().setContext("SCENARIO_NAME", scenario.getName());
 		} catch (Throwable e) {
 			log.error("Error at Before Scenario " + e.getMessage());
 			TestController.getHelper().writeStepFAIL();
@@ -47,6 +48,7 @@ public class CukeHooks extends MasterStepDefs {
 			currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
 			break;
 		}
+		currentScenario.write("-> TestData: " + "\n" + TestController.getHelper().printCurrentTestData());
 		update(scenario);
 	}
 

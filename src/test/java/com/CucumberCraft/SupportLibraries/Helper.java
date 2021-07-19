@@ -2,6 +2,8 @@ package com.CucumberCraft.SupportLibraries;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +22,10 @@ import org.junit.Assert;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 
 public class Helper {
 
@@ -132,5 +138,29 @@ public class Helper {
 
 	public void delaySynchronization(int timeInSeconds) throws InterruptedException {
 		Thread.sleep(timeInSeconds * 1000);
+	}
+
+	public String loadTestDataIntoParam(String param) throws Exception {
+		if (!param.startsWith("<data:"))
+			return param;
+		else {
+			String fieldName = param.replace("<data:", "");
+			String testDataFile = this.getScenarioContext().getContext("SCENARIO_NAME").toString().split("-")[0].trim();
+
+			fieldName = fieldName.substring(0, fieldName.length() - 1);
+			String jsonPath = "$." + fieldName;
+
+			File jsonFile = new File(
+					System.getProperty("user.dir") + "\\src\\test\\resources\\data\\" + testDataFile + ".json");
+
+			return JsonPath.read(jsonFile, jsonPath);
+		}
+	}
+
+	public String printCurrentTestData() throws Exception {
+		String testDataFile = this.getScenarioContext().getContext("SCENARIO_NAME").toString().split("-")[0].trim();
+		File jsonFile = new File(
+				System.getProperty("user.dir") + "\\src\\test\\resources\\data\\" + testDataFile + ".json");
+		return new String(Files.readAllBytes(jsonFile.toPath()), StandardCharsets.UTF_8);
 	}
 }
