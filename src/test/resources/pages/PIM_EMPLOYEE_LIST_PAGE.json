@@ -21,6 +21,15 @@
           "strategy": "xpath"          
         }
       }
+    },
+    {
+      "name": "PIM_EMPLOYEE_LIST_PAGE_SEARCH_CRITERIA_EMPLOYEE_NAME_INPUT",
+      "locators": {
+        "web": {
+          "selector": "empsearch_employee_name_empName",
+          "strategy": "id"          
+        }
+      }
     }
   ]
 }
