@@ -1,41 +1,44 @@
-# cypress-google-search
+# DE Automation Framework
 
-[![E2E](https://github.com/remarkablemark/cypress-google-search/actions/workflows/e2e.yml/badge.svg)](https://github.com/remarkablemark/cypress-google-search/actions/workflows/e2e.yml)
-![GitHub last commit](https://img.shields.io/github/last-commit/remarkablemark/cypress-google-search)
-
-Demo of using [Cypress](https://b.remarkabl.org/cypress) end-to-end (E2E) test runner to perform a [Google](https://www.google.com/) search. See [blog post](https://b.remarkabl.org/3doyeL9) or [YouTube video](https://b.remarkabl.org/3b7vq1Q).
+Digital Engineer (DE) automation framework helps everyone involve in Automation testing quickly by using Cucumber/BDD.
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/)
+- [Java - JDK 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
+- [Java - Environment setup](https://javatutorial.net/set-java-home-windows-10)
+- [Apache Maven](https://www.baeldung.com/install-maven-on-windows-linux-mac)
+- [Eclipse IDE for Java developers](https://www.eclipse.org/downloads/)
+- [TestNG plugin for Eclipse](https://www.lambdatest.com/blog/how-to-install-testng-in-eclipse-step-by-step-guide/)
+- [QAF BDD Editor](https://marketplace.eclipse.org/content/qaf-bdd-editors)
 
-## Install
+## Make the framework in ready state
 
-Clone repository:
-
-```sh
-git clone https://github.com/remarkablemark/cypress-google-search.git
-cd cypress-google-search
-```
-
-Install dependencies:
+Open Eclipse IDE:
 
 ```sh
-npm install
+Go to File > Import
+Select Maven > Existing Maven Projects
+Browse to the framework location
+Click Finish button
 ```
+
+Wait for few minutes to load Maven dependencies
 
 ## Run
 
-Open Cypress:
+Run from Eclipse:
 
 ```sh
-npx cypress open
+Right click on file "/src/test/resources/TestNGRunSmokeTests.xml"
+Select Run As > TestNG Suite
 ```
 
-## CI
+Run from CommandLine:
 
-See [cypress-io/github-action](https://github.com/cypress-io/github-action).
+```sh
+mvn clean install
+```
 
 ## License
 
-[MIT](LICENSE)
+[Vu Bach](www.linkedin.com/in/vu-bach-17448a58)
