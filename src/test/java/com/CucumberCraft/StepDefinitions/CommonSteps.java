@@ -80,24 +80,28 @@ public class CommonSteps extends MasterStepDefs {
 	@And("^\"([^\"]*)\" shows text \"([^\"]*)\"$")
 	public void elementShowsText(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		arg2 = helper.loadTestDataIntoParam(arg2);
 		driverUtils.assertElementShowText(arg1, arg2);
 	}
 
 	@And("^\"([^\"]*)\" contains text \"([^\"]*)\"$")
 	public void elementContainsText(String arg1, String arg2) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		arg2 = helper.loadTestDataIntoParam(arg2);
 		driverUtils.assertElementContainText(arg1, arg2);
 	}
 
 	@And("^\"([^\"]*)\" has attribute \"([^\"]*)\" with value \"([^\"]*)\"$")
 	public void elementAttributeWithValue(String arg1, String arg2, String arg3) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		arg3 = helper.loadTestDataIntoParam(arg3);
 		driverUtils.assertElementAttributeHasValue(arg1, arg2, arg3);
 	}
 
 	@And("^\"([^\"]*)\" has attribute \"([^\"]*)\" contain value \"([^\"]*)\"$")
 	public void elementAttributeContainValue(String arg1, String arg2, String arg3) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
+		arg3 = helper.loadTestDataIntoParam(arg3);
 		driverUtils.assertElementAttributeContainValue(arg1, arg2, arg3);
 	}
 
@@ -203,11 +207,6 @@ public class CommonSteps extends MasterStepDefs {
 		driverUtils.typeTextIntoElement(password, "LOGIN_PAGE_PASSWORD_INPUT");
 		driverUtils.getElement("LOGIN_PAGE_LOGIN_FORM").submit();
 	}
-
-//	@And("^I load the input data of the test case \"([^\"]*)\" in json file \"([^\"]*)\"$")
-//	public void i_load_the_input_data_of_the_test_case_from_file(String arg1, String arg2) throws Throwable {
-//		// Write code here that turns the phrase above into concrete actions
-//		TestController.getHelper().loadTestDataFromJson(arg1, arg2);
 
 //	td[count(//th[.='First Name']/preceding-sibling::th) +1][.='bat']
 }

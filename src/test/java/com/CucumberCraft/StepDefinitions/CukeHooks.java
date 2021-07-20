@@ -48,7 +48,12 @@ public class CukeHooks extends MasterStepDefs {
 			currentScenario.write("-> OsVersion: " + TestController.getTestParameters().getMobileOSVersion());
 			break;
 		}
-		currentScenario.write("-> TestData: " + "\n" + TestController.getHelper().printCurrentTestData());
+		try {
+			currentScenario.write("-> TestData: " + "\n" + TestController.getHelper().printCurrentTestData());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			currentScenario.write("-> TestData: N/A");
+		}
 		update(scenario);
 	}
 
