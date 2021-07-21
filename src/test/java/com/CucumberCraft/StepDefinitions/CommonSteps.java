@@ -105,7 +105,7 @@ public class CommonSteps extends MasterStepDefs {
 		driverUtils.assertElementAttributeContainValue(arg1, arg2, arg3);
 	}
 
-	@And("^user wait for (\\d+) seconds$")
+	@And("^user waits for (\\d+) seconds$")
 	public void userWaitForNSeconds(int arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		helper.delaySynchronization(arg1);
@@ -129,20 +129,20 @@ public class CommonSteps extends MasterStepDefs {
 		driverUtils.navigateBack();
 	}
 
-	@And("^user navigate forward$")
+	@And("^user navigates forward$")
 	public void userNavigateForward() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.navigateForward();
 	}
 
-	@And("^user switch to default$")
+	@And("^user switches to default$")
 	public void userSwitchToDefault() throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.switchToDefault();
 		;
 	}
 
-	@And("^user switch to \"([^\"]*)\"$")
+	@And("^user switches to \"([^\"]*)\"$")
 	public void userSwitchToIframe(String arg1) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
 		driverUtils.switchToIframe(arg1);
