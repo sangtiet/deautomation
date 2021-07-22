@@ -12,8 +12,10 @@ public enum ExecutionMode {
 	
 	MOBILE("mobile"),
 	
-	SEETEST("seetest")
-	
+	SEETEST("seetest"),
+
+	API("api")
+
 	/**
 	 * Execute on a mobile device using Appium
 	 */

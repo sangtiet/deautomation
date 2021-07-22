@@ -18,9 +18,9 @@ public abstract class BaseService {
     private String host;
     private String protocol = "https";
     private int port = 443;
-    private String isEnableProxy = helper.getConfig("default.proxy");
-    private String proxyHost = helper.getConfig("default.proxy.host");
-    private String proxyPort = helper.getConfig("default.proxy.port");
+    private String isEnableProxy = helper.getConfig("api.default.proxy");
+    private String proxyHost = helper.getConfig("api.default.proxy.host");
+    private String proxyPort = helper.getConfig("api.default.proxy.port");
     private Map<String, ?> cookies = new ArrayMap<>();
     private Map<String, ?> headers = new ArrayMap<>();
 
@@ -45,6 +45,23 @@ public abstract class BaseService {
         RequestSpecification requestSpecification = RestAssured.given().accept("application/json")
                 .contentType(ContentType.JSON.withCharset("UTF-8")).baseUri(this.getAPIUrl()).basePath(apiPath)
                 .relaxedHTTPSValidation().cookies(cookies).headers(headers);
+        if (this.isEnableProxy.equals("true")) {
+            requestSpecification.proxy(this.proxyHost, Integer.parseInt(this.proxyPort));
+        }
+        return requestSpecification;
+    }
+
+    protected RequestSpecification customRequestBuilder(String contentType) {
+        RequestSpecification requestSpecification;
+        switch (contentType) {
+            case "application/x-www-form-urlencoded":
+                requestSpecification = RestAssured.given().accept(contentType)
+                        .contentType(ContentType.URLENC.withCharset("UTF-8")).baseUri(this.getAPIUrl()).cookies(cookies).headers(headers);
+                break;  //optional      
+            default:
+                throw new IllegalStateException("Unexpected value: " + contentType);
+        }
+
         if (this.isEnableProxy.equals("true")) {
             requestSpecification.proxy(this.proxyHost, Integer.parseInt(this.proxyPort));
         }
