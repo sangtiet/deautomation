@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Run Test Cukes" >
+<suite name="Run Test Cukes" parallel="tests" thread-count="2">
 
 	<listeners>
 		<!-- This TestNG listener takes care of setting up and tearing down the 
