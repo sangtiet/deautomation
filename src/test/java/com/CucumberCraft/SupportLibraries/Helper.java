@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -29,9 +30,12 @@ import com.jayway.jsonpath.spi.json.GsonJsonProvider;
 
 public class Helper {
 
-	private ScenarioContext scenarioContext = new ScenarioContext();
+	//private ScenarioContext scenarioContext = new ScenarioContext();
+	private ThreadLocal<ScenarioContext> scenarioContext = new ThreadLocal<ScenarioContext>();
 	private Properties properties = Settings.getInstance();
 	private JSONObject TestData = null;
+	
+	Logger log = Logger.getLogger(Helper.class);
 
 	public Helper() {
 
@@ -41,7 +45,19 @@ public class Helper {
 	 * Getters and Setters
 	 */
 	public ScenarioContext getScenarioContext() {
-		return scenarioContext;
+		if (scenarioContext.get() == null) {			
+			try {
+				setScenarioContext(new ScenarioContext());
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				log.error(e.getMessage());
+			}
+		}
+		return scenarioContext.get();
+	}
+	
+	public void setScenarioContext(ScenarioContext p_scenarioContext) {
+		scenarioContext.set(p_scenarioContext);
 	}
 
 	public JSONObject getTestData() {
