@@ -19,7 +19,7 @@ import io.restassured.response.Response;
 
 public class ApiSteps extends SharedContextSteps {
     private Helper helper = TestController.getHelper();
-    private String CPS_SERVICE_URL = helper.getConfig("api.pkl.baseUrl");
+    private String CPS_SERVICE_URL = helper.getConfig("api.demo.baseUrl");
     PostsService postsService;
     Posts reponsePosts;
     MySMSService mySMSService;

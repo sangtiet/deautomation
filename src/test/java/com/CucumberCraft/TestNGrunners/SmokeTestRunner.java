@@ -25,7 +25,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.StepDefinitions" }, 
-	tags = {"@API-demo-04"}, //-----> define which tests you want to run here
+	tags = {"@TEST_PIM_EL"}, //-----> define which tests you want to run here
 	monochrome = true,
 	//dryRun = true,
 	plugin = {

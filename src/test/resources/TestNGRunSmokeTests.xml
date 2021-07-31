@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Run Test Cukes" parallel="tests" thread-count="2">
+<suite name="Run Test Cukes" >
 
 	<listeners>
 		<!-- This TestNG listener takes care of setting up and tearing down the 
-			WebDriver, and it also changes test names in the final TestNG HTML report. -->
+			WebDriver, and it also changes test names in the final TestNG HTML report. 
+			<suite name="Run Test Cukes" parallel="tests" thread-count="2">
+			-->
 		<listener
 			class-name="com.CucumberCraft.SupportLibraries.TestListener" />
 	</listeners>
 	
-	<test name="Smoke Test on Web - Chrome">
+	<test name="Smoke Test on API">
 		<parameter name="ExecutionMode" value="API" />
 		<classes>
 			<class
-				name="com.CucumberCraft.TestNGrunners.SmokeTestRunner" />			
+				name="com.CucumberCraft.TestNGrunners.SmokeTestRunner2" />			
+		</classes>
+	</test>
+	
+	<test name="Smoke Test on Mobile">
+		<parameter name="ExecutionMode" value="WEB" />
+		<parameter name="BrowserName" value="CHROME" />		
+		<classes>
+			<class
+				name="com.CucumberCraft.TestNGrunners.SmokeTestRunner" />
 		</classes>
 	</test>
 

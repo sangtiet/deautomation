@@ -30,6 +30,11 @@ public class TimeStamp {
 
 					String ExecutionMode = TestController.getTestParameters().getExecutionMode().toString();
 					switch (ExecutionMode) {
+					case "API":
+						timeStamp = "Run_" + ExecutionMode + "_"
+								+ Util.getCurrentFormattedTime(properties.getProperty("generic.dateFormatString"))
+										.replace(" ", "_").replace(":", "-");
+						break; // optional
 					case "WEB":
 					case "REMOTE":
 						timeStamp = "Run_" + TestController.getTestParameters().getBrowser().toString() + "_"
@@ -66,8 +71,9 @@ public class TimeStamp {
 				if (OldreportPathWithTimeStamp == null) { // Double-checked
 															// locking
 					Properties properties = Settings.getInstance();
-					String timeStamp = "Run_" + Util.getCurrentFormattedTime(properties.getProperty("generic.dateFormatString"))
-							.replace(" ", "_").replace(":", "-");
+					String timeStamp = "Run_"
+							+ Util.getCurrentFormattedTime(properties.getProperty("generic.dateFormatString"))
+									.replace(" ", "_").replace(":", "-");
 
 					OldreportPathWithTimeStamp = Util.getOldResultPath() + Util.getFileSeparator() + timeStamp;
 

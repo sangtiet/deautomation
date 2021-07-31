@@ -11,7 +11,7 @@ import io.restassured.specification.RequestSpecification;
 public class PostsService extends BaseService {
 
 	private Helper helper = TestController.getHelper();
-	private String REQUEST_POSTS = helper.getConfig("demo.posts");
+	private String REQUEST_POSTS = helper.getConfig("api.demo.endpoint.posts");
 
 	public PostsService(ScenarioContext scenarioContex, String host) {
 		super(scenarioContex, host);
