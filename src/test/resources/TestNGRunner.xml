@@ -12,8 +12,7 @@
 	</listeners>
 	
 	<test name="Smoke Test on Mobile">
-		<parameter name="ExecutionMode" value="WEB" />
-		<parameter name="BrowserName" value="CHROME" />		
+		<parameter name="ExecutionMode" value="API" />			
 		<classes>
 			<class
 				name="com.CucumberCraft.TestNGrunners.TestRunner" />
