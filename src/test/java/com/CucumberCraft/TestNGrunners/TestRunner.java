@@ -25,7 +25,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/features", 	
 	glue = { "com.CucumberCraft.StepDefinitions" }, 
-	tags = {"@TEST_PIM_EL"}, //-----> define which tests you want to run here
+	tags = {"@TEST_PIM_EL_001"}, //-----> define which tests you want to run here
 	monochrome = true,
 	//dryRun = true,
 	plugin = {
@@ -35,7 +35,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		"json:target/cucumber-report/Smoke/cucumber.json",
 		"junit:target/cucumber-report/Smoke/cucumber-junitreport.xml" })
 
-public class SmokeTestRunner extends AbstractTestNGCucumberTests {
+public class TestRunner extends AbstractTestNGCucumberTests {
 
 	@AfterTest
 	private void test() {				
