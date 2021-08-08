@@ -78,9 +78,7 @@ public class AppiumDriverUtil {
 		return null;
 	}
 
-	private String getMobileExecutionPlatform() {
-		return TestController.getTestParameters().getMobileExecutionPlatform().toString().toUpperCase();
-	}
+	
 
 	public void verifyPageShowsUp(String pageName) throws Exception {
 		String platformName = TestController.getTestParameters().getMobileExecutionPlatform().toString().toLowerCase();

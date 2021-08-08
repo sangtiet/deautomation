@@ -35,6 +35,10 @@ public interface DriverUtils {
 
 	void scrollToElement(String elementName) throws Exception;
 	
+	void swipeUp(double startPercentage, double finalPercentage, double anchorPercentage, int duration);
+
+	void swipeDown(int howManySwipes);
+	
 	void pressEnterKey();
 
 	boolean waitForJSandJQueryToLoad();
